@@ -118,10 +118,9 @@
 
 					<inceptionYear>2017</inceptionYear>
 
-					<organizationName>AT&amp;T Intellectual Property. All rights
-						reserved.</organizationName>
+					<organizationName>ONAP</organizationName>
 
-					<projectName>openECOMP : SDN-C</projectName>
+					<projectName>ONAP : CCSDK</projectName>
 
 					<canUpdateCopyright>true</canUpdateCopyright>
 
