@@ -20,7 +20,7 @@
 
 package org.opendaylight.yang.gen.v1.org.openecomp.sdnc.sliapi.provider.impl.rev140523;
 
-import org.openecomp.sdnc.sliapi.sliapiProvider;
+import org.onap.ccsdk.sli.core.sliapi.sliapiProvider;
 
 public class SliapiProviderModule extends org.opendaylight.yang.gen.v1.org.openecomp.sdnc.sliapi.provider.impl.rev140523.AbstractSliapiProviderModule {
     public SliapiProviderModule(org.opendaylight.controller.config.api.ModuleIdentifier identifier, org.opendaylight.controller.config.api.DependencyResolver dependencyResolver) {
