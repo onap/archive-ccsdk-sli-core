@@ -18,7 +18,7 @@
  * ============LICENSE_END=========================================================
  */
 
-package org.openecomp.sdnc.sliapi;
+package org.onap.ccsdk.sli.core.sliapi;
 
 import java.util.Enumeration;
 import java.util.LinkedList;
