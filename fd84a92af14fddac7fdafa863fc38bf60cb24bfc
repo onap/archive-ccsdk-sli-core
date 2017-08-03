@@ -1,0 +1,8 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+1: Ryan Goulding <ryandgoulding@gmail.com>
+Code-Review+2: Marcus Williams <marcus.williams@intel.com>
+Submitted-by: Marcus Williams <marcus.williams@intel.com>
+Submitted-at: Thu, 03 Aug 2017 19:43:02 +0000
+Reviewed-on: http://gerrit.onap.org/r/6671
+Project: ccsdk/sli/core
+Branch: refs/heads/master
