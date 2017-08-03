@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a1a2d67_4d099d2b",
+        "filename": "sli/provider/src/test/java/org/onap/ccsdk/sli/core/sli/provider/MdsalHelperTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1517
+      },
+      "writtenOn": "2017-08-03T19:22:38Z",
+      "side": 1,
+      "message": "Is this test class duplicated in sdnc/core?  I was running into similar issues with it there...",
+      "range": {
+        "startLine": 25,
+        "startChar": 13,
+        "endLine": 25,
+        "endChar": 28
+      },
+      "revId": "fd84a92af14fddac7fdafa863fc38bf60cb24bfc",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
