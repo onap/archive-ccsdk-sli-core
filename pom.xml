@@ -184,7 +184,7 @@
 		<module>sliapi</module>
 	</modules>
 	<organization>
-		<name>OpenECOMP</name>
+		<name>ONAP</name>
 	</organization>
 	<version>0.0.1-SNAPSHOT</version>
 
