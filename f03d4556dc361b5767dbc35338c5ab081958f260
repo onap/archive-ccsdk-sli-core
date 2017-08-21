@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_3d40d255",
+        "filename": "dblib/provider/src/main/java/org/onap/ccsdk/sli/core/dblib/DBLIBResourceProvider.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1721
+      },
+      "writtenOn": "2017-08-21T19:15:25Z",
+      "side": 1,
+      "message": "Why not do this part in BP? Create a properties resolver bean that returns a Properties instance, create a DBResourceManager and inject the Properties, then advertise.",
+      "revId": "f03d4556dc361b5767dbc35338c5ab081958f260",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
