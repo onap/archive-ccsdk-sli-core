@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "9a437d4f_d019a87a",
+        "filename": "dblib/provider/src/main/java/org/onap/ccsdk/sli/core/dblib/DBLIBResourceProvider.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 667
+      },
+      "writtenOn": "2017-08-23T16:20:58Z",
+      "side": 1,
+      "message": "Ryan or Dan, is SDNC_CONFIG_DIR used solely by SDNC or does APPC use as well? If so it seems like we should refactor to be CCSDK_CONFIG_DIR",
+      "range": {
+        "startLine": 50,
+        "startChar": 75,
+        "endLine": 50,
+        "endChar": 90
+      },
+      "revId": "f03d4556dc361b5767dbc35338c5ab081958f260",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a437d4f_3d40d255",
         "filename": "dblib/provider/src/main/java/org/onap/ccsdk/sli/core/dblib/DBLIBResourceProvider.java",
         "patchSetId": 6
