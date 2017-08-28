@@ -39,7 +39,7 @@ ExprGrammar.tokens
 ExprGrammarLexer.tokens
 
 # BlackDuck generated file
-sdnc-core_bdio.jsonld
+ccsdk-core_bdio.jsonld
 blackDuckHubProjectName.txt
 blackDuckHubProjectVersionName.txt
 
