@@ -6,9 +6,9 @@
 	<groupId>org.onap.ccsdk.sli.core</groupId>
 	<artifactId>ccsdk-sli-core</artifactId>
 
-	<name>SDN-C Core Components</name>
+	<name>CCSDK Core Components</name>
 	<url>https://wiki.onap.org</url>
-	<description>The SDN-C core components contains the SLI, dblib and root pom</description>
+	<description>CCSDK core components contains the SLI, dblib</description>
 
 	<parent>
 		<groupId>org.onap.ccsdk.parent</groupId>
