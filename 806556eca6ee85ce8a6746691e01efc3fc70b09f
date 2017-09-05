@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_dc03de71",
+        "filename": "dblib/provider/src/main/resources/org/opendaylight/blueprint/dblib-blueprint.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1721
+      },
+      "writtenOn": "2017-09-05T17:32:18Z",
+      "side": 1,
+      "message": "Looks good but don\u0027t we need to also advertise dbResourceManager as an OSGi service?",
+      "revId": "806556eca6ee85ce8a6746691e01efc3fc70b09f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
