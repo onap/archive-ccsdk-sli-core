@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_071c6e12",
+        "filename": "sliPluginUtils/provider/src/test/java/org/onap/ccsdk/sli/core/slipluginutils/Dme2Test.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 667
+      },
+      "writtenOn": "2017-09-06T21:26:18Z",
+      "side": 1,
+      "message": "This is default and must be added to tests due to this change:\nhttps://git.onap.org/sdnc/core/commit/sliPluginUtils/provider/src/main/java/org/openecomp/sdnc/sli/SliPluginUtils/DME2.java?id\u003ddda3edb6257146ab6599bfd44658a9791037511d",
+      "range": {
+        "startLine": 37,
+        "startChar": 256,
+        "endLine": 37,
+        "endChar": 280
+      },
+      "revId": "0d63d99ea283749d2b5c24b073b585faf8a62e7b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
