@@ -22,6 +22,29 @@
       "revId": "bf4c428a4ac0e23dad1a2cd885349ec70bb8b19f",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_81104602",
+        "filename": "dblib/provider/src/main/java/org/onap/ccsdk/sli/core/dblib/CachedDataSource.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 373
+      },
+      "writtenOn": "2017-09-07T20:19:48Z",
+      "side": 1,
+      "message": "code alignment is not proper.",
+      "range": {
+        "startLine": 566,
+        "startChar": 16,
+        "endLine": 566,
+        "endChar": 33
+      },
+      "revId": "bf4c428a4ac0e23dad1a2cd885349ec70bb8b19f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
