@@ -20,6 +20,19 @@
 
 package org.onap.ccsdk.sli.core.dblib;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException;
+import org.apache.tomcat.jdbc.pool.PoolExhaustedException;
+import org.onap.ccsdk.sli.core.dblib.config.DbConfigPool;
+import org.onap.ccsdk.sli.core.dblib.factory.AbstractDBResourceManagerFactory;
+import org.onap.ccsdk.sli.core.dblib.factory.AbstractResourceManagerFactory;
+import org.onap.ccsdk.sli.core.dblib.factory.DBConfigFactory;
+import org.onap.ccsdk.sli.core.dblib.pm.PollingWorker;
+import org.onap.ccsdk.sli.core.dblib.pm.SQLExecutionMonitor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.sql.DataSource;
+import javax.sql.rowset.CachedRowSet;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLDataException;
@@ -38,25 +51,8 @@ import java.util.PriorityQueue;
 import java.util.Properties;
 import java.util.Queue;
 import java.util.Set;
-import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
-
-import javax.sql.DataSource;
-import javax.sql.rowset.CachedRowSet;
-
-import org.apache.tomcat.jdbc.pool.PoolExhaustedException;
-import org.onap.ccsdk.sli.core.dblib.config.DbConfigPool;
-import org.onap.ccsdk.sli.core.dblib.factory.AbstractDBResourceManagerFactory;
-import org.onap.ccsdk.sli.core.dblib.factory.AbstractResourceManagerFactory;
-import org.onap.ccsdk.sli.core.dblib.factory.DBConfigFactory;
-import org.onap.ccsdk.sli.core.dblib.pm.PollingWorker;
-import org.onap.ccsdk.sli.core.dblib.pm.SQLExecutionMonitor;
-
-import com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
 /**
@@ -86,7 +82,7 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
 				if(!right.isSlave())
 					return 1;
 
-			} catch (Throwable e) {
+			} catch (Exception e) {
 				LOGGER.warn("", e);
 			}
 			return 0;
@@ -444,9 +440,7 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
 				return master;
 			}
 		}
-		if(master == null) {
-			LOGGER.warn("MASTER not found.");
-		}
+		LOGGER.warn("MASTER not found.");
 		return master;
 	}
 
