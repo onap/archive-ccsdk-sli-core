@@ -1,0 +1,7 @@
+Code-Review+2: Marcus Williams <marcus.williams@intel.com>
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Submitted-by: Marcus Williams <marcus.williams@intel.com>
+Submitted-at: Thu, 07 Sep 2017 14:47:44 +0000
+Reviewed-on: http://gerrit.onap.org/r/10855
+Project: ccsdk/sli/core
+Branch: refs/heads/master
