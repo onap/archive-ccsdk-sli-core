@@ -648,6 +648,38 @@ public class SliPluginUtils implements SvcLogicJavaPlugin {
 
 			return 0;
 		}
+
+		public boolean equals(Object object) {
+			if (this == object) {
+				return true;
+			}
+			if (!(object instanceof SortableCtxListElement)) {
+				return false;
+			}
+			if (!super.equals(object)) {
+				return false;
+			}
+
+			SortableCtxListElement that = (SortableCtxListElement) object;
+
+			if (child_elements != null ? !child_elements.equals(that.child_elements)
+					: that.child_elements != null) {
+				return false;
+			}
+			// Probably incorrect - comparing Object[] arrays with Arrays.equals
+			if (!java.util.Arrays.equals(sort_fields, that.sort_fields)) {
+				return false;
+			}
+
+			return true;
+		}
+
+		public int hashCode() {
+			int result = super.hashCode();
+			result = 31 * result + (child_elements != null ? child_elements.hashCode() : 0);
+			result = 31 * result + Arrays.hashCode(sort_fields);
+			return result;
+		}
 	}
 
 	/**
