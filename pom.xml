@@ -6,7 +6,7 @@
 	<groupId>org.onap.ccsdk.sli.core</groupId>
 	<artifactId>ccsdk-sli-core</artifactId>
 
-	<name>CCSDK Core Components</name>
+	<name>ccsdk-sli-core</name>
 	<url>https://wiki.onap.org</url>
 	<description>CCSDK core components contains the SLI, dblib</description>
 
