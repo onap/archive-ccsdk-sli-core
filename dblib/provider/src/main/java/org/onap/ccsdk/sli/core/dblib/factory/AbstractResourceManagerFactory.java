@@ -21,19 +21,18 @@
 package org.onap.ccsdk.sli.core.dblib.factory;
 
 
-import java.sql.SQLException;
-import java.util.Set;
-import java.util.concurrent.Callable;
-
 import org.onap.ccsdk.sli.core.dblib.CachedDataSource;
 import org.onap.ccsdk.sli.core.dblib.CachedDataSourceFactory;
-import org.onap.ccsdk.sli.core.dblib.DBConfigException;
 import org.onap.ccsdk.sli.core.dblib.DBResourceManager;
 import org.onap.ccsdk.sli.core.dblib.config.BaseDBConfiguration;
 import org.onap.ccsdk.sli.core.dblib.config.DbConfigPool;
 import org.onap.ccsdk.sli.core.dblib.config.JDBCConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.sql.SQLException;
+import java.util.Set;
+import java.util.concurrent.Callable;
 
 /**
  * @version $Revision: 1.6 $
@@ -85,7 +84,8 @@ public abstract class AbstractResourceManagerFactory {
 							}
 						};
 						if (LOGGER.isDebugEnabled()) {
-							LOGGER.debug("Completed CachedDataSource.Call and notifyAll from " + ds.getDbConnectionName());
+							LOGGER.debug("Completed CachedDataSource.Call and notifyAll from " + (ds != null ? ds
+									.getDbConnectionName() : null));
 						}
 						Thread worker = new Thread(closure);
 						worker.setDaemon(true);
