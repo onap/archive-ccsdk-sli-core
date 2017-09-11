@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_e20ee631",
+        "filename": "dblib/provider/src/main/java/org/onap/ccsdk/sli/core/dblib/CachedDataSource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 373
+      },
+      "writtenOn": "2017-09-11T13:14:09Z",
+      "side": 1,
+      "message": "why this import is added ?",
+      "range": {
+        "startLine": 37,
+        "startChar": 17,
+        "endLine": 37,
+        "endChar": 21
+      },
+      "revId": "8b82e509cfd6e022f5eeac437b3fb51720f671cb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_6203160e",
+        "filename": "dblib/provider/src/main/java/org/onap/ccsdk/sli/core/dblib/CachedDataSource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 373
+      },
+      "writtenOn": "2017-09-11T13:14:09Z",
+      "side": 1,
+      "message": "can be combined into single line",
+      "range": {
+        "startLine": 165,
+        "startChar": 12,
+        "endLine": 166,
+        "endChar": 51
+      },
+      "revId": "8b82e509cfd6e022f5eeac437b3fb51720f671cb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
