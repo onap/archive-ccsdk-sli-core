@@ -34,6 +34,7 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Observer;
 
 import javax.sql.DataSource;
@@ -94,12 +95,14 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 	/* (non-Javadoc)
 	 * @see javax.sql.DataSource#getConnection()
 	 */
+	@Override
 	public Connection getConnection() throws SQLException
 	{
 		return ds.getConnection();
 	}
 
-	public CachedRowSet getData(String statement, ArrayList<Object> arguments) throws SQLException, Throwable
+	public CachedRowSet getData(String statement, ArrayList<Object> arguments)
+			throws SQLException, Throwable
 	{
 		TestObject testObject = null;
 		testObject = monitor.registerRequest();
@@ -128,7 +131,8 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 		}
 	}
 
-	public boolean writeData(String statement, ArrayList<Object> arguments) throws SQLException, Throwable
+	public boolean writeData(String statement, ArrayList<Object> arguments)
+			throws SQLException, Throwable
 	{
 		TestObject testObject = null;
 		testObject = monitor.registerRequest();
@@ -157,7 +161,9 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 		}
 	}
 
-	CachedRowSet executePreparedStatement(Connection conn, String statement, ArrayList<Object> arguments, boolean close) throws SQLException, Throwable
+	CachedRowSet executePreparedStatement(Connection conn, String statement,
+										  ArrayList<Object> arguments, boolean
+												  close) throws SQLException, Throwable
 	{
 		long time = System.currentTimeMillis();
 
@@ -170,9 +176,10 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 		}
 
 		ResultSet rs = null;
+		PreparedStatement ps = null;
 		try {
 			data = RowSetProvider.newFactory().createCachedRowSet();
-			PreparedStatement ps = conn.prepareStatement(statement);
+			ps = conn.prepareStatement(statement);
 			if(arguments != null)
 			{
 				for(int i = 0, max = arguments.size(); i < max; i++){
@@ -221,6 +228,13 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 					conn = null;
 				}
 			} catch(Exception exc){
+
+			}
+			try {
+				if (ps != null){
+					ps.close();
+				}
+			} catch (Exception exc){
 
 			}
 		}
@@ -298,6 +312,7 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 	/* (non-Javadoc)
 	 * @see javax.sql.DataSource#getConnection(java.lang.String, java.lang.String)
 	 */
+	@Override
 	public Connection getConnection(String username, String password)
 			throws SQLException
 	{
@@ -307,6 +322,7 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 	/* (non-Javadoc)
 	 * @see javax.sql.DataSource#getLogWriter()
 	 */
+	@Override
 	public PrintWriter getLogWriter() throws SQLException
 	{
 		return ds.getLogWriter();
@@ -315,6 +331,7 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 	/* (non-Javadoc)
 	 * @see javax.sql.DataSource#getLoginTimeout()
 	 */
+	@Override
 	public int getLoginTimeout() throws SQLException
 	{
 		return ds.getLoginTimeout();
@@ -323,6 +340,7 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 	/* (non-Javadoc)
 	 * @see javax.sql.DataSource#setLogWriter(java.io.PrintWriter)
 	 */
+	@Override
 	public void setLogWriter(PrintWriter out) throws SQLException
 	{
 		ds.setLogWriter(out);
@@ -331,12 +349,14 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 	/* (non-Javadoc)
 	 * @see javax.sql.DataSource#setLoginTimeout(int)
 	 */
+	@Override
 	public void setLoginTimeout(int seconds) throws SQLException
 	{
 		ds.setLoginTimeout(seconds);
 	}
 
 
+	@Override
 	public final String getDbConnectionName(){
 		return connectionName;
 	}
@@ -420,10 +440,12 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 		return true;
 	}
 
+	@Override
 	public boolean isWrapperFor(Class<?> iface) throws SQLException {
 		return false;
 	}
 
+	@Override
 	public <T> T unwrap(Class<T> iface) throws SQLException {
 		return null;
 	}
@@ -447,34 +469,42 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 		monitor.deleteObserver(observer);
 	}
 
+	@Override
 	public long getInterval() {
 		return interval;
 	}
 
+	@Override
 	public long getInitialDelay() {
 		return initialDelay;
 	}
 
+	@Override
 	public void setInterval(long value) {
 		interval = value;
 	}
 
+	@Override
 	public void setInitialDelay(long value) {
 		initialDelay = value;
 	}
 
+	@Override
 	public long getExpectedCompletionTime() {
 		return expectedCompletionTime;
 	}
 
+	@Override
 	public void setExpectedCompletionTime(long value) {
 		expectedCompletionTime = value;
 	}
 
+	@Override
 	public long getUnprocessedFailoverThreshold() {
 		return unprocessedFailoverThreshold;
 	}
 
+	@Override
 	public void setUnprocessedFailoverThreshold(long value) {
 		this.unprocessedFailoverThreshold = value;
 	}
@@ -487,6 +517,7 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 		canTakeOffLine = false;
 		final Thread offLineTimer = new Thread()
 		{
+			@Override
 			public void run(){
 				try {
 					Thread.sleep(30000L);
