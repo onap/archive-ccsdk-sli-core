@@ -43,7 +43,6 @@ import java.util.concurrent.Executor;
 import javax.sql.rowset.CachedRowSet;
 
 import org.apache.tomcat.jdbc.pool.PooledConnection;
-import org.apache.tomcat.jdbc.pool.ProxyConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -65,7 +64,8 @@ public class DBLibConnection implements Connection {
 
 	public boolean lockTable(String tablename) {
 		this.tableName = tablename;
-		return locked = dataSource.lockTable(connection, tableName);
+		locked = dataSource.lockTable(connection, tableName);
+		return locked;
 	}
 
 	public void resetInactivityTimer() {
@@ -80,12 +80,13 @@ public class DBLibConnection implements Connection {
 
 	public boolean unlock() {
 		dataSource.unlockTable(connection);
-		return locked = false;
+		locked = false;
+		return locked;
 	}
 
 	public boolean writeData(String statement, ArrayList<String> arguments) throws SQLException, Throwable
 	{
-		ArrayList<Object> newList=new ArrayList<Object>();
+		ArrayList<Object> newList= new ArrayList<>();
 		if(arguments != null && !arguments.isEmpty()) {
 			newList.addAll(arguments);
 		}
@@ -95,7 +96,7 @@ public class DBLibConnection implements Connection {
 
 	public CachedRowSet getData(String statement, ArrayList<String> arguments) throws SQLException, Throwable
 	{
-		ArrayList<Object> newList=new ArrayList<Object>();
+		ArrayList<Object> newList= new ArrayList<>();
 		if(arguments != null && !arguments.isEmpty()) {
 			newList.addAll(arguments);
 		}
