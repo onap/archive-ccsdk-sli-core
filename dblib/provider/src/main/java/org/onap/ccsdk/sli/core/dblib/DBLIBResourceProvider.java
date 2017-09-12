@@ -24,7 +24,6 @@ import com.google.common.annotations.VisibleForTesting;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.Properties;
@@ -35,10 +34,6 @@ import org.onap.ccsdk.sli.core.dblib.propertiesfileresolver.DblibEnvVarFileResol
 import org.onap.ccsdk.sli.core.dblib.propertiesfileresolver.DblibJREFileResolver;
 import org.onap.ccsdk.sli.core.dblib.propertiesfileresolver.DblibKarafRootFileResolver;
 import org.onap.ccsdk.sli.core.dblib.propertiesfileresolver.DblibPropertiesFileResolver;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.FrameworkUtil;
-import org.osgi.framework.ServiceReference;
-import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
