@@ -184,7 +184,7 @@ public class SvcLogicParser {
         // Handle node tags
 
         String nodeName = attributes.getValue("name");
-        SvcLogicNode thisNode = null;
+        SvcLogicNode thisNode;
 
         try {
         if (!svcLogicStore.isValidNodeType(qName)) {
@@ -217,9 +217,9 @@ public class SvcLogicParser {
             try {
 
             String attrValueStr = attributes.getValue(i);
-            SvcLogicExpression attrValue = null;
+            SvcLogicExpression attrValue;
             if (attrValueStr.trim().startsWith("`")) {
-                int lastParen = attrValueStr.lastIndexOf("`");
+                int lastParen = attrValueStr.lastIndexOf('`');
                 String evalExpr = attrValueStr.trim().substring(1, lastParen);
                 attrValue = SvcLogicExpressionFactory.parse(evalExpr);
 
@@ -240,7 +240,7 @@ public class SvcLogicParser {
         if (curNode != null) {
         try {
             if ("block".equalsIgnoreCase(curNode.getNodeType()) || "for".equalsIgnoreCase(curNode.getNodeType()) || "while".equalsIgnoreCase(curNode.getNodeType())) {
-            curNode.addOutcome("" + (curNode.getNumOutcomes() + 1), thisNode);
+            curNode.addOutcome(Integer.toString(curNode.getNumOutcomes() + 1), thisNode);
             } else {
             if (outcomeValue == null) {
                 throw new SAXException("line " + locator.getLineNumber() + ":" + locator.getColumnNumber() + " " + curNode.getNodeType() + " node expects outcome, instead found " + thisNode.getNodeType());
@@ -330,13 +330,13 @@ public class SvcLogicParser {
     }
 
     public LinkedList<SvcLogicGraph> parse(String fileName) throws SvcLogicException {
-    LinkedList<SvcLogicGraph> graphs = null;
+    LinkedList<SvcLogicGraph> graphs;
 
     URL xsdUrl = null;
     Schema schema = null;
     String validateSchema = System.getProperty(SLI_VALIDATING_PARSER, "true");
 
-    if (validateSchema != null || validateSchema.equalsIgnoreCase("true")) {
+    if (validateSchema != null || "true".equalsIgnoreCase(validateSchema)) {
         xsdUrl = getClass().getResource(SVCLOGIC_XSD);
 
     }

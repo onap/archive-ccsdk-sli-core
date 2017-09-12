@@ -36,7 +36,6 @@ import java.util.TreeMap;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.xml.sax.Locator;
 
 
 public class SvcLogicNode implements Serializable {
@@ -63,8 +62,8 @@ public class SvcLogicNode implements Serializable {
 		nodeName = "";
 		this.nodeType = nodeType;
 		this.graph = graph;
-		attributes = new HashMap<String, SvcLogicExpression> ();
-		parameters = new HashMap<String, SvcLogicExpression> ();
+		attributes = new HashMap<>();
+		parameters = new HashMap<>();
 		outcomes = null;
 		
 	}
@@ -75,8 +74,8 @@ public class SvcLogicNode implements Serializable {
 		this.nodeName = nodeName;
 		this.nodeType = nodeType;
 		this.graph = graph;
-		attributes = new HashMap<String, SvcLogicExpression> ();
-		parameters = new HashMap<String, SvcLogicExpression> ();
+		attributes = new HashMap<>();
+		parameters = new HashMap<>();
 		outcomes = null;
 		graph.setNamedNode(nodeName, this);
 	}
@@ -159,7 +158,7 @@ public class SvcLogicNode implements Serializable {
 			}
 			else if (value.trim().startsWith("`"))
 			{
-				int lastParen = value.lastIndexOf("`");
+				int lastParen = value.lastIndexOf('`');
 				String evalExpr = value.trim().substring(1, lastParen);
 				parmValue = SvcLogicExpressionFactory.parse(evalExpr);
 				
@@ -226,7 +225,7 @@ public class SvcLogicNode implements Serializable {
 	{
 		if (outcomes == null)
 		{
-			outcomes = new HashMap<String, SvcLogicNode>();
+			outcomes = new HashMap<>();
 		}
 		
 		if (outcomeValue.length() == 0) {

@@ -89,7 +89,7 @@ public class SvcLogicDblibStore implements SvcLogicStore {
 
 		PreparedStatement hasGraphStmt = null;
 
-		ArrayList<String> args = new ArrayList<String>();
+		ArrayList<String> args = new ArrayList<>();
 		args.add(module);
 		args.add(rpc);
 		args.add(mode);
@@ -148,7 +148,7 @@ public class SvcLogicDblibStore implements SvcLogicStore {
 			dbConn = dbSvc.getConnection();
 
 
-			ArrayList<String> args = new ArrayList<String>();
+			ArrayList<String> args = new ArrayList<>();
 			args.add(module);
 			args.add(rpc);
 			args.add(mode);
@@ -322,7 +322,7 @@ public class SvcLogicDblibStore implements SvcLogicStore {
 
 		String deleteGraphSql = "DELETE FROM SVC_LOGIC WHERE module = ? AND rpc = ? AND version = ? AND mode = ?";
 
-		ArrayList<String> args = new ArrayList<String>();
+		ArrayList<String> args = new ArrayList<>();
 
 		args.add(module);
 		args.add(rpc);
@@ -344,7 +344,7 @@ public class SvcLogicDblibStore implements SvcLogicStore {
 
 		String activateSql = "UPDATE SVC_LOGIC SET active = 'Y' WHERE module = ? AND rpc = ? AND mode = ? AND version = ?";
 
-		ArrayList<String> args = new ArrayList<String>();
+		ArrayList<String> args = new ArrayList<>();
 
 		args.add(graph.getModule());
 		args.add(graph.getRpc());
@@ -372,7 +372,7 @@ public class SvcLogicDblibStore implements SvcLogicStore {
 		}
 
 		DbLibService dbSvc = getDbLibService();
-		ArrayList<String> args = new ArrayList<String>();
+		ArrayList<String> args = new ArrayList<>();
 
 		args.add(nodeType);
 
@@ -395,7 +395,7 @@ public class SvcLogicDblibStore implements SvcLogicStore {
 		String unregisterNodeSql = "DELETE FROM NODE_TYPES WHERE nodetype = ?";
 
 		DbLibService dbSvc = getDbLibService();
-		ArrayList<String> args = new ArrayList<String>();
+		ArrayList<String> args = new ArrayList<>();
 
 		args.add(nodeType);
 
@@ -415,7 +415,7 @@ public class SvcLogicDblibStore implements SvcLogicStore {
 
 		DbLibService dbSvc = getDbLibService();
 
-		ArrayList<String> args = new ArrayList<String>();
+		ArrayList<String> args = new ArrayList<>();
 
 		args.add(nodeType);
 
