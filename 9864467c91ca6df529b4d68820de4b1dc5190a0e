@@ -22,6 +22,30 @@
       "revId": "9864467c91ca6df529b4d68820de4b1dc5190a0e",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_222629cf",
+        "filename": "sliPluginUtils/provider/src/main/java/org/onap/ccsdk/sli/core/slipluginutils/SvcLogicContextList.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 2007
+      },
+      "writtenOn": "2017-09-12T10:31:53Z",
+      "side": 1,
+      "message": "Those imports are not unused",
+      "parentUuid": "9a437d4f_a2a219ac",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 51
+      },
+      "revId": "9864467c91ca6df529b4d68820de4b1dc5190a0e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
