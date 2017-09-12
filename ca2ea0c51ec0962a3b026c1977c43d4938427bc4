@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_982782b6",
+        "filename": "sli/common/src/main/java/org/onap/ccsdk/sli/core/sli/SvcLogicParser.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 373
+      },
+      "writtenOn": "2017-09-12T14:04:39Z",
+      "side": 1,
+      "message": "Hi Dan, i think the condition should be \u0026\u0026 instead of ||\ncan you please confirm.\nHi Surya, if the condition is \u0026\u0026 then this change is not required as there is a null check for \"validateSchema\"",
+      "range": {
+        "startLine": 339,
+        "startChar": 58,
+        "endLine": 339,
+        "endChar": 72
+      },
+      "revId": "ca2ea0c51ec0962a3b026c1977c43d4938427bc4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
