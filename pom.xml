@@ -16,12 +16,6 @@
 		<version>0.0.2-SNAPSHOT</version>
 	</parent>
 
-	<issueManagement>
-		<system>JIRA</system>
-		<url>http://jira.onap.org/</url>
-	</issueManagement>
-
-
 	<scm>
 		<connection>scm:git:ssh://git@${onap.git.host}/sdnc-code.git</connection>
 		<developerConnection>scm:git:ssh://${onap.git.host}:${onap.git.port}/${onap.git.project}/sdnc-core.git</developerConnection>
@@ -29,12 +23,8 @@
 		<tag>sdnc-core-1.1.0</tag>
 	</scm>
 
-	<ciManagement>
-		<system>Jenkins</system>
-		<url>https://jenkins.onap.org/</url>
-	</ciManagement>
 
-
+<!--
 	<distributionManagement>
 		<repository>
 			<id>ecomp-releases</id>
@@ -51,7 +41,7 @@
 			<url>dav:https://${onap.nexus.host}/content/sites/site/org/onap/sdnc/core/${project.artifactId}/${project.version}</url>
 		</site>
 	</distributionManagement>
-
+-->
 
 	<profiles>
 		<profile>
