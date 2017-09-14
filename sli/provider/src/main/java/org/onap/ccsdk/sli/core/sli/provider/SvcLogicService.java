@@ -28,7 +28,7 @@ import org.opendaylight.controller.md.sal.dom.api.DOMDataBroker;
 
 public interface SvcLogicService {
 
-	public static final String NAME = "org.onap.ccsdk.sli.core.sli.provider.SvcLogicService";
+	String NAME = "org.onap.ccsdk.sli.core.sli.provider.SvcLogicService";
 
 	// public SvcLogicContext execute(SvcLogicGraph graph, SvcLogicContext ctx) throws SvcLogicException;
 	/**
@@ -40,7 +40,7 @@ public interface SvcLogicService {
 	 * @return true if directed graph found, false otherwise
 	 * @throws SvcLogicException
 	 */
-	public boolean hasGraph(String module, String rpc, String version, String mode) throws SvcLogicException;
+	boolean hasGraph(String module, String rpc, String version, String mode) throws SvcLogicException;
 
 	/**
 	 *  Execute a directed graph
@@ -57,7 +57,7 @@ public interface SvcLogicService {
 	 *  @deprecated use execute(String module, String rpc, String version, String mode, DOMDataBroker dataBroker) instead
 	 */
 	@Deprecated
-	public Properties execute(String module, String rpc, String version, String mode, Properties parms) throws SvcLogicException;
+	Properties execute(String module, String rpc, String version, String mode, Properties parms) throws SvcLogicException;
 
 	/**
 	 * Execute a directed graph
@@ -71,6 +71,6 @@ public interface SvcLogicService {
 	 * @return final values of attributes from SvcLogicContext, as Properties
 	 * @throws SvcLogicException
 	 */
-	public Properties execute(String module, String rpc, String version, String mode, Properties parms, DOMDataBroker domDataBroker) throws SvcLogicException;
+	Properties execute(String module, String rpc, String version, String mode, Properties parms, DOMDataBroker domDataBroker) throws SvcLogicException;
 
 }

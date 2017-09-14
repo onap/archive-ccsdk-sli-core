@@ -31,19 +31,19 @@ public interface DbLibService {
 	/* (non-Javadoc)
 	 * @see DataAccessor#getData(java.lang.String, java.util.ArrayList)
 	 */
-	public abstract CachedRowSet getData(String statement,
+	CachedRowSet getData(String statement,
 			ArrayList<String> arguments, String preferredDS)
 			throws SQLException;
 
 	/* (non-Javadoc)
 	 * @see DataAccessor#writeData(java.lang.String, java.util.ArrayList)
 	 */
-	public abstract boolean writeData(String statement,
+	boolean writeData(String statement,
 			ArrayList<String> arguments, String preferredDS)
 			throws SQLException;
 
-	public abstract boolean isActive();
+	boolean isActive();
 
-	public abstract Connection getConnection() throws SQLException;
+	Connection getConnection() throws SQLException;
 
 }
