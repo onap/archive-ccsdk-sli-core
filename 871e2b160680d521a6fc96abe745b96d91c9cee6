@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_189b8568",
+        "filename": "pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 667
+      },
+      "writtenOn": "2017-09-14T21:44:25Z",
+      "side": 1,
+      "message": "Any reason to comment this rather than remove entirely?",
+      "revId": "871e2b160680d521a6fc96abe745b96d91c9cee6",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
