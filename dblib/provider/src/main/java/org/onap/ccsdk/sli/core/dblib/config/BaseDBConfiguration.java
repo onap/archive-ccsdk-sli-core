@@ -26,6 +26,7 @@ public abstract class BaseDBConfiguration {
 	public static final String DATABASE_TYPE	= "org.onap.ccsdk.sli.dbtype";
 	public static final String DATABASE_URL		= "org.onap.ccsdk.sli.jdbc.url";
 	public static final String DATABASE_NAME	= "org.onap.ccsdk.sli.jdbc.database";
+	public static final String DRIVER_NAME		= "org.onap.ccsdk.sli.jdbc.driver";
 	public static final String CONNECTION_NAME	= "org.onap.ccsdk.sli.jdbc.connection.name";
 	public static final String DATABASE_USER 	= "org.onap.ccsdk.sli.jdbc.user";
 	public static final String DATABASE_PSSWD	= "org.onap.ccsdk.sli.jdbc.password";
@@ -69,6 +70,10 @@ public abstract class BaseDBConfiguration {
 
 	public String getDatabaseName() {
 		return props.getProperty(DATABASE_NAME);
+	}
+
+	public String getDriverName() {
+		return props.getProperty(DRIVER_NAME, "com.mysql.jdbc.Driver");
 	}
 
 	public String getDbUserId() {
