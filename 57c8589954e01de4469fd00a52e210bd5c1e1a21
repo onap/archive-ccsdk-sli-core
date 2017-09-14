@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_77c0642a",
+        "filename": "sli/common/src/main/java/org/onap/ccsdk/sli/core/sli/SvcLogicParser.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1517
+      },
+      "writtenOn": "2017-09-14T13:37:30Z",
+      "side": 1,
+      "message": "1) Please indent 4 more spaces so it lines up with the style guide.\n2) Please use this logger method instead as it is cleaner than string concatenation:\nhttps://www.slf4j.org/api/org/slf4j/Logger.html#info(java.lang.String,%20java.lang.Object...)\n\nThus, this would become:\n\nLOGGER.info(\"Parser not configured to validate XML {}\", (xsdUrl !\u003d null ? xsdUrl.getPath() : null));",
+      "range": {
+        "startLine": 364,
+        "startChar": 8,
+        "endLine": 364,
+        "endChar": 107
+      },
+      "revId": "57c8589954e01de4469fd00a52e210bd5c1e1a21",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
