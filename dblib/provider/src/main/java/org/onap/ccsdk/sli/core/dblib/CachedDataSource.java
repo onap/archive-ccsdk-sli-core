@@ -46,6 +46,7 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Observer;
 
 
@@ -98,7 +99,7 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 		return ds.getConnection();
 	}
 
-	public CachedRowSet getData(String statement, ArrayList<Object> arguments)
+	public CachedRowSet getData(String statement, List<Object> arguments)
 			throws SQLException, Throwable
 	{
 		TestObject testObject = null;
@@ -128,7 +129,7 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 		}
 	}
 
-	public boolean writeData(String statement, ArrayList<Object> arguments)
+	public boolean writeData(String statement, List<Object> arguments)
 			throws SQLException, Throwable
 	{
 		TestObject testObject = null;
@@ -159,7 +160,7 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 	}
 
 	CachedRowSet executePreparedStatement(Connection conn, String statement,
-			ArrayList<Object> arguments, boolean close) throws SQLException, Throwable
+			List<Object> arguments, boolean close) throws SQLException, Throwable
 	{
 		long time = System.currentTimeMillis();
 
@@ -207,7 +208,7 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 			} else {
 				LOGGER.error("<"+connectionName+"> Failed to execute: "+ statement + " with no arguments. ", exc);
 			}
-			throw exc; // new SQLException(exc);
+			throw exc;
 		} finally {
 
 			try {
@@ -216,7 +217,7 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 					rs = null;
 				}
 			} catch(Exception exc){
-
+                                LOGGER.error("", exc);
 			}
 			try {
 				if(conn != null && close){
@@ -224,21 +225,21 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 					conn = null;
 				}
 			} catch(Exception exc){
-
+                                LOGGER.error("", exc);
 			}
 			try {
 				if (ps != null){
 					ps.close();
 				}
 			} catch (Exception exc){
-
+                                LOGGER.error("", exc);
 			}
 		}
 
 		return data;
 	}
 
-	boolean executeUpdatePreparedStatement(Connection conn, String statement, ArrayList<Object> arguments, boolean close) throws SQLException, Throwable {
+	boolean executeUpdatePreparedStatement(Connection conn, String statement, List<Object> arguments, boolean close) throws SQLException, Throwable {
 		long time = System.currentTimeMillis();
 
 		CachedRowSet data = null;
@@ -298,7 +299,7 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 					conn = null;
 				}
 			} catch(Exception exc){
-
+                                LOGGER.error("", exc);
 			}
 		}
 
@@ -416,6 +417,7 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 					rs.close();
 					rs = null;
 				} catch (SQLException e) {
+					LOGGER.error("", e);
 				}
 			}
 			if(stmt != null) {
@@ -423,6 +425,7 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 					stmt.close();
 					stmt = null;
 				} catch (SQLException e) {
+					LOGGER.error("", e);
 				}
 			}
 			if(conn !=null){
@@ -430,6 +433,7 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 					conn.close();
 					conn = null;
 				} catch (SQLException e) {
+					LOGGER.error("", e);
 				}
 			}
 		}
@@ -616,9 +620,9 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 			retValue =  false;
 		} finally {
 			try {
-				 lock.close();
+                            lock.close();
 			} catch(Exception exc) {
-
+                            LOGGER.error("", exc);
 			}
 		}
 		return retValue;
