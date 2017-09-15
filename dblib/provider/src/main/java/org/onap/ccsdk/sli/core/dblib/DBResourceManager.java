@@ -72,22 +72,19 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
 	protected final AtomicBoolean dsSelector = new  AtomicBoolean();
 
 //	Queue<CachedDataSource> dsQueue = new ConcurrentLinkedQueue<CachedDataSource>();
-	Queue<CachedDataSource> dsQueue = new PriorityQueue<>(4, new Comparator<CachedDataSource>() {
-		@Override
-		public int compare(CachedDataSource left, CachedDataSource right) {
-			try {
-				if (!left.isSlave()) {
-					return -1;
-				}
-				if (!right.isSlave()) {
-					return 1;
-				}
-			} catch (Throwable e) {
-				LOGGER.warn("", e);
-			}
-			return 0;
-		}
-		});
+	Queue<CachedDataSource> dsQueue = new PriorityQueue<>(4, (Comparator<CachedDataSource>) (left, right) -> {
+        try {
+            if (!left.isSlave()) {
+                return -1;
+            }
+            if (!right.isSlave()) {
+                return 1;
+            }
+        } catch (Throwable e) {
+            LOGGER.warn("", e);
+        }
+        return 0;
+    });
 	protected final Set<CachedDataSource> broken = Collections.synchronizedSet(new HashSet<CachedDataSource>());
 	protected final Object monitor = new Object();
 	protected final Properties configProps;
@@ -690,7 +687,7 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
 	 */
 	@Override
 	public boolean isActive() {
-		return this.dsQueue.size()>0;
+		return !this.dsQueue.isEmpty();
 	}
 
 	public String getActiveStatus(){
