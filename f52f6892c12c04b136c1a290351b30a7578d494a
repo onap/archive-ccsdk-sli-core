@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_cc454218",
+        "filename": "dblib/provider/src/main/java/org/onap/ccsdk/sli/core/dblib/DBResourceManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 667
+      },
+      "writtenOn": "2017-09-15T02:00:19Z",
+      "side": 1,
+      "message": "no harm in this, but I think java 8 it is not needed, as it is assumed.",
+      "range": {
+        "startLine": 85,
+        "startChar": 53,
+        "endLine": 85,
+        "endChar": 69
+      },
+      "revId": "f52f6892c12c04b136c1a290351b30a7578d494a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_ec42460f",
+        "filename": "dblib/provider/src/main/java/org/onap/ccsdk/sli/core/dblib/config/BaseDBConfiguration.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 667
+      },
+      "writtenOn": "2017-09-15T02:00:19Z",
+      "side": 1,
+      "message": "Tabs should be spaces. Per onap style guidelines.\n\nApplies to all changes in this file.\n\nPlease set your IDE to use 4 spaces instead of tabs.",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 1
+      },
+      "revId": "f52f6892c12c04b136c1a290351b30a7578d494a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_4c5152d7",
+        "filename": "dblib/provider/src/main/java/org/onap/ccsdk/sli/core/dblib/jdbc/JdbcDBCachedDataSource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 667
+      },
+      "writtenOn": "2017-09-15T02:00:19Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be in upstream code.",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 3
+      },
+      "revId": "f52f6892c12c04b136c1a290351b30a7578d494a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
