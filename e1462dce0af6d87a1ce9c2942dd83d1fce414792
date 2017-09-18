@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_5be69db5",
+        "filename": "sli/common/src/main/java/org/onap/ccsdk/sli/core/sli/SvcLogicContext.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1443
+      },
+      "writtenOn": "2017-09-18T13:45:20Z",
+      "side": 1,
+      "message": "\"this\" is redundant here and can be removed too.",
+      "range": {
+        "startLine": 215,
+        "startChar": 10,
+        "endLine": 215,
+        "endChar": 14
+      },
+      "revId": "e1462dce0af6d87a1ce9c2942dd83d1fce414792",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_3be1999a",
+        "filename": "sli/common/src/main/java/org/onap/ccsdk/sli/core/sli/SvcLogicContext.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1443
+      },
+      "writtenOn": "2017-09-18T13:45:20Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 228,
+        "startChar": 12,
+        "endLine": 228,
+        "endChar": 16
+      },
+      "revId": "e1462dce0af6d87a1ce9c2942dd83d1fce414792",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
