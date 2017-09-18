@@ -1,0 +1,8 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+1: Bharat saraswal <bharat.saraswal@huawei.com>
+Code-Review+2: Dan Timoney <dtimoney@att.com>
+Submitted-by: Dan Timoney <dtimoney@att.com>
+Submitted-at: Mon, 18 Sep 2017 16:38:43 +0000
+Reviewed-on: http://gerrit.onap.org/r/13015
+Project: ccsdk/sli/core
+Branch: refs/heads/master
