@@ -615,7 +615,9 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 			retValue =  false;
 		} finally {
 			try {
-				 lock.close();
+				if (lock!=null) {
+					lock.close();
+				}
 			} catch(Exception exc) {
 
 			}
