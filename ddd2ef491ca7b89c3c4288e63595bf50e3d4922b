@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_3e1bc21c",
+        "filename": "dblib/provider/src/main/java/org/onap/ccsdk/sli/core/dblib/CachedDataSource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 373
+      },
+      "writtenOn": "2017-09-19T12:42:40Z",
+      "side": 1,
+      "message": "suggest to use try with resource",
+      "range": {
+        "startLine": 618,
+        "startChar": 4,
+        "endLine": 618,
+        "endChar": 6
+      },
+      "revId": "ddd2ef491ca7b89c3c4288e63595bf50e3d4922b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
