@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,6 +19,8 @@
  */
 
 package org.onap.ccsdk.sli.core.dblib;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 import org.apache.tomcat.jdbc.pool.PoolExhaustedException;
 import org.onap.ccsdk.sli.core.dblib.config.BaseDBConfiguration;
@@ -44,7 +46,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Observer;
 
 
@@ -98,9 +99,9 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 	}
 
 	public CachedRowSet getData(String statement, ArrayList<Object> arguments)
-			throws SQLException, Throwable
+			throws SQLException
 	{
-		TestObject testObject = null;
+		TestObject testObject;
 		testObject = monitor.registerRequest();
 
 		Connection connection = null;
@@ -110,17 +111,15 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 				throw new SQLException("Connection invalid");
 			}
 			if(LOGGER.isDebugEnabled())
-				LOGGER.debug("Obtained connection <" + connectionName + ">: "+connection.toString());
+				LOGGER.debug("Obtained connection <{}>: {}", connectionName, connection);
 			return executePreparedStatement(connection, statement, arguments, true);
 		} finally {
 			try {
 				if(connection != null && !connection.isClosed()) {
 					connection.close();
 				}
-			} catch(Throwable exc) {
-				// the exception not monitored
-			} finally {
-				connection = null;
+			} catch(Exception exc) {
+				LOGGER.error("connection close error", exc);
 			}
 
 			monitor.deregisterReguest(testObject);
@@ -128,9 +127,9 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 	}
 
 	public boolean writeData(String statement, ArrayList<Object> arguments)
-			throws SQLException, Throwable
+			throws SQLException
 	{
-		TestObject testObject = null;
+		TestObject testObject;
 		testObject = monitor.registerRequest();
 
 		Connection connection = null;
@@ -140,17 +139,15 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 				throw new SQLException("Connection invalid");
 			}
 			if(LOGGER.isDebugEnabled())
-				LOGGER.debug("Obtained connection <" + connectionName + ">: "+connection.toString());
+                LOGGER.debug("Obtained connection <{}>: {}", connectionName, connection);
 			return executeUpdatePreparedStatement(connection, statement, arguments, true);
 		} finally {
 			try {
 				if(connection != null && !connection.isClosed()) {
 					connection.close();
 				}
-			} catch(Throwable exc) {
-				// the exception not monitored
-			} finally {
-				connection = null;
+			} catch(Exception exc) {
+                LOGGER.error("connection close error", exc);
 			}
 
 			monitor.deregisterReguest(testObject);
@@ -158,23 +155,21 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 	}
 
 	CachedRowSet executePreparedStatement(Connection conn, String statement,
-			ArrayList<Object> arguments, boolean close) throws SQLException, Throwable
+			ArrayList<Object> arguments, boolean close) throws SQLException
 	{
 		long time = System.currentTimeMillis();
 
-		CachedRowSet data = null;
+		CachedRowSet data;
 		if(LOGGER.isDebugEnabled()){
-			LOGGER.debug("SQL Statement: "+ statement);
+			LOGGER.debug("SQL Statement: {}", statement);
 			if(arguments != null && !arguments.isEmpty()) {
-				LOGGER.debug("Argunments: "+ Arrays.toString(arguments.toArray()));
+				LOGGER.debug("Argunments: {}", arguments);
 			}
 		}
 
 		ResultSet rs = null;
-		PreparedStatement ps = null;
-		try {
+		try (PreparedStatement ps = conn.prepareStatement(statement)) {
 			data = RowSetProvider.newFactory().createCachedRowSet();
-			ps = conn.prepareStatement(statement);
 			if(arguments != null)
 			{
 				for(int i = 0, max = arguments.size(); i < max; i++){
@@ -185,67 +180,58 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 			data.populate(rs);
 		    // Point the rowset Cursor to the start
 			if(LOGGER.isDebugEnabled()){
-				LOGGER.debug("SQL SUCCESS. rows returned: " + data.size()+ ", time(ms): "+ (System.currentTimeMillis() - time));			}
+				LOGGER.debug("SQL SUCCESS. rows returned: {}, time(ms): {}", data.size(), (System.currentTimeMillis() -
+                    time));
+			}
 		} catch(SQLException exc){
 			if(LOGGER.isDebugEnabled()){
-				LOGGER.debug("SQL FAILURE. time(ms): "+ (System.currentTimeMillis() - time));
+				LOGGER.debug("SQL FAILURE. time(ms): {}", (System.currentTimeMillis() - time));
 			}
-			try {	conn.rollback(); } catch(Throwable thr){}
+			try {	conn.rollback(); } catch(Exception e) {LOGGER.error("Rollback failed", e);}
 			if(arguments != null && !arguments.isEmpty()) {
-				LOGGER.error("<"+connectionName+"> Failed to execute: "+ statement + " with arguments: "+arguments.toString(), exc);
+				LOGGER.error("<{}> Failed to execute: {} with arguments: {}", connectionName, statement, arguments, exc);
 			} else {
-				LOGGER.error("<"+connectionName+"> Failed to execute: "+ statement + " with no arguments. ", exc);
+				LOGGER.error("<{}> Failed to execute: {} with no arguments.", connectionName, statement, exc);
 			}
 			throw exc;
-		} catch(Throwable exc){
+		} catch(Exception exc){
 			if(LOGGER.isDebugEnabled()){
 				LOGGER.debug("SQL FAILURE. time(ms): "+ (System.currentTimeMillis() - time));
 			}
 			if(arguments != null && !arguments.isEmpty()) {
-				LOGGER.error("<"+connectionName+"> Failed to execute: "+ statement + " with arguments: "+arguments.toString(), exc);
+                LOGGER.error("<{}> Failed to execute: {} with arguments: {}", connectionName, statement, arguments, exc);
 			} else {
-				LOGGER.error("<"+connectionName+"> Failed to execute: "+ statement + " with no arguments. ", exc);
+                LOGGER.error("<{}> Failed to execute: {} with no arguments.", connectionName, statement, exc);
 			}
-			throw exc; // new SQLException(exc);
+            throw new SQLException("Failed to execute");
 		} finally {
 
 			try {
 				if(rs != null){
 					rs.close();
-					rs = null;
 				}
 			} catch(Exception exc){
-
+                LOGGER.error("ResultSet close error", exc);
 			}
+
 			try {
 				if(conn != null && close){
 					conn.close();
-					conn = null;
 				}
 			} catch(Exception exc){
-
-			}
-			try {
-				if (ps != null){
-					ps.close();
-				}
-			} catch (Exception exc){
-
+                LOGGER.error("Connection close error", exc);
 			}
 		}
 
 		return data;
 	}
 
-	boolean executeUpdatePreparedStatement(Connection conn, String statement, ArrayList<Object> arguments, boolean close) throws SQLException, Throwable {
+	boolean executeUpdatePreparedStatement(Connection conn, String statement, ArrayList<Object> arguments,
+        boolean close) throws SQLException {
 		long time = System.currentTimeMillis();
 
-		CachedRowSet data = null;
+		try (PreparedStatement ps = conn.prepareStatement(statement)) {
 
-		int rs = -1;
-		try {
-			data = RowSetProvider.newFactory().createCachedRowSet();
-			PreparedStatement ps = conn.prepareStatement(statement);
 			if(arguments != null)
 			{
 				for(int i = 0, max = arguments.size(); i < max; i++){
@@ -261,43 +247,43 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 						ps.setDate(i+1, (Date)arguments.get(i));
 					} else {
 					ps.setObject(i+1, arguments.get(i));
-				}
+				    }
+			    }
 			}
-			}
-			rs = ps.executeUpdate();
+			int rs = ps.executeUpdate();
 		    // Point the rowset Cursor to the start
 			if(LOGGER.isDebugEnabled()){
-				LOGGER.debug("SQL SUCCESS. rows returned: " + data.size()+ ", time(ms): "+ (System.currentTimeMillis() - time));
+                LOGGER.debug("SQL SUCCESS. rows returned: {}, time(ms): {}", rs, (System.currentTimeMillis()
+                    - time));
 			}
 		} catch(SQLException exc){
 			if(LOGGER.isDebugEnabled()){
-				LOGGER.debug("SQL FAILURE. time(ms): "+ (System.currentTimeMillis() - time));
+                LOGGER.debug("SQL FAILURE. time(ms): {}", (System.currentTimeMillis() - time));
 			}
-			try {	conn.rollback(); } catch(Throwable thr){}
+			try {	conn.rollback(); } catch(Exception e) {LOGGER.error("Rollback failed", e);}
 			if(arguments != null && !arguments.isEmpty()) {
-				LOGGER.error("<"+connectionName+"> Failed to execute: "+ statement + " with arguments: "+arguments.toString(), exc);
+                LOGGER.error("<{}> Failed to execute: {} with arguments: {}", connectionName, statement, arguments, exc);
 			} else {
-				LOGGER.error("<"+connectionName+"> Failed to execute: "+ statement + " with no arguments. ", exc);
+                LOGGER.error("<{}> Failed to execute: {} with no arguments.", connectionName, statement, exc);
 			}
 			throw exc;
-		} catch(Throwable exc){
+		} catch(Exception exc){
 			if(LOGGER.isDebugEnabled()){
 				LOGGER.debug("SQL FAILURE. time(ms): "+ (System.currentTimeMillis() - time));
 			}
 			if(arguments != null && !arguments.isEmpty()) {
-				LOGGER.error("<"+connectionName+"> Failed to execute: "+ statement + " with arguments: "+arguments.toString(), exc);
+                LOGGER.error("<{}> Failed to execute: {} with arguments: ", connectionName, statement, arguments, exc);
 			} else {
-				LOGGER.error("<"+connectionName+"> Failed to execute: "+ statement + " with no arguments. ", exc);
+                LOGGER.error("<{}> Failed to execute: {} with no arguments.", connectionName, statement, exc);
 			}
-			throw exc; // new SQLException(exc);
+            throw new SQLException("Failed to execute");
 		} finally {
 			try {
 				if(conn != null && close){
 					conn.close();
-					conn = null;
 				}
 			} catch(Exception exc){
-
+                LOGGER.error("Connection close error", exc);
 			}
 		}
 
@@ -387,8 +373,8 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 		Statement stmt = null;
 		try
 		{
-			Boolean readOnly = null;
-			String hostname = null;
+			Boolean readOnly;
+			String hostname;
 			conn = this.getConnection();
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("SELECT @@global.read_only, @@global.hostname");   //("SELECT 1 FROM DUAL"); //"select BANNER from SYS.V_$VERSION"
@@ -398,37 +384,38 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 				hostname = rs.getString(2);
 
 					if(LOGGER.isDebugEnabled()){
-						LOGGER.debug("SQL DataSource <"+getDbConnectionName() + "> connected to " + hostname + ", read-only is " + readOnly + ", tested successfully ");
+						LOGGER.debug("SQL DataSource <{}> connected to {}, read-only is {}, tested successfully.",
+                            getDbConnectionName(), hostname, readOnly);
 					}
 			}
 
-		} catch (Throwable exc) {
+		} catch (Exception exc) {
 			if(error_level) {
-				LOGGER.error("SQL DataSource <" + this.getDbConnectionName() +	"> test failed. Cause : " + exc.getMessage());
+				LOGGER.error("SQL DataSource <{}> test failed. Cause : ", getDbConnectionName(), exc);
 			} else {
-				LOGGER.info("SQL DataSource <" + this.getDbConnectionName() +	"> test failed. Cause : " + exc.getMessage());
+                LOGGER.info("SQL DataSource <{}> test failed. Cause : ", getDbConnectionName(), exc);
 			}
 			return false;
 		} finally {
 			if(rs != null) {
 				try {
 					rs.close();
-					rs = null;
 				} catch (SQLException e) {
+                    LOGGER.error("ResultSet close error", e);
 				}
 			}
 			if(stmt != null) {
 				try {
 					stmt.close();
-					stmt = null;
 				} catch (SQLException e) {
+                    LOGGER.error("Statement close error", e);
 				}
 			}
 			if(conn !=null){
 				try {
 					conn.close();
-					conn = null;
 				} catch (SQLException e) {
+                    LOGGER.error("Connection close error", e);
 				}
 			}
 		}
@@ -516,8 +503,8 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 			public void run(){
 				try {
 					Thread.sleep(30000L);
-				}catch(Throwable exc){
-
+				}catch(Exception exc){
+                    LOGGER.error("", exc);
 				}finally{
 					canTakeOffLine = true;
 				}
@@ -535,12 +522,12 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 	}
 
 	protected boolean isSlave() throws PoolExhaustedException {
-		CachedRowSet rs = null;
-		boolean isSlave = true;
+		CachedRowSet rs;
+		boolean isSlave;
 		String hostname = "UNDETERMINED";
 		try {
 			boolean localSlave = true;
-			rs = this.getData("SELECT @@global.read_only, @@global.hostname", new ArrayList<Object>());
+			rs = this.getData("SELECT @@global.read_only, @@global.hostname", new ArrayList<>());
 			while(rs.next()) {
 				localSlave = rs.getBoolean(1);
 				hostname = rs.getString(2);
@@ -551,14 +538,11 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 		} catch (SQLException e) {
 			LOGGER.error("", e);
 			isSlave = true;
-		} catch (Throwable e) {
-			LOGGER.error("", e);
-			isSlave = true;
 		}
 		if(isSlave){
-			LOGGER.debug("SQL SLAVE : "+connectionName + " on server " + hostname);
+			LOGGER.debug("SQL SLAVE : {} on server {}", connectionName, hostname);
 		} else {
-			LOGGER.debug("SQL MASTER : "+connectionName + " on server " + hostname);
+			LOGGER.debug("SQL MASTER : {} on server {}", connectionName, hostname);
 		}
 		return isSlave;
 	}
@@ -568,58 +552,47 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 	}
 
 	protected boolean lockTable(Connection conn, String tableName) {
-		boolean retValue = false;
-		Statement lock = null;
-		try {
-			if(tableName != null) {
-				if(LOGGER.isDebugEnabled()) {
-					LOGGER.debug("Executing 'LOCK TABLES " + tableName + " WRITE' on connection " + conn.toString());
-					if("SVC_LOGIC".equals(tableName)) {
-						Exception e = new Exception();
-						StringWriter sw = new StringWriter();
-						PrintWriter pw = new PrintWriter(sw);
-						e.printStackTrace(pw);
-						LOGGER.debug(sw.toString());
-					}
+
+		checkNotNull(conn, "Input para connection is null");
+		checkNotNull(tableName, "Input para tableName is null");
+
+		boolean retValue;
+
+		try (Statement lock = conn.createStatement()) {
+			if(LOGGER.isDebugEnabled()) {
+				LOGGER.debug("Executing 'LOCK TABLES " + tableName + " WRITE' on connection " + conn.toString());
+				if("SVC_LOGIC".equals(tableName)) {
+					Exception e = new Exception();
+					StringWriter sw = new StringWriter();
+					PrintWriter pw = new PrintWriter(sw);
+					e.printStackTrace(pw);
+					LOGGER.debug(sw.toString());
 				}
-				lock = conn.createStatement();
-				lock.execute("LOCK TABLES " + tableName + " WRITE");
-				retValue = true;
 			}
+
+            lock.execute("LOCK TABLES " + tableName + " WRITE");
+			retValue = true;
 		} catch(Exception exc){
 			LOGGER.error("", exc);
 			retValue =  false;
-		} finally {
-			try {
-                            if (lock != null) {
-                                lock.close();
-                            }
-			} catch(Exception exc) {
-
-			}
 		}
+
 		return retValue;
 	}
 
 	protected boolean unlockTable(Connection conn) {
-		boolean retValue = false;
-		Statement lock = null;
-		try {
+		boolean retValue;
+
+		try (Statement lock = conn.createStatement()) {
 			if(LOGGER.isDebugEnabled()) {
-				LOGGER.debug("Executing 'UNLOCK TABLES' on connection " + conn.toString());
+				LOGGER.debug("Executing 'UNLOCK TABLES' on connection {}", conn);
 			}
-			lock = conn.createStatement();
 			retValue = lock.execute("UNLOCK TABLES");
 		} catch(Exception exc){
 			LOGGER.error("", exc);
 			retValue =  false;
-		} finally {
-			try {
-				 lock.close();
-			} catch(Exception exc) {
-
-			}
 		}
+
 		return retValue;
 	}
 
