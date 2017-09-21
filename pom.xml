@@ -109,12 +109,12 @@
 
 	</build>
 	<modules>
+        <module>utils</module>
 		<module>dblib</module>
 		<module>sli</module>
 		<module>filters</module>
 		<module>sliPluginUtils</module>
 		<module>sliapi</module>
-		<module>utils</module>
 	</modules>
 	<organization>
 		<name>ONAP</name>
