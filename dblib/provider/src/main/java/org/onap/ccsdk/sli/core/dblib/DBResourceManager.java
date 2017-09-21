@@ -52,18 +52,7 @@ import java.util.TimerTask;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javax.sql.DataSource;
-import javax.sql.rowset.CachedRowSet;
-
-import org.apache.tomcat.jdbc.pool.PoolExhaustedException;
-import org.onap.ccsdk.sli.core.dblib.config.DbConfigPool;
 import org.onap.ccsdk.sli.core.dblib.config.JDBCConfiguration;
-import org.onap.ccsdk.sli.core.dblib.factory.DBConfigFactory;
-import org.onap.ccsdk.sli.core.dblib.pm.PollingWorker;
-import org.onap.ccsdk.sli.core.dblib.pm.SQLExecutionMonitor;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @version $Revision: 1.15 $
@@ -885,7 +874,7 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
 			CachedDataSource first = snapshot.getFirst();
 			CachedDataSource last = snapshot.getLast();
 
-			int delta = first.getMonitor().getPorcessedConnectionsCount() - last.getMonitor().getPorcessedConnectionsCount();
+			int delta = first.getMonitor().getProcessedConnectionsCount() - last.getMonitor().getProcessedConnectionsCount();
 			if(delta < 0) {
 				flipper.set(false);
 			} else if(delta > 0) {
@@ -921,7 +910,7 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
 			CachedDataSource first = snapshot.getFirst();
 			CachedDataSource last = snapshot.getLast();
 
-			int delta = first.getMonitor().getPorcessedConnectionsCount() - last.getMonitor().getPorcessedConnectionsCount();
+			int delta = first.getMonitor().getProcessedConnectionsCount() - last.getMonitor().getProcessedConnectionsCount();
 			if(delta < 0) {
 				flipper.set(false);
 			} else if(delta > 0) {
