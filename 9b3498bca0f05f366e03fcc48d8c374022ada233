@@ -22,6 +22,30 @@
       "revId": "9b3498bca0f05f366e03fcc48d8c374022ada233",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_6b4cdcc8",
+        "filename": "dblib/provider/src/main/java/org/onap/ccsdk/sli/core/dblib/CachedDataSource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 373
+      },
+      "writtenOn": "2017-09-21T16:23:17Z",
+      "side": 1,
+      "message": "changed to SQLException, Thanks",
+      "parentUuid": "9a437d4f_a5ae7a96",
+      "range": {
+        "startLine": 121,
+        "startChar": 11,
+        "endLine": 121,
+        "endChar": 20
+      },
+      "revId": "9b3498bca0f05f366e03fcc48d8c374022ada233",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
