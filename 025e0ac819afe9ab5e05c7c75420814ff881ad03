@@ -1,0 +1,7 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+2: Dan Timoney <dtimoney@att.com>
+Submitted-by: Dan Timoney <dtimoney@att.com>
+Submitted-at: Tue, 26 Sep 2017 09:04:32 +0000
+Reviewed-on: http://gerrit.onap.org/r/13853
+Project: ccsdk/sli/core
+Branch: refs/heads/master
