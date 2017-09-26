@@ -9,5 +9,4 @@
         <argument ref="provider" />
     </bean>
     <service ref="dbResourceManager" interface="org.onap.ccsdk.sli.core.dblib.DbLibService" />
-
 </blueprint>
