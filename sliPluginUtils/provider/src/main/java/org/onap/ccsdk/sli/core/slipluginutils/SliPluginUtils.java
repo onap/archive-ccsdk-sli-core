@@ -651,6 +651,7 @@ public class SliPluginUtils implements SvcLogicJavaPlugin {
 			return 0;
 		}
 
+        @Override
 		public boolean equals(Object object) {
 			if (this == object) {
 				return true;
