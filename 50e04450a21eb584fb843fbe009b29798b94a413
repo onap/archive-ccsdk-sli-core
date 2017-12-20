@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a93c517_5b627fd9",
+        "filename": "sliPluginUtils/provider/src/main/java/org/onap/ccsdk/sli/core/slipluginutils/SliPluginUtils.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 667
+      },
+      "writtenOn": "2017-12-20T18:08:14Z",
+      "side": 1,
+      "message": "A space would do nicely here but trivial.",
+      "revId": "50e04450a21eb584fb843fbe009b29798b94a413",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_dba52f05",
+        "filename": "sliPluginUtils/provider/src/main/java/org/onap/ccsdk/sli/core/slipluginutils/SliPluginUtils.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 861,
+      "author": {
+        "id": 667
+      },
+      "writtenOn": "2017-12-20T18:08:14Z",
+      "side": 1,
+      "message": "Tabs should be spaces (from here down), but trivial",
+      "range": {
+        "startLine": 861,
+        "startChar": 0,
+        "endLine": 861,
+        "endChar": 1
+      },
+      "revId": "50e04450a21eb584fb843fbe009b29798b94a413",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_fbaa6bd3",
+        "filename": "sliPluginUtils/provider/src/main/java/org/onap/ccsdk/sli/core/slipluginutils/SliPluginUtils.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 667
+      },
+      "writtenOn": "2017-12-20T18:08:14Z",
+      "side": 1,
+      "message": "/br not needed",
+      "range": {
+        "startLine": 903,
+        "startChar": 53,
+        "endLine": 903,
+        "endChar": 58
+      },
+      "revId": "50e04450a21eb584fb843fbe009b29798b94a413",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_9bafa7e3",
+        "filename": "sliPluginUtils/provider/src/main/java/org/onap/ccsdk/sli/core/slipluginutils/SliStringUtils.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 667
+      },
+      "writtenOn": "2017-12-20T18:08:14Z",
+      "side": 1,
+      "message": "extraneous tab and tabs should be spaces.",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 1
+      },
+      "revId": "50e04450a21eb584fb843fbe009b29798b94a413",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
