@@ -23,13 +23,15 @@ package org.onap.ccsdk.sli.core.utils;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.FileSystemNotFoundException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 import org.osgi.framework.FrameworkUtil;
+import org.slf4j.LoggerFactory;
 
 /**
- * Resolves dblib properties files relative to the directory identified by the JRE property
+ * Resolves project properties files relative to the directory identified by the JRE property
  * <code>dblib.properties</code>.
  */
 public class JREFileResolver implements PropertiesFileResolver {
@@ -37,7 +39,6 @@ public class JREFileResolver implements PropertiesFileResolver {
     /**
      * Key for JRE argument representing the configuration directory
      */
-    private static final String DBLIB_JRE_PROPERTY_KEY = "dblib.properties";
 
     private final String successMessage;
     private final Class clazz;
@@ -55,14 +56,15 @@ public class JREFileResolver implements PropertiesFileResolver {
     @Override
     public Optional<File> resolveFile(final String filename) {
         final URL jreArgumentUrl = FrameworkUtil.getBundle(this.clazz)
-                .getResource(DBLIB_JRE_PROPERTY_KEY);
+                .getResource(filename);
         try {
             if (jreArgumentUrl == null) {
                 return Optional.empty();
             }
             final Path dblibPath = Paths.get(jreArgumentUrl.toURI());
             return Optional.of(dblibPath.resolve(filename).toFile());
-        } catch(final URISyntaxException e) {
+        } catch(final URISyntaxException | FileSystemNotFoundException e) {
+            LoggerFactory.getLogger(this.getClass()).error("", e);
             return Optional.empty();
         }
     }
