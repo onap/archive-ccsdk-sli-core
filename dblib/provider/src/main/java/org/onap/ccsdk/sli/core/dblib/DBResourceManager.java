@@ -70,7 +70,6 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
 
 	protected final AtomicBoolean dsSelector = new  AtomicBoolean();
 
-//	Queue<CachedDataSource> dsQueue = new ConcurrentLinkedQueue<CachedDataSource>();
 	Queue<CachedDataSource> dsQueue = new PriorityQueue<>(4, new Comparator<CachedDataSource>() {
 	@Override
 	public int compare(CachedDataSource left, CachedDataSource right) {
@@ -430,6 +429,8 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
 				}
 				LOGGER.error("Generated alarm: "+active.getDbConnectionName()+" - "+message);
 				handleGetConnectionException(active, exc);
+				if(sources.contains(active))
+					sources.remove(active);
 			} finally {
 				if(LOGGER.isDebugEnabled()){
 					time = System.currentTimeMillis() - time;
