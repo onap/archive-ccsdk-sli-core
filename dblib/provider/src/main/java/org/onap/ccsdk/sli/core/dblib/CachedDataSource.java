@@ -83,9 +83,15 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 
     private String globalHostName = null;
 
+    private boolean isDerby = false;
+
 
     public CachedDataSource(BaseDBConfiguration jdbcElem) throws DBConfigException {
         configure(jdbcElem);
+
+        if ("org.apache.derby.jdbc.EmbeddedDriver".equals(jdbcElem.getDriverName())) {
+        		isDerby = true;
+        }
         monitor = new SQLExecutionMonitor(this);
     }
 
@@ -464,6 +470,11 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
     }
 
     protected boolean isSlave() throws PoolExhaustedException {
+
+    		// If using Apache derby, just return false
+    		if (isDerby) {
+    			return false;
+    		}
         CachedRowSet rs;
         boolean isSlave;
         String hostname = "UNDETERMINED";
