@@ -75,7 +75,18 @@ public class DBLIBResourceProvider {
         dblibPropertiesFileResolvers.add(new CoreDefaultFileResolver(
                 "Using property file (2) from default directory"
         ));
+<<<<<<< HEAD
+<<<<<<< HEAD
         dblibPropertiesFileResolvers.add(new JREFileResolver(
+=======
+       dblibPropertiesFileResolvers.add(new JREFileResolver(
+>>>>>>> 99f06c7... Update sli/core for Nitrogen
+=======
+       dblibPropertiesFileResolvers.add(new JREFileResolver(
+=======
+        dblibPropertiesFileResolvers.add(new JREFileResolver(
+>>>>>>> d3cd4dd... Generalization of CCSDK core/utils framework
+>>>>>>> 7f321a2... Generalization of CCSDK core/utils framework
                 "Using property file (3) from JRE argument", DBLIBResourceProvider.class
         ));
         dblibPropertiesFileResolvers.add(new KarafRootFileResolver(
