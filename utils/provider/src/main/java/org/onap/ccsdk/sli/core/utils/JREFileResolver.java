@@ -23,11 +23,18 @@ package org.onap.ccsdk.sli.core.utils;
 import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
+<<<<<<< HEAD
 import java.nio.file.Files;
+=======
+import java.nio.file.FileSystemNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+>>>>>>> 99f06c7... Update sli/core for Nitrogen
 import java.util.Optional;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
+import org.slf4j.LoggerFactory;
 
 /**
  * Resolves project properties files relative to the directory identified by the JRE property
@@ -54,9 +61,14 @@ public class JREFileResolver implements PropertiesFileResolver {
      */
     @Override
     public Optional<File> resolveFile(final String filename) {
+<<<<<<< HEAD
         final Bundle bundle = FrameworkUtil.getBundle(this.clazz);
         final File dataFile;
 
+=======
+        final URL jreArgumentUrl = FrameworkUtil.getBundle(this.clazz)
+                .getResource(filename);
+>>>>>>> 99f06c7... Update sli/core for Nitrogen
         try {
             if (bundle == null) {
                 return Optional.empty();
@@ -66,6 +78,7 @@ public class JREFileResolver implements PropertiesFileResolver {
             if (jreArgumentEntry == null) {
                 return Optional.empty();
             }
+<<<<<<< HEAD
 
             dataFile = bundle.getDataFile(filename);
             if(dataFile.exists()) {
@@ -80,6 +93,12 @@ public class JREFileResolver implements PropertiesFileResolver {
 
             return Optional.of(dataFile);
         } catch(final Exception e) {
+=======
+            final Path dblibPath = Paths.get(jreArgumentUrl.toURI());
+            return Optional.of(dblibPath.resolve(filename).toFile());
+        } catch(final URISyntaxException | FileSystemNotFoundException e) {
+            LoggerFactory.getLogger(this.getClass()).error("", e);
+>>>>>>> 99f06c7... Update sli/core for Nitrogen
             return Optional.empty();
         }
     }
