@@ -9,29 +9,14 @@
 
 
 	<parent>
-		<groupId>org.onap.ccsdk.sli.core</groupId>
-		<artifactId>ccsdk-sli-core</artifactId>
-        	<version>0.2.0-SNAPSHOT</version>
+		<groupId>org.onap.ccsdk.parent</groupId>
+		<artifactId>odlparent-lite</artifactId>
+        	<version>1.0.0-SNAPSHOT</version>
 	</parent>
-	<name>Service Logic Interface Plugin Utilities</name>
+	<name>ccsdk-sli-core :: sliPluginUtils</name>
 	<description>A package of static utility functions to be used when developing SLI plugins</description>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.onap.ccsdk.sli.core</groupId>
-				<artifactId>SliPluginUtils-features</artifactId>
-				<classifier>features</classifier>
-				<type>xml</type>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.onap.ccsdk.sli.core</groupId>
-				<artifactId>SliPluginUtils-provider</artifactId>
-				<version>${project.version}</version>
-				</dependency>
-		</dependencies>
-	</dependencyManagement>
+
 
 	<modules>
 		<module>provider</module>
