@@ -2,17 +2,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>sliPluginUtils</artifactId>
-		<groupId>org.onap.ccsdk.sli.core</groupId>
-		<version>0.2.0-SNAPSHOT</version>
+		<artifactId>odlparent-lite</artifactId>
+		<groupId>org.onap.ccsdk.parent</groupId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath/>
 	</parent>
 	<artifactId>sliPluginUtils-installer</artifactId>
-	<name>SLI Plugin Utilities - Karaf  Installer</name>
+	<name>ccsdk-sli-core :: sliPluginUtils :: ${project.artifactId}</name>
+	<version>0.2.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
-		<application.name>sdnc-sliPluginUtils</application.name>
-		<features.boot>sdnc-sliPluginUtils</features.boot>
+		<application.name>ccsdk-sliPluginUtils</application.name>
+		<features.boot>${application.name}</features.boot>
 		<features.repositories>mvn:org.onap.ccsdk.sli.core/sliPluginUtils-features/${project.version}/xml/features</features.repositories>
 		<include.transitive.dependencies>false</include.transitive.dependencies>
 	</properties>
@@ -21,7 +23,7 @@
 
 		<dependency>
 			<groupId>org.onap.ccsdk.sli.core</groupId>
-			<artifactId>sliPluginUtils-features</artifactId>
+			<artifactId>${application.name}</artifactId>
 			<version>${project.version}</version>
 			<classifier>features</classifier>
 			<type>xml</type>
@@ -135,4 +137,5 @@
 		</plugins>
 	</build>
 
+	<groupId>org.onap.ccsdl.sli.core</groupId>
 </project>
