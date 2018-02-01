@@ -7,7 +7,6 @@
 		<version>0.2.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>filters-installer</artifactId>
-	<name>Filters - Karaf  Installer</name>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -135,4 +134,5 @@
 		</plugins>
 	</build>
 
+	<name>ccsdk-sli-core :: filters :: ${project.artifactId}</name>
 </project>

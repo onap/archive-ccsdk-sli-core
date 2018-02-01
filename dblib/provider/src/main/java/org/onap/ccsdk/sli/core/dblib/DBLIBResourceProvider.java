@@ -75,6 +75,7 @@ public class DBLIBResourceProvider {
         dblibPropertiesFileResolvers.add(new CoreDefaultFileResolver(
                 "Using property file (2) from default directory"
         ));
+
         dblibPropertiesFileResolvers.add(new JREFileResolver(
                 "Using property file (3) from JRE argument", DBLIBResourceProvider.class
         ));

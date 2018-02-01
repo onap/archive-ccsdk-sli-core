@@ -2,18 +2,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>utils</artifactId>
-        <groupId>org.onap.ccsdk.sli.core</groupId>
-        <version>0.2.0-SNAPSHOT</version>
+        <groupId>org.onap.ccsdk.parent</groupId>
+        <artifactId>odlparent-lite</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
+    <groupId>org.onap.ccsdk.sli.core</groupId>
     <artifactId>utils-installer</artifactId>
+    <version>0.2.0-SNAPSHOT</version>
     <name>SLI core utils - Karaf  Installer</name>
     <packaging>pom</packaging>
 
     <properties>
-        <application.name>sdnc-slicore-utils</application.name>
-        <features.boot>sdnc-slicore-utils</features.boot>
-        <features.repositories>mvn:org.onap.ccsdk.sli.core/utils-features/${project.version}/xml/features</features.repositories>
+        <application.name>ccsdk-slicore-utils</application.name>
+        <features.boot>ccsdk-slicore-utils</features.boot>
+        <features.repositories>mvn:org.onap.ccsdk.sli.core/${features.boot}/${project.version}/xml/features</features.repositories>
         <include.transitive.dependencies>false</include.transitive.dependencies>
     </properties>
 
