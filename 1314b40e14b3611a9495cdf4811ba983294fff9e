@@ -1,0 +1,331 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a93c517_365dee15",
+        "filename": "dblib/features/features3-dblib/pom.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1517
+      },
+      "writtenOn": "2018-02-08T21:06:06Z",
+      "side": 1,
+      "message": "Why are we keeping around karaf3 features?  The file path implies that this is a karaf3 feature.",
+      "range": {
+        "startLine": 10,
+        "startChar": 13,
+        "endLine": 10,
+        "endChar": 27
+      },
+      "revId": "1314b40e14b3611a9495cdf4811ba983294fff9e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_d69daabd",
+        "filename": "dblib/installer/pom.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1517
+      },
+      "writtenOn": "2018-02-08T21:06:06Z",
+      "side": 1,
+      "message": "The formatting of this file is off.",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 43
+      },
+      "revId": "1314b40e14b3611a9495cdf4811ba983294fff9e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_56b19a45",
+        "filename": "dblib/provider/src/main/java/org/onap/ccsdk/sli/core/dblib/CachedDataSource.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1517
+      },
+      "writtenOn": "2018-02-08T21:06:06Z",
+      "side": 1,
+      "message": "formatting is off.",
+      "range": {
+        "startLine": 93,
+        "startChar": 8,
+        "endLine": 93,
+        "endChar": 10
+      },
+      "revId": "1314b40e14b3611a9495cdf4811ba983294fff9e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_f689c675",
+        "filename": "dblib/provider/src/main/java/org/onap/ccsdk/sli/core/dblib/DBLIBResourceProvider.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1517
+      },
+      "writtenOn": "2018-02-08T21:06:06Z",
+      "side": 1,
+      "message": "Do we need a space here?  I don\u0027t see how it improves readability and it bloats an already quite large patch.",
+      "revId": "1314b40e14b3611a9495cdf4811ba983294fff9e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_5698babf",
+        "filename": "filters/features/ccsdk-filters/pom.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1517
+      },
+      "writtenOn": "2018-02-08T21:06:06Z",
+      "side": 1,
+      "message": "Formatting is off.",
+      "range": {
+        "startLine": 46,
+        "startChar": 2,
+        "endLine": 50,
+        "endChar": 35
+      },
+      "revId": "1314b40e14b3611a9495cdf4811ba983294fff9e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_368bae69",
+        "filename": "filters/features/features3-filters/pom.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1517
+      },
+      "writtenOn": "2018-02-08T21:06:06Z",
+      "side": 1,
+      "message": "Similar to the last comment, why is this a \"features-3*\" filename?",
+      "range": {
+        "startLine": 10,
+        "startChar": 13,
+        "endLine": 10,
+        "endChar": 29
+      },
+      "revId": "1314b40e14b3611a9495cdf4811ba983294fff9e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_b6f6def7",
+        "filename": "filters/pom.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1517
+      },
+      "writtenOn": "2018-02-08T21:06:06Z",
+      "side": 1,
+      "message": "ONAP?",
+      "range": {
+        "startLine": 18,
+        "startChar": 44,
+        "endLine": 18,
+        "endChar": 49
+      },
+      "revId": "1314b40e14b3611a9495cdf4811ba983294fff9e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_36e2ce2f",
+        "filename": "filters/provider/pom.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1517
+      },
+      "writtenOn": "2018-02-08T21:06:06Z",
+      "side": 1,
+      "message": "Can we upgrade this?  ODL is using 3.1.0 in Nitrogen as shown here:\nhttps://github.com/opendaylight/odlparent/blob/2.0.x/odlparent/pom.xml#L771-L775",
+      "range": {
+        "startLine": 31,
+        "startChar": 8,
+        "endLine": 35,
+        "endChar": 21
+      },
+      "revId": "1314b40e14b3611a9495cdf4811ba983294fff9e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_d6d28a5b",
+        "filename": "pom.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1517
+      },
+      "writtenOn": "2018-02-08T21:06:06Z",
+      "side": 1,
+      "message": "I feel like a lot of this should probably be information stored in the parent, at least eventually.  That way when we decide to use newer versions, we only need to change in one spot?",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 27
+      },
+      "revId": "1314b40e14b3611a9495cdf4811ba983294fff9e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_b6cd7eb9",
+        "filename": "sli/features/features3-sli/pom.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1517
+      },
+      "writtenOn": "2018-02-08T21:06:06Z",
+      "side": 1,
+      "message": "Can we use 4 spaces instead of tabs?  We can do that refactor later too if necessary.  Just makes it more portable :).",
+      "revId": "1314b40e14b3611a9495cdf4811ba983294fff9e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_56c67a9b",
+        "filename": "sli/provider/src/main/java/org/onap/ccsdk/sli/core/sli/provider/SvcLogicPropertiesProvider.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1517
+      },
+      "writtenOn": "2018-02-08T21:06:06Z",
+      "side": 1,
+      "message": "Please remove tabs.",
+      "revId": "1314b40e14b3611a9495cdf4811ba983294fff9e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_76c37689",
+        "filename": "sli/provider/src/main/java/org/onap/ccsdk/sli/core/sli/provider/SvcLogicServiceImpl.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1517
+      },
+      "writtenOn": "2018-02-08T21:06:06Z",
+      "side": 1,
+      "message": "We should probably refactor so that we can catch something more generic than \"Exception\".  Sonar usually complains about these sorts of things.",
+      "range": {
+        "startLine": 282,
+        "startChar": 17,
+        "endLine": 282,
+        "endChar": 26
+      },
+      "revId": "1314b40e14b3611a9495cdf4811ba983294fff9e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_16bc7205",
+        "filename": "sli/recording/pom.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1517
+      },
+      "writtenOn": "2018-02-08T21:06:06Z",
+      "side": 1,
+      "message": "should probably be kept in the parent pom to make it easier to change for oxygen, etc.",
+      "range": {
+        "startLine": 29,
+        "startChar": 23,
+        "endLine": 29,
+        "endChar": 28
+      },
+      "revId": "1314b40e14b3611a9495cdf4811ba983294fff9e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_36b96e15",
+        "filename": "sliapi/features/features3-sliapi/pom.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1517
+      },
+      "writtenOn": "2018-02-08T21:06:06Z",
+      "side": 1,
+      "message": "Should we really include this here?  Wouldn\u0027t it be better to just feature:repo-add to get it instead?",
+      "range": {
+        "startLine": 54,
+        "startChar": 2,
+        "endLine": 60,
+        "endChar": 15
+      },
+      "revId": "1314b40e14b3611a9495cdf4811ba983294fff9e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_d6392aa5",
+        "filename": "utils/provider/pom.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1517
+      },
+      "writtenOn": "2018-02-08T21:06:06Z",
+      "side": 1,
+      "message": "Should probably be \"ONAP\"",
+      "range": {
+        "startLine": 22,
+        "startChar": 14,
+        "endLine": 22,
+        "endChar": 45
+      },
+      "revId": "1314b40e14b3611a9495cdf4811ba983294fff9e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
