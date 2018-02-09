@@ -223,26 +223,7 @@ public class ConfigureNodeExecutor extends SvcLogicNodeExecutor {
 				LOG.warn("Adaptor for " + adaptorName + " not found");
 			}
 		}
-
-		SvcLogicNode nextNode = node.getOutcomeValue(outValue);
-		if (nextNode != null) {
-			if (LOG.isDebugEnabled()) {
-				LOG.debug("about to execute " + outValue + " branch");
-			}
-			return (nextNode);
-		}
-
-		nextNode = node.getOutcomeValue("Other");
-		if (nextNode != null) {
-			if (LOG.isDebugEnabled()) {
-				LOG.debug("about to execute Other branch");
-			}
-		} else {
-			if (LOG.isDebugEnabled()) {
-				LOG.debug("no " + outValue + " or Other branch found");
-			}
-		}
-		return (nextNode);
+        return (getNextNode(node, outValue));
 	}
 
 }
