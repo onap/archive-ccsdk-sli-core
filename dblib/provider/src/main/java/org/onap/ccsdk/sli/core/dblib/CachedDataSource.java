@@ -512,8 +512,7 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
 		boolean retValue = false;
 		String query = "LOCK TABLES " + tableName + " WRITE";
 		try (Statement preStmt = conn.createStatement();
-				Statement lock = conn.prepareStatement(query);
-				ResultSet rs = preStmt.executeQuery("GETDATE()")) {
+			 Statement lock = conn.prepareStatement(query)) {
 			if (tableName != null) {
 				if (LOGGER.isDebugEnabled()) {
 					LOGGER.debug("Executing 'LOCK TABLES " + tableName + " WRITE' on connection " + conn.toString());
