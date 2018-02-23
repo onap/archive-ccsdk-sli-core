@@ -39,7 +39,7 @@ public class SetNodeExecutor extends SvcLogicNodeExecutor {
     private static final Logger LOG = LoggerFactory.getLogger(SetNodeExecutor.class);
 
     @Override
-    public SvcLogicNode execute(SvcLogicService svc, SvcLogicNode node, SvcLogicContext ctx)
+    public SvcLogicNode execute(SvcLogicServiceImpl svc, SvcLogicNode node, SvcLogicContext ctx)
             throws SvcLogicException {
         execute(node,ctx);
         return null;
@@ -163,4 +163,3 @@ public class SetNodeExecutor extends SvcLogicNodeExecutor {
         }
     }
 }
-
