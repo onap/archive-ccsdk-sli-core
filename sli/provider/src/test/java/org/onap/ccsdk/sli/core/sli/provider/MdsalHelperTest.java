@@ -132,4 +132,11 @@ public class MdsalHelperTest extends TestCase {
 
 
     }
+
+    @Test
+    public void toJavaEnum() throws Exception{
+        assertEquals("_2018HelloWorld",MdsalHelper.toJavaEnum("2018Hello World"));
+        assertEquals("SomethingElse",MdsalHelper.toJavaEnum("Something.Else"));
+        assertEquals("MyTestString",MdsalHelper.toJavaEnum("my-test-string"));
+    }
 }
