@@ -40,6 +40,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.onap.ccsdk.sli.core.dblib.DBResourceManager;
 import org.onap.ccsdk.sli.core.sli.SvcLogicContext;
 import org.onap.ccsdk.sli.core.sli.SvcLogicGraph;
 import org.onap.ccsdk.sli.core.sli.SvcLogicParser;
@@ -74,6 +75,7 @@ public class ITCaseSvcLogicGraphExecutor {
             put("set", new SetNodeExecutor());
             put("switch", new SwitchNodeExecutor());
             put("update", new UpdateNodeExecutor());
+            put("while", new WhileNodeExecutor());
 
         }
     };
@@ -156,6 +158,7 @@ public class ITCaseSvcLogicGraphExecutor {
 
             SvcLogicStore store = SvcLogicStoreFactory.getSvcLogicStore(svcprops);
 
+
             assertNotNull(store);
 
 
@@ -214,10 +217,13 @@ public class ITCaseSvcLogicGraphExecutor {
                         fail("Could not resolve test case file " + testCaseFile);
                     }
 
+
                     LinkedList<SvcLogicGraph> graphs = parser.parse(testCaseUrl.getPath());
 
                     assertNotNull(graphs);
 
+                    // Load grqphs into db to support call node
+                    parser.load(testCaseUrl.getPath(), store);
                     for (SvcLogicGraph graph : graphs) {
                         if (graph.getRpc().equals(testCaseMethod)) {
                             Properties props = ctx.toProperties();
