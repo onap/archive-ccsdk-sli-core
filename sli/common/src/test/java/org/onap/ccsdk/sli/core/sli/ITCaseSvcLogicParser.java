@@ -34,9 +34,6 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Properties;
 
-import ch.vorburger.mariadb4j.DB;
-import ch.vorburger.mariadb4j.DBConfigurationBuilder;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -67,17 +64,9 @@ public class ITCaseSvcLogicParser {
 
 		props.load(propStr);
 
+        store = SvcLogicStoreFactory.getSvcLogicStore(props);
 
-		// Start MariaDB4j database
-		DBConfigurationBuilder config = DBConfigurationBuilder.newBuilder();
-		config.setPort(0); // 0 => autom. detect free port
-		DB db = DB.newEmbeddedDB(config.build());
-		db.start();
-
-
-		// Override jdbc URL and database name
-		props.setProperty("org.onap.ccsdk.sli.jdbc.database", "test");
-		props.setProperty("org.onap.ccsdk.sli.jdbc.url", config.getURL("test"));
+        assertNotNull(store);
 
     }
 
@@ -120,8 +109,9 @@ public class ITCaseSvcLogicParser {
                     }
 
                     try {
-                        SvcLogicParser.validate(testCaseUrl.getPath(), store);
+                        SvcLogicParser.load(testCaseUrl.getPath(), store);
                     } catch (Exception e) {
+
                         fail("Validation failure [" + e.getMessage() + "]");
                     }
                 }
@@ -152,7 +142,7 @@ public class ITCaseSvcLogicParser {
                 if (testCaseUrl == null) {
                     fail("Could not resolve test case file " + testCaseFile);
                 }
-                SvcLogicParser.load(testCaseUrl.getPath(), store);
+                SvcLogicParser.validate(testCaseUrl.getPath(), store);
             }
         }
     }
