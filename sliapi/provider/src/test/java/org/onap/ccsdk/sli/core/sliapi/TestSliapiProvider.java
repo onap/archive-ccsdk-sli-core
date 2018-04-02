@@ -50,6 +50,8 @@ import org.opendaylight.yang.gen.v1.org.onap.ccsdk.sli.core.sliapi.rev161110.Exe
 import org.opendaylight.yang.gen.v1.org.onap.ccsdk.sli.core.sliapi.rev161110.SLIAPIService;
 import org.opendaylight.yang.gen.v1.org.onap.ccsdk.sli.core.sliapi.rev161110.execute.graph.input.SliParameter;
 import org.opendaylight.yang.gen.v1.org.onap.ccsdk.sli.core.sliapi.rev161110.execute.graph.input.SliParameterBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author dt5972
@@ -58,8 +60,14 @@ import org.opendaylight.yang.gen.v1.org.onap.ccsdk.sli.core.sliapi.rev161110.exe
 public class TestSliapiProvider {
 
     private sliapiProvider provider;
+    private static final Logger LOGGER = LoggerFactory.getLogger(TestSliapiProvider.class);
 
     private static final String HEALTHCHECK_DG = "sli_healthcheck.xml";
+    private static final String CONFIGNODE_DG = "sli_configureNode.xml";
+    private static final String DELETENODE_DG = "sli_deleteNode.xml";
+    private static final String EXECUTENODE_DG = "sli_executeNode.xml";
+    private static final String CALLNODE_DG = "sli_callNode.xml";
+    private static final String FORNODE_DG = "sli_forNode.xml";
 
     private static final Map<String, SvcLogicNodeExecutor> BUILTIN_NODES = new HashMap<String, SvcLogicNodeExecutor>() {
         {
@@ -113,9 +121,54 @@ public class TestSliapiProvider {
         if (testCaseUrl == null) {
             fail("Cannot find "+HEALTHCHECK_DG);
         }
-        SvcLogicParser.load(testCaseUrl.getPath(), store);
-        SvcLogicParser.activate("sli", "healthcheck", "1.0.0", "sync", store);
 
+        // Load the DG for the configure api
+        URL testCaseUrl1 = TestSliapiProvider.class.getClassLoader().getResource(CONFIGNODE_DG);
+        if (testCaseUrl1 == null) {
+            fail("Cannot find "+CONFIGNODE_DG);
+        }
+
+        // Load the DG for the delete api
+        URL testCaseUrl2 = TestSliapiProvider.class.getClassLoader().getResource(DELETENODE_DG);
+        if (testCaseUrl2 == null) {
+            fail("Cannot find "+DELETENODE_DG);
+        }
+
+        // Load the DG for the execute api
+        URL testCaseUrl3 = TestSliapiProvider.class.getClassLoader().getResource(EXECUTENODE_DG);
+        if (testCaseUrl3 == null) {
+            fail("Cannot find "+EXECUTENODE_DG);
+        }
+
+        // Load the DG for the call api
+        URL testCaseUrl4 = TestSliapiProvider.class.getClassLoader().getResource(CALLNODE_DG);
+        if (testCaseUrl4 == null) {
+            fail("Cannot find "+CALLNODE_DG);
+        }
+
+        // Load the DG for the for api
+        URL testCaseUrl5 = TestSliapiProvider.class.getClassLoader().getResource(FORNODE_DG);
+        if (testCaseUrl5 == null) {
+            fail("Cannot find "+FORNODE_DG);
+        }
+
+        LOGGER.debug("test1");
+        SvcLogicParser.load(testCaseUrl.getPath(), store);
+        SvcLogicParser.load(testCaseUrl1.getPath(), store);
+        SvcLogicParser.load(testCaseUrl2.getPath(), store);
+        SvcLogicParser.load(testCaseUrl3.getPath(), store);
+        SvcLogicParser.load(testCaseUrl4.getPath(), store);
+        SvcLogicParser.load(testCaseUrl5.getPath(), store);
+
+        SvcLogicParser.activate("sli", "healthcheck", "1.0.0", "sync", store);
+        SvcLogicParser.activate("test", "configureNode", "1", "sync", store);
+        SvcLogicParser.activate("test", "deleteNode", "1", "async", store);
+        SvcLogicParser.activate("test", "executeNode", "1", "sync", store);
+        SvcLogicParser.activate("test", "callNode", "1", "sync", store);
+        SvcLogicParser.activate("test", "forNode", "1", "sync", store);
+
+
+        LOGGER.debug("test2");
         // Create a ServiceLogicService and initialize it
         SvcLogicServiceImpl svc = new SvcLogicServiceImpl(new SvcLogicPropertiesProviderImpl());
         for (String nodeType : BUILTIN_NODES.keySet()) {
@@ -127,6 +180,7 @@ public class TestSliapiProvider {
         provider.setDataBroker(dataBroker);
         provider.setNotificationService(notifyService);
         provider.setRpcRegistry(rpcRegistry);
+        LOGGER.debug("test3");
     }
 
     /**
@@ -156,6 +210,94 @@ public class TestSliapiProvider {
 
 
 
+
+        provider.executeGraph(inputBuilder.build());
+    }
+
+    @Test
+    public void testConfigureNode() {
+        ExecuteGraphInputBuilder inputBuilder = new ExecuteGraphInputBuilder();
+
+        inputBuilder.setMode(ExecuteGraphInput.Mode.Sync);
+        inputBuilder.setModuleName("test");
+        inputBuilder.setRpcName("configureNode");
+        List<SliParameter> pList = new LinkedList<>();
+        SliParameterBuilder pBuilder = new SliParameterBuilder();
+        pBuilder.setParameterName("int-parameter");
+        pBuilder.setIntValue(1);
+        pList.add(pBuilder.build());
+        inputBuilder.setSliParameter(pList);
+
+
+
+
+        provider.executeGraph(inputBuilder.build());
+    }
+
+    @Test
+    public void testDeleteNode() {
+        ExecuteGraphInputBuilder inputBuilder = new ExecuteGraphInputBuilder();
+
+        inputBuilder.setMode(ExecuteGraphInput.Mode.Sync);
+        inputBuilder.setModuleName("test");
+        inputBuilder.setRpcName("deleteNode");
+        List<SliParameter> pList = new LinkedList<>();
+        SliParameterBuilder pBuilder = new SliParameterBuilder();
+        pBuilder.setParameterName("int-parameter");
+        pBuilder.setIntValue(1);
+        pList.add(pBuilder.build());
+        inputBuilder.setSliParameter(pList);
+
+        provider.executeGraph(inputBuilder.build());
+    }
+
+    @Test
+    public void testExecuteNode() {
+        ExecuteGraphInputBuilder inputBuilder = new ExecuteGraphInputBuilder();
+
+        inputBuilder.setMode(ExecuteGraphInput.Mode.Sync);
+        inputBuilder.setModuleName("test");
+        inputBuilder.setRpcName("executeNode");
+        List<SliParameter> pList = new LinkedList<>();
+        SliParameterBuilder pBuilder = new SliParameterBuilder();
+        pBuilder.setParameterName("int-parameter");
+        pBuilder.setIntValue(1);
+        pList.add(pBuilder.build());
+        inputBuilder.setSliParameter(pList);
+
+        provider.executeGraph(inputBuilder.build());
+    }
+
+    @Test
+    public void testCallNode() {
+        ExecuteGraphInputBuilder inputBuilder = new ExecuteGraphInputBuilder();
+
+        inputBuilder.setMode(ExecuteGraphInput.Mode.Sync);
+        inputBuilder.setModuleName("test");
+        inputBuilder.setRpcName("callNode");
+        List<SliParameter> pList = new LinkedList<>();
+        SliParameterBuilder pBuilder = new SliParameterBuilder();
+        pBuilder.setParameterName("int-parameter");
+        pBuilder.setIntValue(1);
+        pList.add(pBuilder.build());
+        inputBuilder.setSliParameter(pList);
+
+        provider.executeGraph(inputBuilder.build());
+    }
+
+    @Test
+    public void testForNode() {
+        ExecuteGraphInputBuilder inputBuilder = new ExecuteGraphInputBuilder();
+
+        inputBuilder.setMode(ExecuteGraphInput.Mode.Sync);
+        inputBuilder.setModuleName("test");
+        inputBuilder.setRpcName("forNode");
+        List<SliParameter> pList = new LinkedList<>();
+        SliParameterBuilder pBuilder = new SliParameterBuilder();
+        pBuilder.setParameterName("int-parameter");
+        pBuilder.setIntValue(1);
+        pList.add(pBuilder.build());
+        inputBuilder.setSliParameter(pList);
 
         provider.executeGraph(inputBuilder.build());
     }
