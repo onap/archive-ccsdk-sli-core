@@ -82,5 +82,6 @@
 			<version>${equinox.osgi.version}</version>
 			<scope>provided</scope>
 		</dependency>
+
 	</dependencies>
 </project>
