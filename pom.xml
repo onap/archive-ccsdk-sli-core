@@ -28,6 +28,7 @@
 		<module>filters</module>
 		<module>sliPluginUtils</module>
 		<module>sliapi</module>
+		<module>features</module>
 	</modules>
 
 	<scm>
