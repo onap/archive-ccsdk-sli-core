@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a9dcd25_a4c38837",
+        "filename": "sli/provider/src/main/java/org/onap/ccsdk/sli/core/sli/provider/MdsalHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1517
+      },
+      "writtenOn": "2018-07-13T17:29:30Z",
+      "side": 1,
+      "message": "unnecessary spacing",
+      "range": {
+        "startLine": 531,
+        "startChar": 0,
+        "endLine": 531,
+        "endChar": 13
+      },
+      "revId": "cfabda23cb6dc6c98e3266228f3bd2f409591a2f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a9dcd25_c4c0142d",
+        "filename": "sli/provider/src/main/java/org/onap/ccsdk/sli/core/sli/provider/MdsalHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1517
+      },
+      "writtenOn": "2018-07-13T17:29:30Z",
+      "side": 1,
+      "message": "use spaces, ot tabs",
+      "revId": "cfabda23cb6dc6c98e3266228f3bd2f409591a2f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a9dcd25_64dd8014",
+        "filename": "sli/provider/src/main/java/org/onap/ccsdk/sli/core/sli/provider/MdsalHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 1517
+      },
+      "writtenOn": "2018-07-13T17:29:30Z",
+      "side": 1,
+      "message": "returns null if property is not found, why not use null instead of empty string sentinel?  then your conditional on line 536 becomes a single conditional...\n\nhttps://docs.oracle.com/javase/7/docs/api/java/util/Properties.html#getProperty(java.lang.String)",
+      "range": {
+        "startLine": 534,
+        "startChar": 44,
+        "endLine": 534,
+        "endChar": 55
+      },
+      "revId": "cfabda23cb6dc6c98e3266228f3bd2f409591a2f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a9dcd25_84e20cd4",
+        "filename": "sli/provider/src/main/java/org/onap/ccsdk/sli/core/sli/provider/MdsalHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1517
+      },
+      "writtenOn": "2018-07-13T17:29:30Z",
+      "side": 1,
+      "message": "Can we do better than using Reflection/Class APIs?  It can get hard to follow for non-authors and people supporting it into thee future...  Can we check for a derived parent class for example?  One that allows us to call methods such as \"build\".  Just a thought...",
+      "range": {
+        "startLine": 567,
+        "startChar": 27,
+        "endLine": 567,
+        "endChar": 40
+      },
+      "revId": "cfabda23cb6dc6c98e3266228f3bd2f409591a2f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
