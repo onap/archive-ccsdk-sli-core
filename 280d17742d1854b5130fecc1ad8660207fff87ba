@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da7095c5_872c454c",
+        "filename": "dblib/provider/src/main/java/org/onap/ccsdk/sli/core/dblib/CachedDataSource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 3201
+      },
+      "writtenOn": "2018-07-24T23:07:57Z",
+      "side": 1,
+      "message": "Formatting is incorrect, remove the tab please..",
+      "revId": "280d17742d1854b5130fecc1ad8660207fff87ba",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da7095c5_a73149a4",
+        "filename": "dblib/provider/src/main/java/org/onap/ccsdk/sli/core/dblib/CachedDataSource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 3201
+      },
+      "writtenOn": "2018-07-24T23:07:57Z",
+      "side": 1,
+      "message": "ps.close is auto closable?",
+      "revId": "280d17742d1854b5130fecc1ad8660207fff87ba",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
