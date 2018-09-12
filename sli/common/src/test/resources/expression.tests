@@ -1,3 +1,4 @@
+ietf-eth-tran-service:etht-svc.globals.etht-svc-bandwidth-profiles[0].bandwidth-profile-name
 $uni-circuit-id
 $asePort
 length($uni-circuit-id) > 0
