@@ -136,19 +136,21 @@ public class ITCaseSvcLogicGraphExecutor {
             Properties svcprops = new Properties();
             svcprops.load(propStr);
 
-            SvcLogicStore store = SvcLogicStoreFactory.getSvcLogicStore(svcprops);
 
-
-            assertNotNull(store);
 
 
             SvcLogicParser parser = new SvcLogicParser();
 
             // Loop through executor tests
-            SvcLogicPropertiesProvider resourceProvider = new SvcLogicPropertiesProviderImpl();
-
+            SvcLogicPropertiesProvider resourceProvider = new SvcLogicPropertiesProvider() {
+                @Override
+                public Properties getProperties() {
+                    return svcprops;
+                }
+            };
             SvcLogicServiceImpl svc = new SvcLogicServiceImpl(resourceProvider);
-
+            SvcLogicStore store = svc.getStore();
+            assertNotNull(store);
             for (String nodeType : BUILTIN_NODES.keySet()) {
 
                 LOG.info("SLI - registering node executor for node type {}", nodeType);
