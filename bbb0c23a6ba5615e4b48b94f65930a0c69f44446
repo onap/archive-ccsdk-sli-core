@@ -1,0 +1,8 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+2: Dan Timoney <dtimoney@att.com>
+Code-Review+2: Jun (Nicolas) Hu <jun.nicolas.hu@att.com>
+Submitted-by: Jun (Nicolas) Hu <jun.nicolas.hu@att.com>
+Submitted-at: Thu, 18 Oct 2018 20:34:09 +0000
+Reviewed-on: https://gerrit.onap.org/r/70738
+Project: ccsdk/sli/core
+Branch: refs/heads/casablanca
