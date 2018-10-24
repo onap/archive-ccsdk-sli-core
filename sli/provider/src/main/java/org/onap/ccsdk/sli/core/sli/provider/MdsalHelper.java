@@ -230,9 +230,12 @@ public class MdsalHelper {
                                 }
 
                                 if (retValue != null) {
-                                    propVal = retValue.getValue().toString();
-                                    LOG.debug("Setting property " + propName + " to " + propVal);
-                                    props.setProperty(propName, propVal);
+                                   propVal = retValue.getValue().toString();
+                                   //chop off .ipv4-address
+                                   propName = propName.substring(0,propName.length() - 13);
+                                   LOG.debug("Setting property " + propName + " to " + propVal);
+ 
+                                   props.setProperty(propName, propVal);
 
                                 }
                             } catch (Exception e) {
@@ -254,6 +257,8 @@ public class MdsalHelper {
 
                                 if (retValue != null) {
                                     propVal = retValue.getValue().toString();
+                                    //chop off .ipv6-address
+                                    propName = propName.substring(0,propName.length() - 13);
                                     LOG.debug("Setting property " + propName + " to " + propVal);
                                     props.setProperty(propName, propVal);
 
