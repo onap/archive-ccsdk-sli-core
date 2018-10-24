@@ -547,7 +547,7 @@ public class MdsalHelper {
 
             if (isYangGenerated(elemType)) {
             	
-            	if (isIpAddress(elemType) || isIpv4Address(elemType) || isIpv6Address(elemType)) {
+            	if (isIpAddress(elemType)) {
 
                     String curValue = props.getProperty(curBase, "");
 
@@ -555,7 +555,24 @@ public class MdsalHelper {
                     	toObj.add(IpAddressBuilder.getDefaultInstance(curValue));
                         foundValue = true;
                     }
-            	} else if (isIpPrefix(elemType)) {
+            	} else if (isIpv4Address(elemType)) {
+                    String curValue = props.getProperty(curBase, "");
+
+                    if ((curValue != null) && (curValue.length() > 0)) {
+                    	toObj.add(new Ipv4Address(curValue));
+                        foundValue = true;
+                    }
+            		
+            	} else if (isIpv6Address(elemType)) {
+                    String curValue = props.getProperty(curBase, "");
+
+                    if ((curValue != null) && (curValue.length() > 0)) {
+                    	toObj.add(new Ipv6Address(curValue));
+                        foundValue = true;
+                    }
+            	}
+            	
+            	else if (isIpPrefix(elemType)) {
 
                     String curValue = props.getProperty(curBase, "");
 
