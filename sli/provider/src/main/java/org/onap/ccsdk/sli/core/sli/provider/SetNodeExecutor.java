@@ -110,7 +110,7 @@ public class SetNodeExecutor extends SvcLogicNodeExecutor {
                         if (lhsPrefix.endsWith(".")) {
                             lhsPrefix = lhsPrefix.substring(0, lhsPrefix.length() - 1);
                         }
-                        int lhsPfxLength = lhsPrefix.length();
+
                         HashMap<String, String> parmsToAdd = new HashMap<String, String>();
 
                         for (String sourceVarName : ctx.getAttributeKeySet()) {
@@ -133,7 +133,6 @@ public class SetNodeExecutor extends SvcLogicNodeExecutor {
                         String prefix = lhsVarName + ".";
                         //Clear length value in case an array exists with this prefix
                         String lengthParamName = lhsVarName + "_length";
-                        parmsToRemove.add(lengthParamName);
                         LOG.debug("Unsetting " + lengthParamName + " because prefix " + prefix + " is being cleared.");
 
                         for (String curCtxVarname : ctx.getAttributeKeySet()) {
@@ -141,10 +140,13 @@ public class SetNodeExecutor extends SvcLogicNodeExecutor {
                             //Special handling for reseting array values, strips out brackets and any numbers between the brackets
                             //when testing if a context memory value starts with a prefix
                             if(!prefix.contains("[") && curCtxVarnameMatchingValue.contains("[")) {
-                                curCtxVarnameMatchingValue = curCtxVarname.replaceAll(arrayPattern, "");
+                                curCtxVarnameMatchingValue = curCtxVarname.replaceAll(arrayPattern, "") + ".";
                             }
                             if (curCtxVarnameMatchingValue.startsWith(prefix)) {
                                 LOG.debug("Unsetting " + curCtxVarname + " because matching value " + curCtxVarnameMatchingValue + " starts with the prefix " + prefix);
+                                parmsToRemove.add(curCtxVarname);
+                            }else if (curCtxVarnameMatchingValue.startsWith(lengthParamName)) {
+                            	LOG.debug("Unsetting " + curCtxVarname + " because matching value " + curCtxVarnameMatchingValue + " starts with the prefix " + lengthParamName);
                                 parmsToRemove.add(curCtxVarname);
                             }
                         }
