@@ -319,7 +319,7 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
     }
 
     public void cleanUp() {
-        if (ds != null && ds instanceof Closeable) {
+        if (ds instanceof Closeable) {
             try {
                 ((Closeable) ds).close();
             } catch (IOException e) {
@@ -344,12 +344,13 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
         if (isDerby) {
             testQuery = "SELECT 'false', 'localhost' FROM SYSIBM.SYSDUMMY1";
         }
-        ResultSet rs = null;
-        try (Connection conn = this.getConnection(); Statement stmt = conn.createStatement()) {
+
+        try (Connection conn = this.getConnection(); Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(testQuery)) { // ("SELECT 1 FROM DUAL"); //"select BANNER from SYS.V_$VERSION"
+
             Boolean readOnly;
             String hostname;
-            rs = stmt.executeQuery(testQuery); // ("SELECT 1 FROM DUAL"); //"select
-                                                                                    // BANNER from SYS.V_$VERSION"
+           
             while (rs.next()) {
                 readOnly = rs.getBoolean(1);
                 hostname = rs.getString(2);
@@ -368,14 +369,6 @@ public abstract class CachedDataSource implements DataSource, SQLExecutionMonito
                         SQL_DATA_SOURCE + this.getDbConnectionName() + "> test failed. Cause : " + exc.getMessage());
             }
             return false;
-        } finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                    LOGGER.error(e.getLocalizedMessage(), e);
-                }
-            }
         }
         return true;
     }
