@@ -328,7 +328,9 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
             {
                 try {
                     Thread.sleep(retryInterval);
-                } catch (InterruptedException e1) {    }
+                } catch (InterruptedException e1) {
+                    Thread.currentThread().interrupt();
+                }
                 CachedDataSource brokenSource = null;
                 try {
                     if (!broken.isEmpty()) {
