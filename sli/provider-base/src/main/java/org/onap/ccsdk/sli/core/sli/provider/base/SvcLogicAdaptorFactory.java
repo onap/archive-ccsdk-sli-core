@@ -19,7 +19,7 @@
  * ============LICENSE_END=========================================================
  */
 
-package org.onap.ccsdk.sli.core.sli.provider;
+package org.onap.ccsdk.sli.core.sli.provider.base;
 
 import java.util.HashMap;
 
