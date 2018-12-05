@@ -1,8 +1,10 @@
-/*-
+    /*-
  * ============LICENSE_START=======================================================
  * onap
  * ================================================================================
  * Copyright (C) 2016 - 2017 ONAP
+ * ================================================================================
+ * Modifications Copyright (C) 2018 IBM.
  * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,6 +46,10 @@ public class JdbcDBCachedDataSource extends CachedDataSource {
     private static final String AS_CONF_ERROR = "AS_CONF_ERROR: ";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JdbcDBCachedDataSource.class);
+    
+    private static final int MIN_LIMIT = 5; 
+    private static final int MAX_LIMIT = 10;
+    private static final int INITIAL_LIMIT = 10;
 
     /**
      * @param jdbcElem
@@ -88,26 +94,27 @@ public class JdbcDBCachedDataSource extends CachedDataSource {
         }
 
         minLimit = jdbcConfig.getDbMinLimit();
-//        if (minLimit == null)
-//        {
-//            String errorMsg =  "Invalid XML contents: JDBC Connection missing minLimit attribute";
-//            LOGGER.error(AS_CONF_ERROR + errorMsg);
-//            throw new DBConfigException(errorMsg);
-//        }
+        if (minLimit == null)
+        {
+           String errorMsg =  "Invalid XML contents: JDBC Connection missing minLimit attribute";
+           LOGGER.error(AS_CONF_ERROR + errorMsg);
+           minLimit = MIN_LIMIT;
+        }
         maxLimit = jdbcConfig.getDbMaxLimit();
-//        if (maxLimit == null)
-//        {
-//            String errorMsg =  "Invalid XML contents: JDBC Connection missing maxLimit attribute";
-//            LOGGER.error(AS_CONF_ERROR + errorMsg);
-//            throw new DBConfigException(errorMsg);
-//        }
+        if (maxLimit == null)
+        {
+            String errorMsg =  "Invalid XML contents: JDBC Connection missing maxLimit attribute";
+            LOGGER.error(AS_CONF_ERROR + errorMsg);
+            maxLimit = MAX_LIMIT;
+        }
         initialLimit = jdbcConfig.getDbInitialLimit();
-//        if (initialLimit == null)
-//        {
-//            String errorMsg =  "Invalid XML contents: JDBC Connection missing initialLimit attribute";
-//            LOGGER.error(AS_CONF_ERROR + errorMsg);
-//            throw new DBConfigException(errorMsg);
-//        }
+        if (initialLimit == null)
+        {
+            String errorMsg =  "Invalid XML contents: JDBC Connection missing initialLimit attribute";
+            LOGGER.error(AS_CONF_ERROR + errorMsg);
+            initialLimit = INITIAL_LIMIT;
+        }
+
 
         dbUrl = jdbcConfig.getDbUrl();
         if (dbUrl == null) {
