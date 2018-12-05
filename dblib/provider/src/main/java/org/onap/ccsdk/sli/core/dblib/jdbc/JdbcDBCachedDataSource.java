@@ -4,6 +4,8 @@
  * ================================================================================
  * Copyright (C) 2016 - 2017 ONAP
  * ================================================================================
+ * Modifications Copyright (C) 2018 IBM.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -88,26 +90,10 @@ public class JdbcDBCachedDataSource extends CachedDataSource {
         }
 
         minLimit = jdbcConfig.getDbMinLimit();
-//        if (minLimit == null)
-//        {
-//            String errorMsg =  "Invalid XML contents: JDBC Connection missing minLimit attribute";
-//            LOGGER.error(AS_CONF_ERROR + errorMsg);
-//            throw new DBConfigException(errorMsg);
-//        }
         maxLimit = jdbcConfig.getDbMaxLimit();
-//        if (maxLimit == null)
-//        {
-//            String errorMsg =  "Invalid XML contents: JDBC Connection missing maxLimit attribute";
-//            LOGGER.error(AS_CONF_ERROR + errorMsg);
-//            throw new DBConfigException(errorMsg);
-//        }
+
         initialLimit = jdbcConfig.getDbInitialLimit();
-//        if (initialLimit == null)
-//        {
-//            String errorMsg =  "Invalid XML contents: JDBC Connection missing initialLimit attribute";
-//            LOGGER.error(AS_CONF_ERROR + errorMsg);
-//            throw new DBConfigException(errorMsg);
-//        }
+
 
         dbUrl = jdbcConfig.getDbUrl();
         if (dbUrl == null) {
