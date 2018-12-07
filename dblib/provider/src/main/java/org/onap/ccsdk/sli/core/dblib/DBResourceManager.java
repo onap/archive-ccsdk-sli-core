@@ -3,6 +3,7 @@
  * onap
  * ================================================================================
  * Copyright (C) 2016 - 2017 ONAP
+ * Modifications Copyright (C) 2018 IBM.
  * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,7 +63,7 @@ import org.slf4j.LoggerFactory;
  * Rich Tabedzki
  */
 public class DBResourceManager implements DataSource, DataAccessor, DBResourceObserver, DbLibService {
-    private static Logger LOGGER = LoggerFactory.getLogger(DBResourceManager.class);
+    private static Logger logger = LoggerFactory.getLogger(DBResourceManager.class);
 
     transient boolean terminating = false;
     transient protected long retryInterval = 10000L;
@@ -96,7 +97,7 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
         if(!recoveryMode)
         {
             recoveryMode = false;
-            LOGGER.info("Recovery Mode disabled");
+            logger.info("Recovery Mode disabled");
         }
         // get time out value for thread cleanup
         terminationTimeOut = getLongFromProperties(properties, "org.onap.dblib.termination.timeout", 300000L);
@@ -120,7 +121,7 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
             this.config(properties);
         } catch (final Exception e) {
             // TODO: config throws <code>Exception</code> which is poor practice.  Eliminate this in a separate patch.
-            LOGGER.error("Fatal Exception encountered while configuring DBResourceManager", e);
+            logger.error("Fatal Exception encountered while configuring DBResourceManager", e);
         }
     }
 
@@ -134,7 +135,7 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
             JDBCConfiguration[] config = dbConfig.getJDBCbSourceArray();
             CachedDataSource[] cachedDS = new CachedDataSource[config.length];
             if (cachedDS == null || cachedDS.length == 0) {
-                LOGGER.error("Initialization of CachedDataSources failed. No instance was created.");
+                logger.error("Initialization of CachedDataSources failed. No instance was created.");
                 throw new Exception("Failed to initialize DB Library. No data source was created.");
             }
 
@@ -159,7 +160,7 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
 
             // the timeout param is set is seconds.
             long timeout = ((dbConfig.getTimeout() <= 0) ? 60L : dbConfig.getTimeout());
-            LOGGER.debug("Timeout set to {} seconds", timeout);
+            logger.debug("Timeout set to {} seconds", timeout);
             timeout *= 1000;
 
 
@@ -167,10 +168,10 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
                 semaphore.wait(timeout);
             }
         } catch(Exception exc){
-            LOGGER.warn("DBResourceManager.initWorker", exc);
+            logger.warn("DBResourceManager.initWorker", exc);
         } finally {
             startTime = System.currentTimeMillis() - startTime;
-            LOGGER.info("Completed wait with {} active datasource(s) in {} ms", dsQueue.size(), startTime);
+            logger.info("Completed wait with {} active datasource(s) in {} ms", dsQueue.size(), startTime);
         }
     }
 
@@ -178,8 +179,8 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
     private final class DataSourceComparator implements Comparator<CachedDataSource> {
         @Override
         public int compare(CachedDataSource left, CachedDataSource right) {
-            if(LOGGER.isTraceEnabled())
-                LOGGER.trace("----------SORTING-------- () : ()", left.getDbConnectionName(), right.getDbConnectionName());
+            if(logger.isTraceEnabled())
+                logger.trace("----------SORTING-------- () : ()", left.getDbConnectionName(), right.getDbConnectionName());
             try {
                 if(left == right) {
                     return 0;
@@ -197,7 +198,7 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
                     return 1;
 
             } catch (Throwable e) {
-                LOGGER.warn("", e);
+                logger.warn("", e);
             }
             return -1;
         }
@@ -223,17 +224,17 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
                 try {
                     slave = ds.isSlave();
                 } catch (Exception exc) {
-                    LOGGER.warn("", exc);
+                    logger.warn("", exc);
                 }
             }
             if(!slave) {
-                LOGGER.info("Adding MASTER {} to active queue", ds.getDbConnectionName());
+                logger.info("Adding MASTER {} to active queue", ds.getDbConnectionName());
                 try {
                     synchronized (semaphoreQ) {
                         semaphoreQ.notifyAll();
                     }
                 } catch(Exception exc) {
-                    LOGGER.warn("", exc);
+                    logger.warn("", exc);
                 }
         }
             try {
@@ -246,10 +247,10 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
                     }
                 }
             } catch(Exception exc) {
-                LOGGER.warn("", exc);
+                logger.warn("", exc);
             }
             if(ds != null)
-                LOGGER.info("Thread DataSourceTester terminated {} for {}", this.getName(), ds.getDbConnectionName());
+                logger.info("Thread DataSourceTester terminated {} for {}", this.getName(), ds.getDbConnectionName());
         }
 
     }
@@ -265,10 +266,11 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
                 tmpLongValue = Long.parseLong(value);
 
         } catch(NumberFormatException exc) {
-            if(LOGGER.isWarnEnabled()){
-                LOGGER.warn("'"+property+"'=" + value+" is invalid. It should be a numeric value");
+            if(logger.isWarnEnabled()){
+                logger.warn("'"+property+"'=" + value+" is invalid. It should be a numeric value");
             }
         } catch(Exception exc) {
+            logger.warn("", exc);
         }
         return tmpLongValue;
 
@@ -285,10 +287,11 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
                 tmpValue = Boolean.parseBoolean(value);
 
         } catch(NumberFormatException exc) {
-            if(LOGGER.isWarnEnabled()){
-                LOGGER.warn("'"+property+"'=" + value+" is invalid. It should be a boolean value");
+            if(logger.isWarnEnabled()){
+                logger.warn("'"+property+"'=" + value+" is invalid. It should be a boolean value");
             }
         } catch(Exception exc) {
+            logger.warn("", exc);
         }
         return tmpValue;
 
@@ -300,10 +303,10 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
         // if observable is active and there is a standby available, switch
         if(observable instanceof SQLExecutionMonitor)
         {
-            SQLExecutionMonitor monitor = (SQLExecutionMonitor)observable;
-            if(monitor.getParent() instanceof CachedDataSource)
+            SQLExecutionMonitor execMonitor = (SQLExecutionMonitor)observable;
+            if(execMonitor.getParent() instanceof CachedDataSource)
             {
-                CachedDataSource dataSource = (CachedDataSource)monitor.getParent();
+                CachedDataSource dataSource = (CachedDataSource)execMonitor.getParent();
                 if(dataSource == dsQueue.first())
                 {
                     if(recoveryMode && dsQueue.size() > 1){
@@ -328,7 +331,9 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
             {
                 try {
                     Thread.sleep(retryInterval);
-                } catch (InterruptedException e1) {    }
+                } catch (InterruptedException e1) {
+                    logger.warn("Interrupter Exception",e1);
+                }
                 CachedDataSource brokenSource = null;
                 try {
                     if (!broken.isEmpty()) {
@@ -342,7 +347,7 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
                                 broken.remove(brokenSource);
                                 brokenSource.blockImmediateOffLine();
                                 dsQueue.add(brokenSource);
-                                LOGGER.info("DataSource <"
+                                logger.info("DataSource <"
                                         + brokenSource.getDbConnectionName()
                                         + "> recovered.");
                             }
@@ -350,24 +355,26 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
                         }
                     }
                 } catch (Exception exc) {
-                    LOGGER.warn(exc.getMessage());
+                    logger.warn(exc.getMessage());
                     if(brokenSource != null){
                         try {
                             if(!broken.contains(brokenSource))
                                 broken.add(brokenSource);
                             brokenSource = null;
-                        } catch (Exception e1) {    }
+                        } catch (Exception e1) {
+                            logger.warn(" Exception",e1);
+                        }
                     }
                 }
             }
-            LOGGER.info("DBResourceManager.RecoveryMgr <"+this.toString() +"> terminated." );
+            logger.info("DBResourceManager.RecoveryMgr <"+this.toString() +"> terminated." );
         }
 
         private boolean resetConnectionPool(CachedDataSource dataSource){
             try {
                 return dataSource.testConnection();
             } catch (Exception exc) {
-                LOGGER.info("DataSource <" + dataSource.getDbConnectionName() + "> resetCache failed with error: "+ exc.getMessage());
+                logger.info("DataSource <" + dataSource.getDbConnectionName() + "> resetCache failed with error: "+ exc.getMessage());
                 return false;
             }
         }
@@ -393,7 +400,7 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
 
         // test if there are any connection pools available
         if(this.dsQueue.isEmpty()){
-            LOGGER.error("Generated alarm: DBResourceManager.getData - No active DB connection pools are available.");
+            logger.error("Generated alarm: DBResourceManager.getData - No active DB connection pools are available.");
             throw new DBLibException("No active DB connection pools are available in RequestDataWithRecovery call.");
         }
 
@@ -421,18 +428,18 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
                     SQLException sqlExc = (SQLException)exc;
                     int code = sqlExc.getErrorCode();
                     String state = sqlExc.getSQLState();
-                    LOGGER.debug("SQLException code: {} state: {}", code, state);
+                    logger.debug("SQLException code: {} state: {}", code, state);
                     if("07001".equals(sqlExc.getSQLState())) {
                         throw sqlExc;
                     }
                 }
                 lastException = exc;
-                LOGGER.error("Generated alarm: "+active.getDbConnectionName(), exc);
+                logger.error("Generated alarm: "+active.getDbConnectionName(), exc);
                 handleGetConnectionException(active, exc);
             } finally {
-                if(LOGGER.isDebugEnabled()){
+                if(logger.isDebugEnabled()){
                     time = System.currentTimeMillis() - time;
-                    LOGGER.debug("getData processing time : "+ active.getDbConnectionName()+"  "+time+" miliseconds.");
+                    logger.debug("getData processing time : "+ active.getDbConnectionName()+"  "+time+" miliseconds.");
                 }
             }
         }
@@ -457,7 +464,7 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
 
     private CachedRowSet requestDataNoRecovery(String statement, ArrayList<Object> arguments, String preferredDS) throws SQLException {
         if(dsQueue.isEmpty()){
-            LOGGER.error("Generated alarm: DBResourceManager.getData - No active DB connection pools are available.");
+            logger.error("Generated alarm: DBResourceManager.getData - No active DB connection pools are available.");
             throw new DBLibException("No active DB connection pools are available in RequestDataNoRecovery call.");
         }
         CachedDataSource active = this.dsQueue.first();
@@ -472,13 +479,12 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
                 }
             }
             return active.getData(statement, arguments);
-//        } catch(SQLDataException exc){
-//            throw exc;
+
         } catch(Throwable exc){
             String message = exc.getMessage();
             if(message == null)
                 message = exc.getClass().getName();
-            LOGGER.error("Generated alarm: "+active.getDbConnectionName()+" - "+message);
+            logger.error("Generated alarm: "+active.getDbConnectionName()+" - "+message);
             if(exc instanceof SQLException)
                 throw (SQLException)exc;
             else {
@@ -487,9 +493,9 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
                 throw excptn;
             }
         } finally {
-            if(LOGGER.isDebugEnabled()){
+            if(logger.isDebugEnabled()){
                 time = System.currentTimeMillis() - time;
-                LOGGER.debug(">> getData : "+ active.getDbConnectionName()+"  "+time+" miliseconds.");
+                logger.debug(">> getData : "+ active.getDbConnectionName()+"  "+time+" miliseconds.");
             }
         }
     }
@@ -516,24 +522,24 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
             if(!dss.isSlave()) {
                 final CachedDataSource first = this.dsQueue.first();
                 if(first != dss) {
-                    if(LOGGER.isDebugEnabled())
-                        LOGGER.debug("----------REODRERING--------");
+                    if(logger.isDebugEnabled())
+                        logger.debug("----------REODRERING--------");
                     dsQueue.clear();
                     if(!dsQueue.addAll(Arrays.asList(clone))) {
-                        LOGGER.error("Failed adding datasources");
+                        logger.error("Failed adding datasources");
                 }
                 }
                 return  dss;
             }
         }
-        LOGGER.warn("MASTER not found.");
+        logger.warn("MASTER not found.");
         return null;
     }
 
 
     private boolean writeDataNoRecovery(String statement, ArrayList<Object> arguments, String preferredDS) throws SQLException {
         if(dsQueue.isEmpty()){
-            LOGGER.error("Generated alarm: DBResourceManager.getData - No active DB connection pools are available.");
+            logger.error("Generated alarm: DBResourceManager.getData - No active DB connection pools are available.");
             throw new DBLibException("No active DB connection pools are available in RequestDataNoRecovery call.");
         }
 
@@ -558,12 +564,12 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
                 String message = exc.getMessage();
                 if(message == null)
                     message = exc.getClass().getName();
-                LOGGER.error("Generated alarm: "+active.getDbConnectionName()+" - "+message);
+                logger.error("Generated alarm: "+active.getDbConnectionName()+" - "+message);
                 if(exc instanceof SQLException) {
                     SQLException sqlExc = SQLException.class.cast(exc);
                     // handle read-only exception
                     if(sqlExc.getErrorCode() == 1290 && "HY000".equals(sqlExc.getSQLState())) {
-                        LOGGER.warn("retrying due to: " + sqlExc.getMessage());
+                        logger.warn("retrying due to: " + sqlExc.getMessage());
                         this.findMaster();
                         if(retryAllowed){
                             retryAllowed = false;
@@ -578,9 +584,9 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
                     throw excptn;
                 }
             } finally {
-                if(LOGGER.isDebugEnabled()){
+                if(logger.isDebugEnabled()){
                     time = System.currentTimeMillis() - time;
-                    LOGGER.debug("writeData processing time : "+ active.getDbConnectionName()+"  "+time+" miliseconds.");
+                    logger.debug("writeData processing time : "+ active.getDbConnectionName()+"  "+time+" miliseconds.");
                 }
             }
         }
@@ -622,14 +628,13 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
             }
             return new DBLibConnection(active.getConnection(), active);
         } catch(javax.sql.rowset.spi.SyncFactoryException exc){
-            LOGGER.debug("Free memory (bytes): " + Runtime.getRuntime().freeMemory());
-            LOGGER.warn("CLASSPATH issue. Allowing retry", exc);
+            logger.debug("Free memory (bytes): " + Runtime.getRuntime().freeMemory());
+            logger.warn("CLASSPATH issue. Allowing retry", exc);
             lastException = exc;
-        } catch(PoolExhaustedException exc) {
+        } catch(PoolExhaustedException | SQLNonTransientConnectionException exc) {
             throw new NoAvailableConnectionsException(exc);
-        } catch(SQLNonTransientConnectionException exc){
-            throw new NoAvailableConnectionsException(exc);
-        } catch(Exception exc){
+        }
+         catch(Exception exc){
             lastException = exc;
             if(recoveryMode){
                 handleGetConnectionException(active, exc);
@@ -647,7 +652,7 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
             excptn.setStackTrace(trwb.getStackTrace());
             throw excptn;
         } finally {
-            if(LOGGER.isDebugEnabled()){
+            if(logger.isDebugEnabled()){
                 displayState();
             }
         }
@@ -662,7 +667,6 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
             SQLException exception = new DBLibException(lastException.getMessage());
             exception.setStackTrace(lastException.getStackTrace());
             if(lastException.getCause() instanceof SQLException) {
-//                exception.setNextException((SQLException)lastException.getCause());
                 throw (SQLException)lastException.getCause();
             }
             throw exception;
@@ -712,7 +716,7 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
         try {
             if(!source.canTakeOffLine())
             {
-                LOGGER.error("Could not switch due to blocking");
+                logger.error("Could not switch due to blocking");
                 return;
             }
 
@@ -721,22 +725,22 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
             {
                 if(broken.add(source))
                 {
-                    LOGGER.warn("DB Recovery: DataSource <" + source.getDbConnectionName()    + "> put in the recovery mode. Reason : " + exc.getMessage());
+                    logger.warn("DB Recovery: DataSource <" + source.getDbConnectionName()    + "> put in the recovery mode. Reason : " + exc.getMessage());
                 } else {
-                    LOGGER.warn("Error putting DataSource <" +source.getDbConnectionName()+  "> in recovery mode.");
+                    logger.warn("Error putting DataSource <" +source.getDbConnectionName()+  "> in recovery mode.");
                 }
             } else {
-                LOGGER.info("DB Recovery: DataSource <" + source.getDbConnectionName() + "> already in recovery queue");
+                logger.info("DB Recovery: DataSource <" + source.getDbConnectionName() + "> already in recovery queue");
             }
             if(removed)
             {
                 if(!dsQueue.isEmpty())
                 {
-                    LOGGER.warn("DB DataSource <" + dsQueue.first().getDbConnectionName()    + "> became active");
+                    logger.warn("DB DataSource <" + dsQueue.first().getDbConnectionName()    + "> became active");
                 }
             }
         } catch (Exception e) {
-            LOGGER.error("", e);
+            logger.error("", e);
         }
     }
 
@@ -754,13 +758,13 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
                 try {
                     broken.add( new TerminatingCachedDataSource(null));
                 } catch(Exception exc){
-                    LOGGER.error("Waiting for Worker to stop", exc);
+                    logger.error("Waiting for Worker to stop", exc);
                 }
             }
             worker.join(terminationTimeOut);
-            LOGGER.info("DBResourceManager.RecoveryMgr <"+worker.toString() +"> termination was successful: " + worker.getState());
+            logger.info("DBResourceManager.RecoveryMgr <"+worker.toString() +"> termination was successful: " + worker.getState());
         } catch(Exception exc){
-            LOGGER.error("Waiting for Worker thread to terminate ", exc);
+            logger.error("Waiting for Worker thread to terminate ", exc);
         }
     }
 
@@ -785,11 +789,11 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
     }
 
     public void displayState(){
-        if(LOGGER.isDebugEnabled()){
-            LOGGER.debug("POOLS : Active = "+dsQueue.size() + ";\t Broken = "+broken.size());
+        if(logger.isDebugEnabled()){
+            logger.debug("POOLS : Active = "+dsQueue.size() + ";\t Broken = "+broken.size());
             CachedDataSource current = dsQueue.first();
             if(current != null) {
-                LOGGER.debug("POOL : Active name = \'"+current.getDbConnectionName()+ "\'");
+                logger.debug("POOL : Active name = \'"+current.getDbConnectionName()+ "\'");
             }
         }
     }
@@ -884,7 +888,7 @@ public class DBResourceManager implements DataSource, DataAccessor, DBResourceOb
                 handleGetConnectionException(obj, ption);
             }
         } catch(Throwable exc){
-            LOGGER.warn("", exc);
+            logger.warn("", exc);
         }
     }
 
