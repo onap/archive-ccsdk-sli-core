@@ -154,6 +154,8 @@ public class SvcLogicServiceImpl implements SvcLogicService {
         LOG.info("About to execute graph {}", graph.toString());
 		try {
 			while (curNode != null) {
+				MDC.put("nodeId", curNode.getNodeId() + " (" + curNode.getNodeType() + ")");
+				LOG.info("About to execute node # {} ({})", curNode.getNodeId(), curNode.getNodeType());
 
 				SvcLogicNode nextNode = executeNode(curNode, ctx);
 				curNode = nextNode;
@@ -172,8 +174,6 @@ public class SvcLogicServiceImpl implements SvcLogicService {
             return (null);
         }
 
-		LOG.info("About to execute node # {} ({})", node.getNodeId(), node.getNodeType());
-		
         if (LOG.isDebugEnabled()) {
             LOG.debug("Executing node {}", node.getNodeId());
         }
@@ -183,8 +183,6 @@ public class SvcLogicServiceImpl implements SvcLogicService {
         if (executor != null) {
             LOG.debug("Executing node executor for node type {} - {}", node.getNodeType(),
                     executor.getClass().getName());
-
-    		MDC.put("nodeId", node.getNodeId() + " (" + node.getNodeType() + ")");
             return (executor.execute(this, node, ctx));
         } else {
             throw new SvcLogicException("Attempted to execute a node of type " + node.getNodeType() + ", but no executor was registered for this type");
