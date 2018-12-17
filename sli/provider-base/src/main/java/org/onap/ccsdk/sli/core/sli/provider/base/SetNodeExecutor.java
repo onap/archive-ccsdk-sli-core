@@ -111,7 +111,7 @@ public class SetNodeExecutor extends AbstractSvcLogicNodeExecutor {
                             lhsPrefix = lhsPrefix.substring(0, lhsPrefix.length() - 1);
                         }
 
-                        HashMap<String, String> parmsToAdd = new HashMap<String, String>();
+                        HashMap<String, String> parmsToAdd = new HashMap<>();
 
                         for (String sourceVarName : ctx.getAttributeKeySet()) {
                             if (sourceVarName.startsWith(rhsRoot)) {
@@ -125,7 +125,7 @@ public class SetNodeExecutor extends AbstractSvcLogicNodeExecutor {
                         }
                     } else {
                         // If RHS is empty, unset attributes in LHS
-                        LinkedList<String> parmsToRemove = new LinkedList<String>();
+                        LinkedList<String> parmsToRemove = new LinkedList<>();
                         String prefix = lhsVarName + ".";
                         String arrayPrefix = lhsVarName + "[";
                         //Clear length value in case an array exists with this prefix
