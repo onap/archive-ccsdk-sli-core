@@ -33,6 +33,7 @@
 		<module>sliPluginUtils</module>
 		<module>sliapi</module>
 		<module>features</module>
+		<module>artifacts</module>
 	</modules>
 
 	<scm>
