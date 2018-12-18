@@ -52,6 +52,9 @@ public class MdsalHelper {
 	private static final Logger LOG = LoggerFactory.getLogger(MdsalHelper.class);
 	private static Properties yangMappingProperties = new Properties();
 	private static final String IP_ADDRESS="IpAddress";
+	private static final String IPV4_ADDRESS="Ipv4Address";
+	private static final String IPv6_ADDRESS="Ipv6Address";
+	
 	private static final String IP_PREFIX="IpPrefix";
 
 	@Deprecated
@@ -136,7 +139,7 @@ public class MdsalHelper {
 					String propVal = null;
 					if (IP_ADDRESS.equals(simpleTypeName) || IP_PREFIX.equals(simpleTypeName)) {
 						propVal = String.valueOf((char[]) retValue);
-					} else if ("Ipv4Address".equals(simpleTypeName) || "Ipv6Address".equals(simpleTypeName)) {
+					} else if (IPV4_ADDRESS.equals(simpleTypeName) || IPV6_ADDRESS.equals(simpleTypeName)) {
 						propVal = (String) retValue;
 					} else if ("Dscp".equals(simpleTypeName)) {
 						propVal = String.valueOf((short) retValue);
@@ -634,16 +637,16 @@ public class MdsalHelper {
 
 							String simpleName = paramClass.getSimpleName();
 
-							if ("Ipv4Address".equals(simpleName) || "Ipv6Address".equals(simpleName)
+							if (IPV4_ADDRESS.equals(simpleName) || IPV6_ADDRESS.equals(simpleName)
 									|| IP_ADDRESS.equals(simpleName)) {
 
 								if ((paramValue != null) && (paramValue.length() > 0)) {
 									try {
 										IpAddress ipAddr = IpAddressBuilder.getDefaultInstance(paramValue);
 
-										if ("Ipv4Address".equals(simpleName)) {
+										if (IPV4_ADDRESS.equals(simpleName)) {
 											m.invoke(toObj, ipAddr.getIpv4Address());
-										} else if ("Ipv6Address".equals(simpleName)) {
+										} else if (IPV6_ADDRESS.equals(simpleName)) {
 											m.invoke(toObj, ipAddr.getIpv6Address());
 
 										} else {
@@ -996,7 +999,7 @@ public class MdsalHelper {
 	}
 
 	private static boolean classHasSpecialHandling(String simpleName) {
-		if (IP_ADDRESS.equals(simpleName) || "Ipv4Address".equals(simpleName) || "Ipv6Address".equals(simpleName)
+		if (IP_ADDRESS.equals(simpleName) || IPV4_ADDRESS.equals(simpleName) || IPV6_ADDRESS.equals(simpleName)
 				|| IP_PREFIX.equals(simpleName) || "PortNumber".equals(simpleName) || "Dscp".equals(simpleName)) {
 			return true;
 		}
@@ -1070,7 +1073,7 @@ public class MdsalHelper {
 
 							String simpleName = returnClass.getSimpleName();
 
-							if ("Ipv4Address".equals(simpleName) || "Ipv6Address".equals(simpleName)
+							if (IPV4_ADDRESS.equals(simpleName) || IPV6_ADDRESS.equals(simpleName)
 									|| IP_ADDRESS.equals(simpleName) || IP_PREFIX.equals(simpleName)
 									|| "PortNumber".equals(simpleName) || "Dscp".equals(simpleName)) {
 								LOG.trace(m.getName() + " is an " + simpleName);
@@ -1146,7 +1149,7 @@ public class MdsalHelper {
 			return (false);
 		}
 		String simpleName = c.getSimpleName();
-		return ("Ipv4Address".equals(simpleName));
+		return (IPV4_ADDRESS.equals(simpleName));
 	}
 
 	public static boolean isIpv6Address(Class c) {
@@ -1158,7 +1161,7 @@ public class MdsalHelper {
 			return (false);
 		}
 		String simpleName = c.getSimpleName();
-		return ("Ipv6Address".equals(simpleName));
+		return (IPV6_ADDRESS.equals(simpleName));
 	}
 
 	public static boolean isIpAddress(Class c) {
