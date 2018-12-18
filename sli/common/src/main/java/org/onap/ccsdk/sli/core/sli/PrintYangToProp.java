@@ -144,7 +144,7 @@ public class PrintYangToProp {
 						fieldName = toLowerHyphen(m.getName().substring(2));
 					}
 
-					fieldName = fieldName.substring(0, 1).toLowerCase()
+				if(fieldName!= null && fieldName.length >0 ) fieldName = fieldName.substring(0, 1).toLowerCase()
 							+ fieldName.substring(1);
 
 					// Is the return type a yang generated class?
@@ -222,7 +222,7 @@ public class PrintYangToProp {
 								}
 
 								if (retValue != null) {
-									String propVal = retValue.getValue().toString();
+									String propVal = retValue.getValue();
 									//LOG.debug("Setting property " + propName
 									//		+ " to " + propVal);
 									props.setProperty(propName, propVal);
