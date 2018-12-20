@@ -144,8 +144,8 @@ public class PrintYangToProp {
                         fieldName = toLowerHyphen(m.getName().substring(2));
                     }
 
-                if(fieldName!= null && fieldName.length() >0 ) fieldName = fieldName.substring(0, 1).toLowerCase()
-                            + fieldName.substring(1);
+                if(fieldName!= null && fieldName.length() >0 ) fieldName = fieldName.substring(0, 1).toLowerCase()+ fieldName.substring(1);
+                            
 
                     // Is the return type a yang generated class?
                     if (isYangGenerated(returnType)) {
@@ -196,8 +196,7 @@ public class PrintYangToProp {
 
                                 if (retValue != null) {
                                     String propVal = retValue.getValue();
-                                    //LOG.debug("Setting property " + propName
-                                    //        + " to " + propVal);
+                                    
                                     props.setProperty(propName, propVal);
 
                                 }
@@ -223,8 +222,7 @@ public class PrintYangToProp {
 
                                 if (retValue != null) {
                                     String propVal = retValue.getValue();
-                                    //LOG.debug("Setting property " + propName
-                                    //        + " to " + propVal);
+                                    
                                     props.setProperty(propName, propVal);
 
                                 }
@@ -236,7 +234,7 @@ public class PrintYangToProp {
                                                 + TO_PROPERTIES_STRING, e);
                             }
                         } else if (isIpv4Prefix(returnType)) {
-                            //System.out.println("isIpv4Prefix");
+                            
                             // Save its value
                             try {
                                 String propName = propNamePfx + "." + fieldName;
@@ -250,9 +248,8 @@ public class PrintYangToProp {
                                 }
 
                                 if (retValue != null) {
-                                    String propVal = retValue.getValue().toString();
-                                    //LOG.debug("Setting property " + propName
-                                    //        + " to " + propVal);
+                                    String propVal = retValue.getValue();
+                                    
                                     props.setProperty(propName, propVal);
 
                                 }
