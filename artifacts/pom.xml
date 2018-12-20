@@ -29,49 +29,49 @@
 				<artifactId>ccsdk-dblib</artifactId>
 				<version>${project.version}</version>
 				<type>xml</type>
-				<classifier>feature</classifier>
+				<classifier>features</classifier>
 			</dependency>
 			<dependency>
 				<groupId>org.onap.ccsdk.sli.core</groupId>
 				<artifactId>ccsdk-filters</artifactId>
 				<version>${project.version}</version>
 				<type>xml</type>
-				<classifier>feature</classifier>
+				<classifier>features</classifier>
 			</dependency>
 			<dependency>
 				<groupId>org.onap.ccsdk.sli.core</groupId>
 				<artifactId>ccsdk-sli</artifactId>
 				<version>${project.version}</version>
 				<type>xml</type>
-				<classifier>feature</classifier>
+				<classifier>features</classifier>
 			</dependency>
 			<dependency>
 				<groupId>org.onap.ccsdk.sli.core</groupId>
 				<artifactId>ccsdk-sli-core-all</artifactId>
 				<version>${project.version}</version>
 				<type>xml</type>
-				<classifier>feature</classifier>
+				<classifier>features</classifier>
 			</dependency>
 			<dependency>
 				<groupId>org.onap.ccsdk.sli.core</groupId>
 				<artifactId>ccsdk-sliapi</artifactId>
 				<version>${project.version}</version>
 				<type>xml</type>
-				<classifier>feature</classifier>
+				<classifier>features</classifier>
 			</dependency>
 			<dependency>
 				<groupId>org.onap.ccsdk.sli.core</groupId>
 				<artifactId>ccsdk-slicore-utils</artifactId>
 				<version>${project.version}</version>
 				<type>xml</type>
-				<classifier>feature</classifier>
+				<classifier>features</classifier>
 			</dependency>
 			<dependency>
 				<groupId>org.onap.ccsdk.sli.core</groupId>
 				<artifactId>ccsdk-sliPluginUtils</artifactId>
 				<version>${project.version}</version>
 				<type>xml</type>
-				<classifier>feature</classifier>
+				<classifier>features</classifier>
 			</dependency>
 			<dependency>
 				<groupId>org.onap.ccsdk.sli.core</groupId>

@@ -16,40 +16,6 @@
 
     <name>ccsdk-sli-core :: sliapi :: ${project.artifactId}</name>
 
-	<dependencyManagement>
-		<dependencies>
-		     <dependency>
-                <groupId>org.opendaylight.mdsal.model</groupId>
-                <artifactId>mdsal-model-artifacts</artifactId>
-                <version>${odl.mdsal.model.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.opendaylight.controller</groupId>
-                <artifactId>mdsal-artifacts</artifactId>
-                <version>${odl.mdsal.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-				<groupId>org.onap.ccsdk.sli.core</groupId>
-				<artifactId>sli-common</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.onap.ccsdk.sli.core</groupId>
-				<artifactId>sli-provider</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.onap.ccsdk.sli.core</groupId>
-				<artifactId>dblib-provider</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-            
-		</dependencies>
-	</dependencyManagement>
 	
     <dependencies>
 
