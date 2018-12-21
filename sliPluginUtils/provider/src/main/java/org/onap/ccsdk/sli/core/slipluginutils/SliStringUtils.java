@@ -43,7 +43,9 @@ public class SliStringUtils implements SvcLogicJavaPlugin {
 	public static final String INPUT_PARAM_SOURCE = "source";
 	public static final String INPUT_PARAM_TARGET = "target";
 	
-	public SliStringUtils() {}
+	public SliStringUtils() {
+		//this method does nothing
+	}
 
 	/**
 	 * Provides split functionality to Directed Graphs.
@@ -125,8 +127,8 @@ public class SliStringUtils implements SvcLogicJavaPlugin {
      * @since 11.0.2
      */
     public static String equalsIgnoreCase(Map<String, String> parameters, SvcLogicContext ctx) throws SvcLogicException {
-        SliPluginUtils.checkParameters(parameters, new String[]{INPUT_PARAM_SOURCE,"target"}, LOG);
-        if(parameters.get(INPUT_PARAM_SOURCE).equalsIgnoreCase(parameters.get("target"))){
+        SliPluginUtils.checkParameters(parameters, new String[]{INPUT_PARAM_SOURCE,INPUT_PARAM_TARGET}, LOG);
+        if(parameters.get(INPUT_PARAM_SOURCE).equalsIgnoreCase(parameters.get(INPUT_PARAM_TARGET))){
             return "true";
         }
         return "false";
@@ -189,8 +191,8 @@ public class SliStringUtils implements SvcLogicJavaPlugin {
      * @since 11.0.2
      */
     public static String contains(Map<String, String> parameters, SvcLogicContext ctx) throws SvcLogicException {
-        SliPluginUtils.checkParameters(parameters, new String[]{INPUT_PARAM_SOURCE,"target"}, LOG);
-        if(parameters.get(INPUT_PARAM_SOURCE).contains(parameters.get("target"))){
+        SliPluginUtils.checkParameters(parameters, new String[]{INPUT_PARAM_SOURCE,INPUT_PARAM_TARGET}, LOG);
+        if(parameters.get(INPUT_PARAM_SOURCE).contains(parameters.get(INPUT_PARAM_TARGET))){
             return "true";
         }
         return "false";
@@ -213,8 +215,8 @@ public class SliStringUtils implements SvcLogicJavaPlugin {
      * @since 11.0.2
      */
     public static String endsWith(Map<String, String> parameters, SvcLogicContext ctx) throws SvcLogicException {
-        SliPluginUtils.checkParameters(parameters, new String[]{INPUT_PARAM_SOURCE,"target"}, LOG);
-        if(parameters.get(INPUT_PARAM_SOURCE).endsWith(parameters.get("target"))){
+        SliPluginUtils.checkParameters(parameters, new String[]{INPUT_PARAM_SOURCE,INPUT_PARAM_TARGET}, LOG);
+        if(parameters.get(INPUT_PARAM_SOURCE).endsWith(parameters.get(INPUT_PARAM_TARGET))){
             return "true";
         }
         return "false";
@@ -237,8 +239,8 @@ public class SliStringUtils implements SvcLogicJavaPlugin {
      * @since 11.0.2
      */
     public static String startsWith(Map<String, String> parameters, SvcLogicContext ctx) throws SvcLogicException {
-        SliPluginUtils.checkParameters(parameters, new String[]{INPUT_PARAM_SOURCE,"target"}, LOG);
-        if(parameters.get(INPUT_PARAM_SOURCE).startsWith(parameters.get("target"))){
+        SliPluginUtils.checkParameters(parameters, new String[]{INPUT_PARAM_SOURCE,INPUT_PARAM_TARGET}, LOG);
+        if(parameters.get(INPUT_PARAM_SOURCE).startsWith(parameters.get(INPUT_PARAM_TARGET))){
             return "true";
         }
         return "false";
@@ -302,8 +304,8 @@ public class SliStringUtils implements SvcLogicJavaPlugin {
      * @since 11.0.2
      */
     public static void replace(Map<String, String> parameters, SvcLogicContext ctx) throws SvcLogicException {
-        SliPluginUtils.checkParameters(parameters, new String[]{INPUT_PARAM_SOURCE,"outputPath","target","replacement"}, LOG);
-        ctx.setAttribute(parameters.get("outputPath"), (parameters.get(INPUT_PARAM_SOURCE).replace(parameters.get("target"), parameters.get("replacement"))));
+        SliPluginUtils.checkParameters(parameters, new String[]{INPUT_PARAM_SOURCE,"outputPath",INPUT_PARAM_TARGET,"replacement"}, LOG);
+        ctx.setAttribute(parameters.get("outputPath"), (parameters.get(INPUT_PARAM_SOURCE).replace(parameters.get(INPUT_PARAM_TARGET), parameters.get("replacement"))));
     }
 
     /**
@@ -324,8 +326,8 @@ public class SliStringUtils implements SvcLogicJavaPlugin {
      * @since 11.0.2
      */
     public static void replaceAll(Map<String, String> parameters, SvcLogicContext ctx) throws SvcLogicException {
-        SliPluginUtils.checkParameters(parameters, new String[]{INPUT_PARAM_SOURCE,"outputPath","target","replacement"}, LOG);
-        ctx.setAttribute(parameters.get("outputPath"), parameters.get(INPUT_PARAM_SOURCE).replaceAll(parameters.get("target"), parameters.get("replacement")));
+        SliPluginUtils.checkParameters(parameters, new String[]{INPUT_PARAM_SOURCE,"outputPath",INPUT_PARAM_TARGET,"replacement"}, LOG);
+        ctx.setAttribute(parameters.get("outputPath"), parameters.get(INPUT_PARAM_SOURCE).replaceAll(parameters.get(INPUT_PARAM_TARGET), parameters.get("replacement")));
     }
     
     /**
@@ -385,8 +387,8 @@ public class SliStringUtils implements SvcLogicJavaPlugin {
      * @since 11.0.2
      */
     public static void concat( Map<String, String> parameters, SvcLogicContext ctx ) throws SvcLogicException {
-            SliPluginUtils.checkParameters( parameters, new String[]{INPUT_PARAM_SOURCE,"target","outputPath"}, LOG );
-            String result = parameters.get(INPUT_PARAM_SOURCE).concat(parameters.get("target"));
+            SliPluginUtils.checkParameters( parameters, new String[]{INPUT_PARAM_SOURCE,INPUT_PARAM_TARGET,"outputPath"}, LOG );
+            String result = parameters.get(INPUT_PARAM_SOURCE).concat(parameters.get(INPUT_PARAM_TARGET));
             ctx.setAttribute(parameters.get("outputPath"), result);
     }
 
