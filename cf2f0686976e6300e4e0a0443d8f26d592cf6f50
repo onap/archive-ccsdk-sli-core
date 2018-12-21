@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9adffdf1_facd0686",
+        "filename": "sli/common/src/main/java/org/onap/ccsdk/sli/core/sli/PrintYangToProp.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 3293
+      },
+      "writtenOn": "2018-12-21T04:31:37Z",
+      "side": 1,
+      "message": "Instead you can do Strings.isNullOrEmpty(fieldName) more readable in my view.",
+      "range": {
+        "startLine": 147,
+        "startChar": 19,
+        "endLine": 147,
+        "endChar": 60
+      },
+      "revId": "cf2f0686976e6300e4e0a0443d8f26d592cf6f50",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
