@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9adffdf1_3072cfad",
+        "filename": "sliPluginUtils/provider/src/main/java/org/onap/ccsdk/sli/core/slipluginutils/SliStringUtils.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 3293
+      },
+      "writtenOn": "2018-12-23T00:33:05Z",
+      "side": 1,
+      "message": "I think this is unnecessary also we do not even need this constructor since we are not passing anything.",
+      "range": {
+        "startLine": 47,
+        "startChar": 2,
+        "endLine": 47,
+        "endChar": 28
+      },
+      "revId": "7c33328e7d21737378d9d2082bcdfd6467bff74e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
