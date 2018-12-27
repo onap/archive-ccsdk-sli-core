@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9adffdf1_4e77b4a0",
+        "filename": "dblib/provider/src/main/java/org/onap/ccsdk/sli/core/dblib/config/DbConfigPool.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 3293
+      },
+      "writtenOn": "2018-12-27T16:41:25Z",
+      "side": 1,
+      "message": "Missing space.",
+      "range": {
+        "startLine": 34,
+        "startChar": 27,
+        "endLine": 34,
+        "endChar": 36
+      },
+      "revId": "7e5a5d052533403c40119e4ec93f90f93f3e9f5a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
