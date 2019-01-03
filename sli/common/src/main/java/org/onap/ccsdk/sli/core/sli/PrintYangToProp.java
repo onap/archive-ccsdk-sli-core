@@ -93,7 +93,7 @@ public class PrintYangToProp {
         }
     
         
-        String simpleName = fromClass.getSimpleName();
+//        String simpleName = fromClass.getSimpleName();
 
         if (fromObj instanceof List) {
 
@@ -223,8 +223,7 @@ public class PrintYangToProp {
 
                                 if (retValue != null) {
                                     String propVal = retValue.getValue();
-                                    //LOG.debug("Setting property " + propName
-                                    //        + " to " + propVal);
+
                                     props.setProperty(propName, propVal);
 
                                 }
@@ -236,7 +235,7 @@ public class PrintYangToProp {
                                                 + TO_PROPERTIES_STRING, e);
                             }
                         } else if (isIpv4Prefix(returnType)) {
-                            //System.out.println("isIpv4Prefix");
+
                             // Save its value
                             try {
                                 String propName = propNamePfx + "." + fieldName;
@@ -250,9 +249,8 @@ public class PrintYangToProp {
                                 }
 
                                 if (retValue != null) {
-                                    String propVal = retValue.getValue().toString();
-                                    //LOG.debug("Setting property " + propName
-                                    //        + " to " + propVal);
+                                    String propVal = retValue.getValue();
+
                                     props.setProperty(propName, propVal);
 
                                 }
@@ -264,7 +262,7 @@ public class PrintYangToProp {
                                                 + TO_PROPERTIES_STRING, e);
                             }
                         } else if (isIpv6Prefix(returnType)) {
-                            //System.out.println("isIpv6Prefix");
+
                             // Save its value
                             try {
                                 String propName = propNamePfx + "." + fieldName;
@@ -278,9 +276,8 @@ public class PrintYangToProp {
                                 }
 
                                 if (retValue != null) {
-                                    String propVal = retValue.getValue().toString();
-                                    //LOG.debug("Setting property " + propName
-                                    //        + " to " + propVal);
+                                    String propVal = retValue.getValue();
+
                                     props.setProperty(propName, propVal);
 
                                 }
@@ -312,10 +309,7 @@ public class PrintYangToProp {
                                                 + TO_PROPERTIES_STRING, e);
                             }
                         }
-                    } else if (returnType.equals(Class.class)) {
-
-                        //LOG.debug(m.getName()
-                        //        + " returns a Class object - not interested");
+                    } else if (returnType!=null && returnType.equals(Class.class)) {
 
                     } else if (List.class.isAssignableFrom(returnType)) {
 
@@ -361,17 +355,12 @@ public class PrintYangToProp {
 
                             if (propValObj != null) {
                                 String propVal = propValObj.toString();
-                                //LOG.debug("Setting property " + propName
-                                //        + " to " + propVal);
+
                                 props.setProperty(propName, propVal);
 
                             }
                         } catch (Exception e) {
-                            LOG.error(
-                                    CAUGHT_EXCEPTION_MSG
-                                            + fromClass.getName() + "."
-                                            + m.getName()
-                                            + TO_PROPERTIES_STRING, e);
+                            LOG.error( CAUGHT_EXCEPTION_MSG + fromClass.getName() + "." + m.getName() + TO_PROPERTIES_STRING, e);
                         }
                     }
 
@@ -398,8 +387,6 @@ public class PrintYangToProp {
         int maxIdx = -1;
         boolean foundValue = false;
 
-        //LOG.debug("Saving properties to List<" + elemType.getName()
-        //        + ">  from " + pfx);
 
         // Figure out array size
         for (Object pNameObj : props.keySet()) {
@@ -424,7 +411,7 @@ public class PrintYangToProp {
             }
         }
 
-        //LOG.debug(pfx + " has max index of " + maxIdx);
+
         for (int i = 0; i <= maxIdx; i++) {
 
             String curBase = pfx + "[" + i + "]";
@@ -437,8 +424,7 @@ public class PrintYangToProp {
                     Method buildMethod = builderClass.getMethod("build");
                     builderObj = toBuilder(props, curBase, builderObj, true);
                     if (builderObj != null) {
-                        //LOG.debug("Calling " + builderObj.getClass().getName()
-                        //        + "." + buildMethod.getName() + "()");
+
                         Object builtObj = buildMethod.invoke(builderObj);
                         toObj.add(builtObj);
                         foundValue = true;
@@ -470,14 +456,11 @@ public class PrintYangToProp {
         Class toClass = toObj.getClass();
         boolean foundValue = false;
 
-        //LOG.debug("Saving properties to " + toClass.getName() + " class from "
-        //        + pfx);
 
         Ipv4Address addr;
 
         if (isYangGenerated(toClass)) {
             // Class is yang generated.
-            //LOG.debug(toClass.getName() + " is a Yang-generated class");
 
             String propNamePfx = null;
             if (preservePfx) {
@@ -503,7 +486,7 @@ public class PrintYangToProp {
             }
 
             if (toObj instanceof Identifier) {
-                //LOG.debug(toClass.getName() + " is a Key - skipping");
+
                 return (toObj);
             }
 
@@ -511,9 +494,8 @@ public class PrintYangToProp {
             // set
 
             for (Method m : toClass.getMethods()) {
-                // LOG.debug("Is " + m.getName() + " method a setter?");
+
                 if (isSetter(m)) {
-                    // LOG.debug(m.getName() + " is a setter");
                     Class paramTypes[] = m.getParameterTypes();
                     Class paramClass = paramTypes[0];
 
@@ -525,9 +507,7 @@ public class PrintYangToProp {
 
                     String paramValue = props.getProperty(propName);
                     if (paramValue == null) {
-                        //LOG.debug(propName + " is unset");
                     } else {
-                        //LOG.debug(propName + " = " + paramValue);
                     }
 
                     // Is the return type a yang generated class?
@@ -535,7 +515,6 @@ public class PrintYangToProp {
                         // Is it an enum?
                         if (paramClass.isEnum()) {
 
-                            //LOG.debug(m.getName() + " expects an Enum");
                             // Param type is a typedef.
                             if (paramValue != null) {
                                 Object paramObj = null;
@@ -556,10 +535,6 @@ public class PrintYangToProp {
                                         m.setAccessible(true);
                                     }
 
-                                    //LOG.debug("Calling "
-                                    //        + toObj.getClass().getName() + "."
-                                    //        + m.getName() + "(" + paramValue
-                                    //        + ")");
                                     m.invoke(toObj, paramObj);
 
                                     if (!isAccessible) {
@@ -648,9 +623,7 @@ public class PrintYangToProp {
                                 Object builderObj = null;
                                 Object paramObj = null;
 
-                                //LOG.debug(m.getName()
-                                //        + " expects a yang-generated class - looking for builder "
-                                //        + builderName);
+
                                 try {
                                     builderClass = Class.forName(builderName);
                                     builderObj = builderClass.newInstance();
@@ -732,10 +705,7 @@ public class PrintYangToProp {
 
                                         Method buildMethod = builderClass
                                                 .getMethod("build");
-                                        //LOG.debug("Calling "
-                                        //        + paramObj.getClass().getName()
-                                        //        + "." + buildMethod.getName()
-                                        //        + "()");
+
                                         Object builtObj = buildMethod
                                                 .invoke(paramObj);
 
@@ -744,9 +714,7 @@ public class PrintYangToProp {
                                             m.setAccessible(true);
                                         }
 
-                                        //LOG.debug("Calling "
-                                        //        + toObj.getClass().getName()
-                                        //        + "." + m.getName() + "()");
+
                                         m.invoke(toObj, builtObj);
                                         if (!isAccessible) {
                                             m.setAccessible(isAccessible);
@@ -768,10 +736,7 @@ public class PrintYangToProp {
                                         if (!isAccessible) {
                                             m.setAccessible(true);
                                         }
-                                        //LOG.debug("Calling "
-                                        //        + toObj.getClass().getName()
-                                        //        + "." + m.getName() + "("
-                                        //        + paramValue + ")");
+
                                         m.invoke(toObj, paramValue);
                                         if (!isAccessible) {
                                             m.setAccessible(isAccessible);
@@ -797,9 +762,6 @@ public class PrintYangToProp {
 
                         if (List.class.isAssignableFrom(paramClass)) {
 
-                            //LOG.debug("Parameter class " + paramClass.getName()
-                            //        + " is a List");
-
                             // Figure out what type of args are in List and pass
                             // that to toList().
 
@@ -821,10 +783,7 @@ public class PrintYangToProp {
                                     if (!isAccessible) {
                                         m.setAccessible(true);
                                     }
-                                    //LOG.debug("Calling "
-                                    //        + toObj.getClass().getName() + "."
-                                    //        + m.getName() + "(" + paramValue
-                                    //        + ")");
+
                                     m.invoke(toObj, paramObj);
                                     if (!isAccessible) {
                                         m.setAccessible(isAccessible);
@@ -844,10 +803,6 @@ public class PrintYangToProp {
 
                             // Setter expects something that is not a List and
                             // not yang-generated. Just pass the parameter value
-
-                            //LOG.debug("Parameter class "
-                            //        + paramClass.getName()
-                            //        + " is not a yang-generated class or a List");
 
                             if (paramValue != null) {
 
@@ -890,11 +845,6 @@ public class PrintYangToProp {
 
                                     if (constObj != null) {
                                         try {
-                                            //LOG.debug("Calling "
-                                            //        + toObj.getClass()
-                                            //                .getName() + "."
-                                            //        + m.getName() + "("
-                                            //        + constObj + ")");
                                             m.invoke(toObj, constObj);
                                             foundValue = true;
                                         } catch (Exception e2) {
@@ -909,11 +859,7 @@ public class PrintYangToProp {
                                             if (!isAccessible) {
                                                 m.setAccessible(true);
                                             }
-                                            //LOG.debug("Calling "
-                                            //        + toObj.getClass()
-                                            //                .getName() + "."
-                                            //        + m.getName() + "("
-                                            //        + paramValue + ")");
+
                                             m.invoke(toObj, paramValue);
                                             if (!isAccessible) {
                                                 m.setAccessible(isAccessible);
@@ -970,21 +916,16 @@ public class PrintYangToProp {
             Class toClass) {
         boolean foundValue = false;
 
-        //LOG.debug("Analyzing " + toClass.getName() + " class : pfx " + pfx);
+
 
         if (isYangGenerated(toClass)
                 && (!Identifier.class.isAssignableFrom(toClass))) {
             // Class is yang generated.
-            //LOG.debug(toClass.getName() + " is a Yang-generated class");
-
             if (toClass.getName().endsWith("Key")) {
                 if (Identifier.class.isAssignableFrom(toClass)) {
-                    //LOG.debug(Identifier.class.getName()
-                    //        + " is assignable from " + toClass.getName());
+
                 } else {
 
-                    //LOG.debug(Identifier.class.getName()
-                    //        + " is NOT assignable from " + toClass.getName());
                 }
             }
 
@@ -1019,9 +960,8 @@ public class PrintYangToProp {
             // set
 
             for (Method m : toClass.getMethods()) {
-                //LOG.debug("Is " + m.getName() + " method a getter?");
+
                 if (isGetter(m)) {
-                //    LOG.debug(m.getName() + " is a getter");
                     Class returnClass = m.getReturnType();
 
                     String fieldName = toLowerHyphen(m.getName().substring(3));
@@ -1032,14 +972,12 @@ public class PrintYangToProp {
                             + fieldName.substring(1);
 
                     String propName = propNamePfx + "." + fieldName;
-                    //System.out.println("****" + propName);
 
                     // Is the return type a yang generated class?
                     if (isYangGenerated(returnClass)) {
                         // Is it an enum?
                         if (returnClass.isEnum()) {
 
-                            //LOG.debug(m.getName() + " is an Enum");
                             //pstr.print("\n" + propName);
                             //pstr.print("\n" + propName + ":Enum:" + Arrays.asList(returnClass.getEnumConstants()) + "\n");
                             pstr.print("\"" + propName + ":Enum:" + Arrays.asList(returnClass.getEnumConstants()) + "\",");
@@ -1052,7 +990,6 @@ public class PrintYangToProp {
                             //System.out.println("simpleName:" + simpleName);
                             
                             if ("Ipv4Address".equals(simpleName) || "Ipv6Address".equals(simpleName) || "IpAddress".equals(simpleName) || "Ipv4Prefix".equals(simpleName) || "Ipv6Prefix".equals(simpleName) || "IpPrefix".equals(simpleName)) {
-                                //LOG.debug(m.getName()+" is an "+simpleName);
                                 //pstr.print("\n" + propName);
                                 //pstr.print("\n" + propName + ":" + simpleName + "\n");
                                 pstr.print("\"" + propName + ":" + simpleName + "\",");
@@ -1063,21 +1000,14 @@ public class PrintYangToProp {
                                 boolean isNumber = false;
                                 boolean isBoolean = false;
                                 boolean isIdentifier = false;
-                                //System.out.println("simpleName:" + simpleName);
-                                //System.out.println("propName:" + propName);
                                 for(Method mthd : returnClass.getMethods()){
                                     String methodName = mthd.getName();
-                                    //System.out.println("methodName:" + methodName);
                                     if(methodName.equals("getValue")){
                                         Class retType = mthd.getReturnType();
-                                        //System.out.println("retType:" + retType);
                                         isString = String.class.isAssignableFrom(retType);
                                         isNumber = Number.class.isAssignableFrom(retType);
                                         isBoolean = Boolean.class.isAssignableFrom(retType);
                                         isIdentifier = Identifier.class.isAssignableFrom(retType);
-                                        //System.out.println("isString:" + isString);
-                                        //System.out.println("isNumber:" + isNumber);
-                                        //System.out.println("isNumber:" + isNumber);
                                         break;
                                     }
                                 }
@@ -1095,17 +1025,9 @@ public class PrintYangToProp {
                                     prop.setProperty(propName,"");
                                     propList.add(propName);
                                 }else if(isIdentifier){
-                                    //System.out.println("isIdentifier");
-                                    //isIdentifer so skipping 
+                                    //isIdentifer so skipping
                                     continue;
                                 }else{
-                                /*
-                                System.out.println("fieldName:" + fieldName);
-                                System.out.println("simpleName:" + simpleName);
-                                System.out.println("returnClass:" + returnClass);
-                                System.out.println("pstr:" + pstr);
-                                System.out.println("propNamePfx:" + propNamePfx);
-                                */
                                 getProperties(pstr, propNamePfx + ".CLASS_FOUND", returnClass);
                                 }
                             }
@@ -1118,8 +1040,6 @@ public class PrintYangToProp {
 
                         if (List.class.isAssignableFrom(returnClass)) {
 
-                            //LOG.debug("Parameter class "
-                            //        + returnClass.getName() + " is a List");
 
                             // Figure out what type of args are in List and pass
                             // that to toList().
@@ -1128,13 +1048,6 @@ public class PrintYangToProp {
                             Type elementType = ((ParameterizedType) returnType)
                                     .getActualTypeArguments()[0];
                             Class elementClass = (Class) elementType;
-                            //LOG.debug("Calling printPropertyList on list type ("
-                                    //+ elementClass.getName()
-                                //    + "), pfx is ("
-                                //    + pfx
-                                //    + "), toClass is ("
-                                //    + toClass.getName() + ")");
-                            //System.out.println("List propNamePfx:" + propNamePfx+ "." + toLowerHyphen(elementClass.getSimpleName()) + "[]");
                             if(String.class.isAssignableFrom(elementClass)){
                                 pstr.print("\"" + propName + ":[String,String,...]\",");
                                 prop.setProperty(propName,"");
@@ -1164,11 +1077,7 @@ public class PrintYangToProp {
                             // Setter expects something that is not a List and
                             // not yang-generated. Just pass the parameter value
 
-                            //LOG.debug("Parameter class "
-                            //        + returnClass.getName()
-                            //        + " is not a yang-generated class or a List");
 
-                            //pstr.print("\n" + propName);
                             String className=returnClass.getName();
                             int nClassNameIndex = className.lastIndexOf('.');
                             String nClassName = className;
@@ -1209,8 +1118,7 @@ public class PrintYangToProp {
         if (c == null) {
             return (false);
         } else {
-            //System.out.println(c.getName());
-            return (c.getName().startsWith("org.opendaylight.yang.gen."));
+                       return (c.getName().startsWith("org.opendaylight.yang.gen."));
         }
     }
     
@@ -1237,7 +1145,7 @@ public class PrintYangToProp {
             return (false);
         }
         String simpleName = c.getSimpleName();
-        //System.out.println("simpleName:" + simpleName);
+
         return ("Ipv4Prefix".equals(simpleName)) ;
     }
 
@@ -1247,7 +1155,7 @@ public class PrintYangToProp {
             return (false);
         }
         String simpleName = c.getSimpleName();
-        //System.out.println("simpleName:" + simpleName);
+
         return ("Ipv6Prefix".equals(simpleName)) ;
     }
 
@@ -1266,7 +1174,7 @@ public class PrintYangToProp {
 
         String retval = str.replaceAll(regex, replacement).toLowerCase();
 
-        //LOG.debug("Converting " + inStr + " => " + str + " => " + retval);
+
         return (retval);
     }
 
@@ -1292,7 +1200,7 @@ public class PrintYangToProp {
     }
 
     public static boolean isGetter(Method m) {
-        //System.out.println(m);
+
         if (m == null) {
             return (false);
         }
@@ -1346,7 +1254,7 @@ public class PrintYangToProp {
             //printPropertyList(ps,"",cl);
             //JsonObject jsonObj = Json.createObjectBuilder().build();
             Properties p = getProperties(ps,"",cl);    
-            //System.out.println(p);
+         
 
         }catch(Exception e){
             e.printStackTrace();
