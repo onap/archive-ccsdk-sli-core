@@ -45,7 +45,7 @@ public class DME2 implements SvcLogicJavaPlugin {
     public static final String PROXY_URL_KEY = "proxyUrl";
     public static final String PROXY_URLS_VALUE_SEPARATOR = ",";
     public static final String AAF_USERNAME_KEY = "aafUserName";
-    public static final String AAF_PASSWORD_KEY = "aafPassword";
+    public static final String AAF_PD_KEY = "aafPassword";
     public static final String ENV_CONTEXT_KEY = "envContext";
     public static final String ROUTE_OFFER_KEY = "routeOffer";
     public static final String COMMON_SERVICE_VERSION_KEY = "commonServiceVersion";
@@ -75,7 +75,7 @@ public class DME2 implements SvcLogicJavaPlugin {
             }
         }
         this.aafUserName = properties.getProperty(AAF_USERNAME_KEY, null);
-        this.aafPassword = properties.getProperty(AAF_PASSWORD_KEY, null);
+        this.aafPassword = properties.getProperty(AAF_PD_KEY, null);
         this.envContext = properties.getProperty(ENV_CONTEXT_KEY, null);
         this.routeOffer = properties.getProperty(ROUTE_OFFER_KEY, null);
         this.commonServiceVersion = properties.getProperty(COMMON_SERVICE_VERSION_KEY, null);
@@ -107,12 +107,12 @@ public class DME2 implements SvcLogicJavaPlugin {
         }else {
             sb.append("/version=" + this.commonServiceVersion);
         }
-        String envContext = parameters.getOrDefault(ENV_CONTEXT_KEY, this.envContext);
-        sb.append("/envContext=" + envContext);
+        String env_context = parameters.getOrDefault(ENV_CONTEXT_KEY, this.envContext);
+        sb.append("/envContext=" + env_context);
 
-        String routeOffer = parameters.getOrDefault(ROUTE_OFFER_KEY, this.routeOffer);
-        if (routeOffer != null && routeOffer.length() > 0) {
-            sb.append("/routeOffer=" + routeOffer);
+        String route_offer = parameters.getOrDefault(ROUTE_OFFER_KEY, this.routeOffer);
+        if (route_offer != null && route_offer.length() > 0) {
+            sb.append("/routeOffer=" + route_offer);
         }
 
         String subContext = parameters.get(SUBCONTEXT_KEY);
@@ -125,9 +125,9 @@ public class DME2 implements SvcLogicJavaPlugin {
             sb.append("&partner=" + this.partner);
         }
         sb.append("&dme2.allowhttpcode=true");
-        String endpointReadTimeout = parameters.getOrDefault(ENDPOINT_READ_TIMEOUT_KEY, this.endpointReadTimeout);
-        if (endpointReadTimeout != null) {
-            sb.append("&dme2.endpointReadTimeout=" + endpointReadTimeout);
+        String endPointReadTimeout = parameters.getOrDefault(ENDPOINT_READ_TIMEOUT_KEY, this.endpointReadTimeout);
+        if (endPointReadTimeout != null) {
+            sb.append("&dme2.endpointReadTimeout=" + endPointReadTimeout);
         }
         String incompleteUrl = sb.toString();
 
