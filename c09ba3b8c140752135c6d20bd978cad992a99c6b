@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9adffdf1_a12d0e97",
+        "filename": "sli/common/src/main/java/org/onap/ccsdk/sli/core/sli/PrintYangToProp.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 3293
+      },
+      "writtenOn": "2019-01-04T01:43:11Z",
+      "side": 1,
+      "message": "Commented code ?",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 56
+      },
+      "revId": "c09ba3b8c140752135c6d20bd978cad992a99c6b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
