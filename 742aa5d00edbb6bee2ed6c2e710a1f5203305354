@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9adffdf1_fddbae79",
+        "filename": "dblib/provider/src/main/java/org/onap/ccsdk/sli/core/dblib/CachedDataSource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 3293
+      },
+      "writtenOn": "2019-01-08T22:59:20Z",
+      "side": 1,
+      "message": "Missing space.",
+      "range": {
+        "startLine": 360,
+        "startChar": 60,
+        "endLine": 360,
+        "endChar": 100
+      },
+      "revId": "742aa5d00edbb6bee2ed6c2e710a1f5203305354",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9adffdf1_3df616fa",
+        "filename": "dblib/provider/src/main/java/org/onap/ccsdk/sli/core/dblib/CachedDataSource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 3293
+      },
+      "writtenOn": "2019-01-08T22:59:20Z",
+      "side": 1,
+      "message": "Missing space.",
+      "range": {
+        "startLine": 365,
+        "startChar": 84,
+        "endLine": 365,
+        "endChar": 101
+      },
+      "revId": "742aa5d00edbb6bee2ed6c2e710a1f5203305354",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9adffdf1_dddeea6c",
+        "filename": "dblib/provider/src/main/java/org/onap/ccsdk/sli/core/dblib/CachedDataSource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 3293
+      },
+      "writtenOn": "2019-01-08T22:59:20Z",
+      "side": 1,
+      "message": "Missing space.",
+      "range": {
+        "startLine": 367,
+        "startChar": 84,
+        "endLine": 367,
+        "endChar": 100
+      },
+      "revId": "742aa5d00edbb6bee2ed6c2e710a1f5203305354",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
