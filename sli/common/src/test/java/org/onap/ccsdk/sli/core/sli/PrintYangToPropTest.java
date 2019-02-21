@@ -11,8 +11,11 @@ import java.util.Properties;
 import org.junit.Test;
 import org.opendaylight.yang.gen.v1.org.onap.ccsdk.sli.core.sliapi.rev161110.ExecuteGraphInput.Mode;
 import org.opendaylight.yang.gen.v1.org.onap.ccsdk.sli.core.sliapi.rev161110.ExecuteGraphInputBuilder;
+import org.opendaylight.yang.gen.v1.org.onap.ccsdk.sli.core.sliapi.rev161110.TestResultsBuilder;
 import org.opendaylight.yang.gen.v1.org.onap.ccsdk.sli.core.sliapi.rev161110.execute.graph.input.SliParameter;
 import org.opendaylight.yang.gen.v1.org.onap.ccsdk.sli.core.sliapi.rev161110.execute.graph.input.SliParameterBuilder;
+import org.opendaylight.yang.gen.v1.org.onap.ccsdk.sli.core.sliapi.rev161110.test.results.TestResult;
+import org.opendaylight.yang.gen.v1.org.onap.ccsdk.sli.core.sliapi.rev161110.test.results.TestResultBuilder;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpAddressBuilder;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpPrefixBuilder;
 import org.slf4j.Logger;
@@ -82,7 +85,38 @@ public class PrintYangToPropTest {
 
 		// Generate builder from properties just generated
 		PrintYangToProp.toBuilder(props, pBuilder);
+		
 
 	}
+	
+    @Test
+    public void testWithList() {
+        TestResultsBuilder resultsBuilder = new TestResultsBuilder();
+        TestResultBuilder resultBuilder = new TestResultBuilder();
+
+        // Set builder with values
+        List<TestResult> resultList = new LinkedList<>();
+        resultBuilder.setTestIdentifier("test1");
+        List<String> results = new LinkedList<>();
+        results.add("pass");
+        resultBuilder.setResults(results);
+        resultList.add(resultBuilder.build());
+        resultsBuilder.setTestResult(resultList);
+
+        // Generate properties
+        Properties props = new Properties();
+        props = PrintYangToProp.toProperties(props, resultsBuilder);
+
+        Enumeration propNames = props.propertyNames();
+
+        while (propNames.hasMoreElements()) {
+            String propName = (String) propNames.nextElement();
+            LOG.info("Property {} = {}", propName, props.getProperty(propName));
+        }
+
+        // Generate builder from properties just generated
+        PrintYangToProp.toBuilder(props, resultsBuilder);
+
+    }
 
 }

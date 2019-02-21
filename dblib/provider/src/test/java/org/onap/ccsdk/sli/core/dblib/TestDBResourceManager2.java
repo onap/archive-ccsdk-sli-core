@@ -13,7 +13,7 @@ import org.junit.Test;
 import ch.vorburger.mariadb4j.DB;
 import ch.vorburger.mariadb4j.DBConfigurationBuilder;
 
-public class TestDBResourceManager {
+public class TestDBResourceManager2 {
 
     DbLibService dblibSvc;
     DBResourceManager dbm;
@@ -34,15 +34,17 @@ public class TestDBResourceManager {
         DB db = DB.newEmbeddedDB(config.build());
         db.start();
 
-        // Override jdbc URL and database name
+        // Override jdbc URL, database name, and recovery
         props.setProperty("org.onap.ccsdk.sli.jdbc.database", "test");
         props.setProperty("org.onap.ccsdk.sli.jdbc.url", config.getURL("test"));
+        props.setProperty("org.onap.dblib.connection.recovery", "true");
+        
 
         dblibSvc = new DBResourceManager(props);
         dbm = new DBResourceManager(props);
-        dblibSvc.writeData("CREATE TABLE DBLIB_TEST (name varchar(20));", null, null);
-        dblibSvc.getData("SELECT * FROM DBLIB_TEST", null, null);
-
+        dblibSvc.writeData("CREATE TABLE DBLIB_TEST2 (name varchar(20));", null, null);
+        dblibSvc.getData("SELECT * FROM DBLIB_TEST2", null, null);
+        
 
     }
 
