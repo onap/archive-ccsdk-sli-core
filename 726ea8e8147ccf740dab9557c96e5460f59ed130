@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cc17846f_a63f4422",
+        "filename": "dblib/provider/src/test/java/org/onap/ccsdk/sli/core/dblib/TestDBResourceManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 3201
+      },
+      "writtenOn": "2019-02-21T05:12:24Z",
+      "side": 1,
+      "message": "Unnecessary new line added",
+      "revId": "726ea8e8147ccf740dab9557c96e5460f59ed130",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "111d9fc2_77c45191",
+        "filename": "dblib/provider/src/test/java/org/onap/ccsdk/sli/core/dblib/TestDBResourceManager2.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3201
+      },
+      "writtenOn": "2019-02-21T05:12:24Z",
+      "side": 1,
+      "message": "License is missing.",
+      "revId": "726ea8e8147ccf740dab9557c96e5460f59ed130",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "167456d3_dce5f9a7",
+        "filename": "sli/common/src/test/java/org/onap/ccsdk/sli/core/sli/PrintYangToPropTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 3201
+      },
+      "writtenOn": "2019-02-21T05:12:24Z",
+      "side": 1,
+      "message": "Following license guideline can look more better and more uniform",
+      "revId": "726ea8e8147ccf740dab9557c96e5460f59ed130",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
