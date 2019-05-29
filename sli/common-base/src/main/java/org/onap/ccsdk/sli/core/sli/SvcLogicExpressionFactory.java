@@ -75,10 +75,6 @@ public class SvcLogicExpressionFactory {
 	}
 	
 	public static void main(String argv[]) {
-
-
-		System.setProperty(org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "debug");
-
 		StringBuffer sbuff = new StringBuffer();
 		
 		for (int i = 0 ; i < argv.length ; i++)

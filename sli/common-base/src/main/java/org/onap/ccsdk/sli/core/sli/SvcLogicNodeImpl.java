@@ -40,7 +40,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SvcLogicNode implements Serializable {
+public class SvcLogicNodeImpl implements SvcLogicNode, Serializable {
 	
 	private static final Logger LOG = LoggerFactory
 			.getLogger(SvcLogicExprListener.class);
@@ -58,7 +58,7 @@ public class SvcLogicNode implements Serializable {
 	private HashMap<String, SvcLogicNode> outcomes;
 	private HashMap<String, SvcLogicExpression> parameters;
 	
-	public SvcLogicNode(int nodeId, String nodeType, SvcLogicGraph graph)
+	public SvcLogicNodeImpl(int nodeId, String nodeType, SvcLogicGraph graph)
 	{
 		this.nodeId = nodeId;
 		nodeName = "";
@@ -70,7 +70,7 @@ public class SvcLogicNode implements Serializable {
 		
 	}
 	
-	public SvcLogicNode(int nodeId, String nodeType, String nodeName, SvcLogicGraph graph) throws DuplicateValueException
+	public SvcLogicNodeImpl(int nodeId, String nodeType, String nodeName, SvcLogicGraph graph) throws DuplicateValueException
 	{
 		this.nodeId = nodeId;
 		this.nodeName = nodeName;
@@ -454,4 +454,5 @@ public class SvcLogicNode implements Serializable {
 			}
 		}
 	}
+
 }
