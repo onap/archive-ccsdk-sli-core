@@ -21,6 +21,8 @@
     </organization>
 
     <modules>
+        <module>api</module>
+        <module>common-base</module>
         <module>provider-base</module>
         <module>model</module>
         <module>common</module>

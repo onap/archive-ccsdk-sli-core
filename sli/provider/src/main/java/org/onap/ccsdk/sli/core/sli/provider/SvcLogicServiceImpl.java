@@ -108,7 +108,8 @@ public class SvcLogicServiceImpl extends SvcLogicServiceImplBase implements SvcL
         SvcLogicContext ctx = new SvcLogicContext(props);
         ctx.setAttribute(CURRENT_GRAPH, graph.toString());
         ctx.setAttribute("X-ECOMP-RequestID", MDC.get("X-ECOMP-RequestID"));
-        ctx.setDomDataBroker(domDataBroker);
+        //TODO evulate impact of removing this
+        //ctx.setDomDataBroker(domDataBroker);
         execute(graph, ctx);
         return (ctx.toProperties());
     }

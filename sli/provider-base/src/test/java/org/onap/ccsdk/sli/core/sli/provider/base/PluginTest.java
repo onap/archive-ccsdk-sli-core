@@ -30,8 +30,7 @@ import org.onap.ccsdk.sli.core.sli.SvcLogicException;
 import org.onap.ccsdk.sli.core.sli.SvcLogicGraph;
 import org.onap.ccsdk.sli.core.sli.SvcLogicJavaPlugin;
 import org.onap.ccsdk.sli.core.sli.SvcLogicNode;
-import org.onap.ccsdk.sli.core.sli.provider.base.ExecuteNodeExecutor;
-import org.onap.ccsdk.sli.core.sli.provider.base.SvcLogicExpressionResolver;
+import org.onap.ccsdk.sli.core.sli.SvcLogicNodeImpl;
 
 import junit.framework.TestCase;
 
@@ -55,7 +54,7 @@ public class PluginTest extends TestCase {
         Object o = pluginMethod.invoke(plugin, parmMap, ctx);
 
         SvcLogicGraph graph = new SvcLogicGraph();
-        SvcLogicNode node = new SvcLogicNode(1, "return", graph);
+        SvcLogicNode node = new SvcLogicNodeImpl(1, "return", graph);
         String emitsOutcome = SvcLogicExpressionResolver.evaluate(node.getAttribute("emitsOutcome"),  node, ctx);
         String outValue = executor.mapOutcome(o, emitsOutcome);
         assertEquals("success",outValue);
@@ -76,7 +75,7 @@ public class PluginTest extends TestCase {
         parmMap.put("day", "monday");
         Object o = pluginMethod.invoke(plugin, parmMap, ctx);
         SvcLogicGraph graph = new SvcLogicGraph();
-        SvcLogicNode node = new SvcLogicNode(1, "return", graph);
+        SvcLogicNode node = new SvcLogicNodeImpl(1, "return", graph);
         node.setAttribute("emitsOutcome", "true");
         String emitsOutcome = SvcLogicExpressionResolver.evaluate(node.getAttribute("emitsOutcome"),  node, ctx);
         String outValue = executor.mapOutcome(o, emitsOutcome);
@@ -104,7 +103,7 @@ public class PluginTest extends TestCase {
         SvcLogicContext ctx = new SvcLogicContext();
         Object o = pluginMethod.invoke(plugin, parmMap, ctx);
         SvcLogicGraph graph = new SvcLogicGraph();
-        SvcLogicNode node = new SvcLogicNode(1, "return", graph);
+        SvcLogicNode node = new SvcLogicNodeImpl(1, "return", graph);
         String emitsOutcome = SvcLogicExpressionResolver.evaluate(node.getAttribute("emitsOutcome"),  node, ctx);
         String outValue = executor.mapOutcome(o, emitsOutcome);
         assertEquals("success",outValue);
