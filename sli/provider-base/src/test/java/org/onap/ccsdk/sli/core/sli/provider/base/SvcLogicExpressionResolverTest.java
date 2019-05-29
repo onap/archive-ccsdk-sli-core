@@ -27,12 +27,11 @@ import java.io.InputStreamReader;
 import java.util.LinkedList;
 
 import org.onap.ccsdk.sli.core.sli.SvcLogicContext;
-import org.onap.ccsdk.sli.core.sli.SvcLogicExprListener;
 import org.onap.ccsdk.sli.core.sli.SvcLogicExpression;
 import org.onap.ccsdk.sli.core.sli.SvcLogicExpressionFactory;
 import org.onap.ccsdk.sli.core.sli.SvcLogicGraph;
 import org.onap.ccsdk.sli.core.sli.SvcLogicNode;
-import org.onap.ccsdk.sli.core.sli.provider.base.SvcLogicExpressionResolver;
+import org.onap.ccsdk.sli.core.sli.SvcLogicNodeImpl;
 import org.onap.ccsdk.sli.core.sli.SvcLogicParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,7 +54,7 @@ public class SvcLogicExpressionResolverTest extends TestCase {
 		{
 			SvcLogicContext ctx = new SvcLogicContext();
 			SvcLogicGraph graph = new SvcLogicGraph();
-			SvcLogicNode node = new SvcLogicNode(1, "return", graph);
+			SvcLogicNode node = new SvcLogicNodeImpl(1, "return", graph);
 			graph.setRootNode(node);
 
 			String line = null;

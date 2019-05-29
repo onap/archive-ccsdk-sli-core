@@ -21,7 +21,6 @@
 
 package org.onap.ccsdk.sli.core.sli.provider.base;
 
-import java.util.Map.Entry;
 import java.util.Properties;
 
 import org.onap.ccsdk.sli.core.sli.DuplicateValueException;
@@ -31,9 +30,7 @@ import org.onap.ccsdk.sli.core.sli.SvcLogicExpression;
 import org.onap.ccsdk.sli.core.sli.SvcLogicGraph;
 import org.onap.ccsdk.sli.core.sli.SvcLogicJavaPlugin;
 import org.onap.ccsdk.sli.core.sli.SvcLogicNode;
-import org.onap.ccsdk.sli.core.sli.provider.base.ExecuteNodeExecutor;
-import org.onap.ccsdk.sli.core.sli.provider.base.SvcLogicPropertiesProvider;
-import org.onap.ccsdk.sli.core.sli.provider.base.SvcLogicServiceImplBase;
+import org.onap.ccsdk.sli.core.sli.SvcLogicNodeImpl;
 
 import junit.framework.TestCase;
 
@@ -53,7 +50,7 @@ public class ExecuteNodeExecutorTest extends TestCase {
     public void testBadPlugin() throws DuplicateValueException, SvcLogicException {
         LunchSelectorPlugin p = new LunchSelectorPlugin();
         MockExecuteNodeExecutor execute = new MockExecuteNodeExecutor();
-        SvcLogicNode node = new SvcLogicNode(0, "", "", new SvcLogicGraph());
+        SvcLogicNode node = new SvcLogicNodeImpl(0, "", "", new SvcLogicGraph());
         node.setAttribute("method", "selectLunch");
         SvcLogicPropertiesProvider resourceProvider = new SvcLogicPropertiesProvider() {
 
@@ -63,7 +60,7 @@ public class ExecuteNodeExecutorTest extends TestCase {
         };
         
         
-        execute.execute(new SvcLogicServiceImplBase(null), new SvcLogicNode(0, "", "", new SvcLogicGraph()), new SvcLogicContext());
+        execute.execute(new SvcLogicServiceImplBase(null), new SvcLogicNodeImpl(0, "", "", new SvcLogicGraph()), new SvcLogicContext());
     }
 
 }

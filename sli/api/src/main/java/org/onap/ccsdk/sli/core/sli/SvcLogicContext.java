@@ -26,7 +26,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
-import org.opendaylight.controller.md.sal.dom.api.DOMDataBroker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -36,13 +35,11 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 
 
-public class SvcLogicContext {
+public class SvcLogicContext implements SvcLogicContextApi {
 
 	private static final Logger LOG = LoggerFactory.getLogger(SvcLogicContext.class);
 
 	private HashMap<String, String> attributes;
-
-	private DOMDataBroker domDataBroker;
 
 	private String status = "success";
 
@@ -66,16 +63,6 @@ public class SvcLogicContext {
 			String propName = (String) nameObj;
 			attributes.put(propName, props.getProperty(propName));
 		}
-	}
-
-
-
-	public DOMDataBroker getDomDataBroker() {
-		return domDataBroker;
-	}
-
-	public void setDomDataBroker(DOMDataBroker domDataBroker) {
-		this.domDataBroker = domDataBroker;
 	}
 
 	public String getAttribute(String name)

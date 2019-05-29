@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,20 +42,14 @@ public class SvcLogicLoader {
     private static final Logger LOGGER = LoggerFactory.getLogger(SvcLogicLoader.class);
     protected SvcLogicStore store;
     protected String directoryRoot;
-    protected SvcLogicParser parser;
+    protected BaseSvcLogicParser parser;
 
     public SvcLogicLoader(String directoryRoot, SvcLogicStore store) {
         this.store = store;
         this.directoryRoot = directoryRoot;
-        this.parser = new SvcLogicParser();
+        this.parser = new BaseSvcLogicParser();
     }
     
-    public SvcLogicLoader(String directoryRoot, String propFile) {
-        this.store = SvcLogicParser.getStore(propFile);
-        this.directoryRoot = directoryRoot;
-        this.parser = new SvcLogicParser();
-    }
-
     public void loadAndActivate() throws IOException {
         SvcLogicCrawler slc = new SvcLogicCrawler();
         Files.walkFileTree(Paths.get(directoryRoot), slc);
