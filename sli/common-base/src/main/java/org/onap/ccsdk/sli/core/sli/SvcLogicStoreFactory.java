@@ -80,9 +80,7 @@ public class SvcLogicStoreFactory {
 		if ("jdbc".equalsIgnoreCase(storeType)) {
 			retval = new SvcLogicJdbcStore();
 
-		} else if ("dblib".equalsIgnoreCase(storeType)) {
-			retval = new SvcLogicDblibStore();
-        } else {
+		}  else {
 			throw new ConfigurationException("unsupported dbtype (" + storeType
 					+ ")");
 

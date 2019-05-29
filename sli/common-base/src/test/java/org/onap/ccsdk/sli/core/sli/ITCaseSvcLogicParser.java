@@ -90,90 +90,11 @@ public class ITCaseSvcLogicParser {
         LOG.info("after");
     }
 
-
-
+    /**
+     * Test method for {@link org.onap.ccsdk.sli.core.sli.SvcLogicParser#parse(java.lang.String)}.
+     */
     @Test
-    public void testDblibLoadValidXml() throws IOException, SQLException, ConfigurationException {
-
-        URL propUrl = ITCaseSvcLogicParser.class.getResource("/dblib.properties");
-
-        InputStream propStr = ITCaseSvcLogicParser.class.getResourceAsStream("/dblib.properties");
-
-        Properties props = new Properties();
-
-        props.load(propStr);
-
-        SvcLogicDblibStore dblibStore = new SvcLogicDblibStore(props);
-
-        Connection dbConn = dblibStore.getConnection();
-
-        String dbName = props.getProperty("org.onap.ccsdk.sli.jdbc.database", "sdnctl");
-
-        DatabaseMetaData dbm;
-
-        try {
-            dbm = dbConn.getMetaData();
-        } catch (SQLException e) {
-
-            throw new ConfigurationException("could not get databse metadata", e);
-        }
-
-        // See if table SVC_LOGIC exists. If not, create it.
-        Statement stmt = null;
-        try {
-
-            ResultSet tables = dbm.getTables(null, null, "SVC_LOGIC", null);
-            if (tables.next()) {
-                LOG.debug("SVC_LOGIC table already exists");
-            } else {
-                String crTableCmd = "CREATE TABLE " + dbName + ".SVC_LOGIC (" + "module varchar(80) NOT NULL,"
-                        + "rpc varchar(80) NOT NULL," + "version varchar(40) NOT NULL," + "mode varchar(5) NOT NULL,"
-                        + "active varchar(1) NOT NULL,graph BLOB,"
-                        + "modified_timestamp timestamp DEFAULT NULL,"
-                        + "md5sum varchar(128) DEFAULT NULL,"
-                        + "CONSTRAINT P_SVC_LOGIC PRIMARY KEY(module, rpc, version, mode))";
-
-                stmt = dbConn.createStatement();
-                stmt.executeUpdate(crTableCmd);
-            }
-        } catch (Exception e) {
-            throw new ConfigurationException("could not create SVC_LOGIC table", e);
-        } finally {
-            if (stmt != null) {
-                try {
-                    stmt.close();
-                } catch (SQLException e) {
-                    LOG.error("Statement close error ", e);
-                }
-            }
-        }
-
-        // See if NODE_TYPES table exists and, if not, create it
-        stmt = null;
-        try {
-
-            ResultSet tables = dbm.getTables(null, null, "NODE_TYPES", null);
-            if (tables.next()) {
-                LOG.debug("NODE_TYPES table already exists");
-            } else {
-                String crTableCmd = "CREATE TABLE " + dbName + ".NODE_TYPES (" + "nodetype varchar(80) NOT NULL,"
-                        + "CONSTRAINT P_NODE_TYPES PRIMARY KEY(nodetype))";
-
-                stmt = dbConn.createStatement();
-
-                stmt.executeUpdate(crTableCmd);
-            }
-        } catch (Exception e) {
-            throw new ConfigurationException("could not create SVC_LOGIC table", e);
-        } finally {
-            if (stmt != null) {
-                try {
-                    stmt.close();
-                } catch (SQLException e) {
-                    LOG.error("Statement close error ", e);
-                }
-            }
-        }
+    public void testParseValidXml() {
 
         try {
             InputStream testStr = getClass().getResourceAsStream("/parser-good.tests");
@@ -191,9 +112,24 @@ public class ITCaseSvcLogicParser {
                     if (testCaseUrl == null) {
                         fail("Could not resolve test case file " + testCaseFile);
                     }
+                    
+                    // Test parsing and printing
+                    try {
+                        SvcLogicParser parser = new SvcLogicParser();
+                        
+                        for (SvcLogicGraph graph : parser.parse(testCaseUrl.getPath()))  {
+                            System.out.println("XML for graph "+graph.getModule()+":"+graph.getRpc());
+                            graph.printAsXml(System.out);
+                            System.out.println("GV for graph "+graph.getModule()+":"+graph.getRpc());
+                            graph.printAsGv(System.out); 
+                        }
+                    }  catch (Exception e) {
+
+                        fail("Validation failure [" + e.getMessage() + "]");
+                    }
 
                     try {
-                        SvcLogicParser.load(testCaseUrl.getPath(), dblibStore);
+                        SvcLogicParser.load(testCaseUrl.getPath(), store);
                     } catch (Exception e) {
 
                         fail("Validation failure [" + e.getMessage() + "]");
@@ -208,4 +144,26 @@ public class ITCaseSvcLogicParser {
         }
     }
 
+    @Test(expected = SvcLogicException.class)
+    public void testParseInvalidXml() throws SvcLogicException, IOException {
+
+        InputStream testStr = getClass().getResourceAsStream("/parser-bad.tests");
+        BufferedReader testsReader = new BufferedReader(new InputStreamReader(testStr));
+        String testCaseFile;
+        while ((testCaseFile = testsReader.readLine()) != null) {
+
+            testCaseFile = testCaseFile.trim();
+
+            if (testCaseFile.length() > 0) {
+                if (!testCaseFile.startsWith("/")) {
+                    testCaseFile = "/" + testCaseFile;
+                }
+                URL testCaseUrl = getClass().getResource(testCaseFile);
+                if (testCaseUrl == null) {
+                    fail("Could not resolve test case file " + testCaseFile);
+                }
+                SvcLogicParser.validate(testCaseUrl.getPath(), store);
+            }
+        }
+    }
 }
