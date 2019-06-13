@@ -20,10 +20,12 @@
 		<dependency>
 			<groupId>org.opendaylight.mdsal.model</groupId>
 			<artifactId>ietf-inet-types-2013-07-15</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.opendaylight.mdsal.model</groupId>
 			<artifactId>ietf-yang-types-20130715</artifactId>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 </project>

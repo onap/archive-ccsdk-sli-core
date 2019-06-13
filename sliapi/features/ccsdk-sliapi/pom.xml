@@ -25,6 +25,7 @@
             <version>${project.version}</version>
             <type>xml</type>
             <classifier>features</classifier>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -33,5 +34,11 @@
             <version>${project.version}</version>
         </dependency>
 
+        <!-- Suppress yang-binding from being added to feature.xml -->
+        <dependency>
+            <groupId>org.opendaylight.mdsal</groupId>
+            <artifactId>yang-binding</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 </project>

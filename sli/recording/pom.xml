@@ -61,6 +61,7 @@
 		<dependency>
 			<groupId>org.opendaylight.controller</groupId>
 			<artifactId>sal-binding-api</artifactId>
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- Testing Dependencies -->
