@@ -12,6 +12,7 @@
     <groupId>org.onap.ccsdk.sli.core</groupId>
     <artifactId>utils-features-aggregator</artifactId>
     <packaging>pom</packaging>
+    <version>0.5.1-SNAPSHOT</version>
 
     <name>ccsdk-sli-core :: utils :: ${project.artifactId}</name>
 
