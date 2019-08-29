@@ -34,7 +34,6 @@
 		<module>sliapi</module>
 		<module>features</module>
 		<module>artifacts</module>
-		<module>lighty</module>
 	</modules>
 
 	<scm>
