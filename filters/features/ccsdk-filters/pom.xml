@@ -15,43 +15,12 @@
 	<packaging>feature</packaging>
 
 	<name>ccsdk-sli-core :: filters :: ${project.artifactId}</name>
-	<dependencyManagement>
-		<dependencies>
-		
-			<dependency>
-				<groupId>org.onap.ccsdk.sli.core</groupId>
-				<artifactId>sli-common</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.onap.ccsdk.sli.core</groupId>
-				<artifactId>sli-provider</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.onap.ccsdk.sli.core</groupId>
-				<artifactId>dblib-provider</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-	
 
 	<dependencies>
-
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>ccsdk-sli</artifactId>
-			<version>${project.version}</version>
-			<type>xml</type>
-			<classifier>features</classifier>
-		</dependency>
-
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>filters-provider</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-
 	</dependencies>
 </project>
