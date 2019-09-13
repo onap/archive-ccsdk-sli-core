@@ -48,22 +48,24 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
 		<dependency>
 			<groupId>org.onap.ccsdk.sli.core</groupId>
-			<artifactId>sli-common</artifactId>
+			<artifactId>api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.onap.ccsdk.sli.core</groupId>
-			<artifactId>sli-provider</artifactId>
+			<artifactId>impl</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.onap.ccsdk.sli.core</groupId>
-			<artifactId>sli-recording</artifactId>
+			<artifactId>odlsli</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.onap.ccsdk.sli.core</groupId>
+			<artifactId>parser</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
