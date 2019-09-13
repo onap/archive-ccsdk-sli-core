@@ -23,7 +23,6 @@ package org.onap.ccsdk.sli.core.sli.provider;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -33,17 +32,18 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Properties;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.onap.ccsdk.sli.core.sli.SvcLogicContext;
-import org.onap.ccsdk.sli.core.sli.SvcLogicGraph;
-import org.onap.ccsdk.sli.core.sli.SvcLogicParser;
-import org.onap.ccsdk.sli.core.sli.SvcLogicStore;
-import org.onap.ccsdk.sli.core.sli.SvcLogicStoreFactory;
+import org.onap.ccsdk.sli.core.api.SvcLogicGraph;
+import org.onap.ccsdk.sli.core.api.util.SvcLogicParser;
+import org.onap.ccsdk.sli.core.api.util.SvcLogicPropertiesProvider;
+import org.onap.ccsdk.sli.core.api.util.SvcLogicStore;
+import org.onap.ccsdk.sli.core.sli.SvcLogicExpressionFactory;
+import org.onap.ccsdk.sli.core.sli.SvcLogicParserImpl;
+import org.onap.ccsdk.sli.core.sli.provider.base.AbstractSvcLogicNodeExecutor;
 import org.onap.ccsdk.sli.core.sli.provider.base.BlockNodeExecutor;
 import org.onap.ccsdk.sli.core.sli.provider.base.BreakNodeExecutor;
 import org.onap.ccsdk.sli.core.sli.provider.base.CallNodeExecutor;
@@ -53,6 +53,7 @@ import org.onap.ccsdk.sli.core.sli.provider.base.ExecuteNodeExecutor;
 import org.onap.ccsdk.sli.core.sli.provider.base.ExistsNodeExecutor;
 import org.onap.ccsdk.sli.core.sli.provider.base.ForNodeExecutor;
 import org.onap.ccsdk.sli.core.sli.provider.base.GetResourceNodeExecutor;
+import org.onap.ccsdk.sli.core.sli.provider.base.InMemorySvcLogicStore;
 import org.onap.ccsdk.sli.core.sli.provider.base.IsAvailableNodeExecutor;
 import org.onap.ccsdk.sli.core.sli.provider.base.NotifyNodeExecutor;
 import org.onap.ccsdk.sli.core.sli.provider.base.RecordNodeExecutor;
@@ -61,8 +62,8 @@ import org.onap.ccsdk.sli.core.sli.provider.base.ReserveNodeExecutor;
 import org.onap.ccsdk.sli.core.sli.provider.base.ReturnNodeExecutor;
 import org.onap.ccsdk.sli.core.sli.provider.base.SaveNodeExecutor;
 import org.onap.ccsdk.sli.core.sli.provider.base.SetNodeExecutor;
-import org.onap.ccsdk.sli.core.sli.provider.base.AbstractSvcLogicNodeExecutor;
-import org.onap.ccsdk.sli.core.sli.provider.base.SvcLogicPropertiesProvider;
+import org.onap.ccsdk.sli.core.sli.provider.base.SvcLogicContextImpl;
+import org.onap.ccsdk.sli.core.sli.provider.base.SvcLogicGraphImpl;
 import org.onap.ccsdk.sli.core.sli.provider.base.SwitchNodeExecutor;
 import org.onap.ccsdk.sli.core.sli.provider.base.UpdateNodeExecutor;
 import org.onap.ccsdk.sli.core.sli.provider.base.WhileNodeExecutor;
@@ -71,32 +72,33 @@ import org.slf4j.LoggerFactory;
 
 public class ITCaseSvcLogicGraphExecutor {
 
-    private static final Logger LOG = LoggerFactory.getLogger(SvcLogicGraph.class);
-    private static final Map<String, AbstractSvcLogicNodeExecutor> BUILTIN_NODES = new HashMap<String, AbstractSvcLogicNodeExecutor>() {
-        {
-            put("block", new BlockNodeExecutor());
-            put("break", new BreakNodeExecutor());
-            put("call", new CallNodeExecutor());
-            put("configure", new ConfigureNodeExecutor());
-            put("delete", new DeleteNodeExecutor());
-            put("execute", new ExecuteNodeExecutor());
-            put("exists", new ExistsNodeExecutor());
-            put("for", new ForNodeExecutor());
-            put("get-resource", new GetResourceNodeExecutor());
-            put("is-available", new IsAvailableNodeExecutor());
-            put("notify", new NotifyNodeExecutor());
-            put("record", new RecordNodeExecutor());
-            put("release", new ReleaseNodeExecutor());
-            put("reserve", new ReserveNodeExecutor());
-            put("return", new ReturnNodeExecutor());
-            put("save", new SaveNodeExecutor());
-            put("set", new SetNodeExecutor());
-            put("switch", new SwitchNodeExecutor());
-            put("update", new UpdateNodeExecutor());
-            put("while", new WhileNodeExecutor());
+    private static final Logger LOG = LoggerFactory.getLogger(SvcLogicGraphImpl.class);
+    private static final Map<String, AbstractSvcLogicNodeExecutor> BUILTIN_NODES =
+            new HashMap<String, AbstractSvcLogicNodeExecutor>() {
+                {
+                    put("block", new BlockNodeExecutor());
+                    put("break", new BreakNodeExecutor());
+                    put("call", new CallNodeExecutor());
+                    put("configure", new ConfigureNodeExecutor());
+                    put("delete", new DeleteNodeExecutor());
+                    put("execute", new ExecuteNodeExecutor());
+                    put("exists", new ExistsNodeExecutor());
+                    put("for", new ForNodeExecutor());
+                    put("get-resource", new GetResourceNodeExecutor());
+                    put("is-available", new IsAvailableNodeExecutor());
+                    put("notify", new NotifyNodeExecutor());
+                    put("record", new RecordNodeExecutor());
+                    put("release", new ReleaseNodeExecutor());
+                    put("reserve", new ReserveNodeExecutor());
+                    put("return", new ReturnNodeExecutor());
+                    put("save", new SaveNodeExecutor());
+                    put("set", new SetNodeExecutor(new SvcLogicExpressionFactory()));
+                    put("switch", new SwitchNodeExecutor());
+                    put("update", new UpdateNodeExecutor());
+                    put("while", new WhileNodeExecutor());
 
-        }
-    };
+                }
+            };
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
@@ -112,15 +114,17 @@ public class ITCaseSvcLogicGraphExecutor {
 
         assertNotNull(store);
 
-        SvcLogicParser parser = new SvcLogicParser();
+        SvcLogicParser parser = new SvcLogicParserImpl();
 
-        SvcLogicPropertiesProvider resourceProvider = new SvcLogicPropertiesProviderImpl();
-        SvcLogicServiceImpl svc = new SvcLogicServiceImpl(resourceProvider);
+        SvcLogicPropertiesProvider resourceProvider = new OsgiPropertiesProviderImpl();
+        store = SvcLogicStoreFactory.getSvcLogicStore(resourceProvider.getProperties());
+
+        OsgiSvcLogicServiceImpl svc = new OsgiSvcLogicServiceImpl(store, new SvcLogicExpressionFactory(),
+                OsgiSvcLogicClassResolver.getInstance());
 
         for (String nodeType : BUILTIN_NODES.keySet()) {
             svc.registerExecutor(nodeType, BUILTIN_NODES.get(nodeType));
         }
-
 
 
 
@@ -155,8 +159,7 @@ public class ITCaseSvcLogicGraphExecutor {
 
 
 
-
-            SvcLogicParser parser = new SvcLogicParser();
+            SvcLogicParser parser = new SvcLogicParserImpl();
 
             // Loop through executor tests
             SvcLogicPropertiesProvider resourceProvider = new SvcLogicPropertiesProvider() {
@@ -165,8 +168,9 @@ public class ITCaseSvcLogicGraphExecutor {
                     return svcprops;
                 }
             };
-            SvcLogicServiceImpl svc = new SvcLogicServiceImpl(resourceProvider);
-            SvcLogicStore store = svc.getStore();
+            SvcLogicStore store = new InMemorySvcLogicStore();
+            OsgiSvcLogicServiceImpl svc = new OsgiSvcLogicServiceImpl(store, new SvcLogicExpressionFactory(),
+                    OsgiSvcLogicClassResolver.getInstance());
             assertNotNull(store);
             for (String nodeType : BUILTIN_NODES.keySet()) {
 
@@ -186,7 +190,7 @@ public class ITCaseSvcLogicGraphExecutor {
                     testCaseParameters = testCaseFields[2];
                 }
 
-                SvcLogicContext ctx = new SvcLogicContext();
+                SvcLogicContextImpl ctx = new SvcLogicContextImpl();
                 if (testCaseParameters != null) {
                     String[] testCaseParameterSettings = testCaseParameters.split(",");
 
@@ -221,22 +225,22 @@ public class ITCaseSvcLogicGraphExecutor {
                     assertNotNull(graphs);
 
                     // Load grqphs into db to support call node
-                    SvcLogicParser.load(testCaseUrl.getPath(), store);
-                    SvcLogicParser.activate("neutron", "canCreateNetwork", "1.0.0", "sync", store);
-                    SvcLogicParser.activate("neutron", "switchTester", "1.0.0", "sync", store);
-                    SvcLogicParser.activate("neutron", "forRecordTester", "1.0.0", "sync", store);
-                    SvcLogicParser.activate("neutron", "whileNodeTester", "1.0.0", "sync", store);
-                    SvcLogicParser.activate("neutron", "resourceTester", "1.0.0", "sync", store);
-                    SvcLogicParser.activate("neutron", "configureTester", "1.0.0", "sync", store);
-                    SvcLogicParser.activate("neutron", "javaPluginTester", "1.0.0", "sync", store);
-                    SvcLogicParser.activate("neutron", "allNodesTester", "1.0.0", "sync", store);
-                    SvcLogicParser.activate("neutron", "networkCreated", "1.0.0", "sync", store);
+                    CommandLineUtil.load(testCaseUrl.getPath(), store);
+                    CommandLineUtil.activate("neutron", "canCreateNetwork", "1.0.0", "sync", store);
+                    CommandLineUtil.activate("neutron", "switchTester", "1.0.0", "sync", store);
+                    CommandLineUtil.activate("neutron", "forRecordTester", "1.0.0", "sync", store);
+                    CommandLineUtil.activate("neutron", "whileNodeTester", "1.0.0", "sync", store);
+                    CommandLineUtil.activate("neutron", "resourceTester", "1.0.0", "sync", store);
+                    CommandLineUtil.activate("neutron", "configureTester", "1.0.0", "sync", store);
+                    CommandLineUtil.activate("neutron", "javaPluginTester", "1.0.0", "sync", store);
+                    CommandLineUtil.activate("neutron", "allNodesTester", "1.0.0", "sync", store);
+                    CommandLineUtil.activate("neutron", "networkCreated", "1.0.0", "sync", store);
 
                     for (SvcLogicGraph graph : graphs) {
                         if (graph.getRpc().equals(testCaseMethod)) {
                             Properties props = ctx.toProperties();
                             LOG.info("SvcLogicContext before executing {}:", testCaseMethod);
-                            for (Enumeration e1 = props.propertyNames(); e1.hasMoreElements(); ) {
+                            for (Enumeration e1 = props.propertyNames(); e1.hasMoreElements();) {
                                 String propName = (String) e1.nextElement();
                                 LOG.info(propName + " = " + props.getProperty(propName));
                             }
@@ -245,7 +249,7 @@ public class ITCaseSvcLogicGraphExecutor {
 
                             props = ctx.toProperties();
                             LOG.info("SvcLogicContext after executing {}:", testCaseMethod);
-                            for (Enumeration e2 = props.propertyNames(); e2.hasMoreElements(); ) {
+                            for (Enumeration e2 = props.propertyNames(); e2.hasMoreElements();) {
                                 String propName = (String) e2.nextElement();
                                 LOG.info(propName + " = " + props.getProperty(propName));
                             }

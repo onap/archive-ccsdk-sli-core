@@ -25,27 +25,30 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-
-import org.onap.ccsdk.sli.core.sli.SvcLogicAdaptor;
-import org.onap.ccsdk.sli.core.sli.SvcLogicContext;
-import org.onap.ccsdk.sli.core.sli.SvcLogicException;
-import org.onap.ccsdk.sli.core.sli.SvcLogicExpression;
-import org.onap.ccsdk.sli.core.sli.SvcLogicJavaPlugin;
-import org.onap.ccsdk.sli.core.sli.SvcLogicNode;
-import org.onap.ccsdk.sli.core.sli.SvcLogicRecorder;
-import org.onap.ccsdk.sli.core.sli.SvcLogicResource;
+import org.onap.ccsdk.sli.core.api.SvcLogicContext;
+import org.onap.ccsdk.sli.core.api.SvcLogicNode;
+import org.onap.ccsdk.sli.core.api.SvcLogicServiceBase;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicException;
+import org.onap.ccsdk.sli.core.api.extensions.SvcLogicAdaptor;
+import org.onap.ccsdk.sli.core.api.extensions.SvcLogicJavaPlugin;
+import org.onap.ccsdk.sli.core.api.extensions.SvcLogicRecorder;
+import org.onap.ccsdk.sli.core.api.extensions.SvcLogicResource;
+import org.onap.ccsdk.sli.core.api.lang.SvcLogicExpression;
+import org.onap.ccsdk.sli.core.api.util.SvcLogicResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public abstract class AbstractSvcLogicNodeExecutor {
 	protected SvcLogicResolver resolver;
-	public abstract SvcLogicNode execute(SvcLogicServiceBase svc, SvcLogicNode node, SvcLogicContext ctx) throws SvcLogicException;
+
+    public abstract SvcLogicNode execute(SvcLogicServiceBase svc, SvcLogicNode node, SvcLogicContext ctx)
+            throws SvcLogicException;
 
 	private static final Logger LOG = LoggerFactory.getLogger(AbstractSvcLogicNodeExecutor.class);
 	protected static final String PARAMETER_DEBUG_PATTERN = "Parameter: {} resolves to: {} which came from the expression: {}";
     protected static final String SETTING_DEBUG_PATTERN = "Setting context attribute: {} to: {} which came from the expression: {}";
 
-    protected String evaluateNodeTest(SvcLogicNode node, SvcLogicContext ctx)
+    public String evaluateNodeTest(SvcLogicNode node, SvcLogicContext ctx)
 			throws SvcLogicException {
 		if (node == null) {
 			return null;
@@ -98,7 +101,8 @@ public abstract class AbstractSvcLogicNodeExecutor {
         return (nextNode);
     }
     
-    protected Map<String, String> getResolvedParameters(SvcLogicNode node, SvcLogicContext ctx) throws SvcLogicException{
+    protected Map<String, String> getResolvedParameters(SvcLogicNode node, SvcLogicContext ctx)
+            throws SvcLogicException {
         Map<String, String> parmMap = new HashMap<>();
 
         Set<Map.Entry<String, SvcLogicExpression>> parmSet = node

@@ -28,18 +28,24 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
-import org.onap.ccsdk.sli.core.sli.SvcLogicContext;
-import org.onap.ccsdk.sli.core.sli.SvcLogicException;
-import org.onap.ccsdk.sli.core.sli.SvcLogicExpression;
-import org.onap.ccsdk.sli.core.sli.SvcLogicExpressionFactory;
-import org.onap.ccsdk.sli.core.sli.SvcLogicNode;
+import org.onap.ccsdk.sli.core.api.SvcLogicContext;
+import org.onap.ccsdk.sli.core.api.SvcLogicNode;
+import org.onap.ccsdk.sli.core.api.SvcLogicServiceBase;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicException;
+import org.onap.ccsdk.sli.core.api.lang.SvcLogicExpression;
+import org.onap.ccsdk.sli.core.api.lang.SvcLogicExpressionParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class SetNodeExecutor extends AbstractSvcLogicNodeExecutor {
 
     private static final Logger LOG = LoggerFactory.getLogger(SetNodeExecutor.class);
-    protected final String arrayPattern = "\\[\\d*\\]";
+    public final String arrayPattern = "\\[\\d*\\]";
+    protected SvcLogicExpressionParser parser;
+
+    public SetNodeExecutor(SvcLogicExpressionParser parser) {
+        this.parser = parser;
+    }
 
     @Override
     public SvcLogicNode execute(SvcLogicServiceBase svc, SvcLogicNode node, SvcLogicContext ctx)
@@ -66,10 +72,10 @@ public class SetNodeExecutor extends AbstractSvcLogicNodeExecutor {
                 if (curName.trim().startsWith("`")) {
                     int lastParen = curName.lastIndexOf("`");
                     String evalExpr = curName.trim().substring(1, lastParen);
-                    SvcLogicExpression lhsExpr = SvcLogicExpressionFactory.parse(evalExpr);
+                    SvcLogicExpression lhsExpr = parser.parse(evalExpr);
                     lhsVarName = SvcLogicExpressionResolver.evaluate(lhsExpr, node, ctx);
                 } else {
-                    SvcLogicExpression lhsExpr = SvcLogicExpressionFactory.parse(curName);
+                    SvcLogicExpression lhsExpr = parser.parse(curName);
                     lhsVarName = SvcLogicExpressionResolver.resolveVariableName(lhsExpr, node, ctx);
                 }
             } catch (Exception e) {
@@ -92,7 +98,7 @@ public class SetNodeExecutor extends AbstractSvcLogicNodeExecutor {
 
                         // SDNGC-2321 : rhsRoot is variable name, possibly with subscript(s) to be resolved
                         try {
-                            SvcLogicExpression rhsExpr = SvcLogicExpressionFactory.parse(rhsRoot);
+                            SvcLogicExpression rhsExpr = parser.parse(rhsRoot);
                             rhsRoot = SvcLogicExpressionResolver.resolveVariableName(rhsExpr, node, ctx);
                         } catch (Exception e) {
                             LOG.warn("Caught exception trying to resolve variable name (" + rhsRoot + ")", e);

@@ -24,75 +24,54 @@ package org.onap.ccsdk.sli.core.sli;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicParserException;
+import org.onap.ccsdk.sli.core.api.lang.SvcLogicExpression;
+import org.onap.ccsdk.sli.core.api.lang.SvcLogicExpressionParser;
 import org.onap.ccsdk.sli.core.sli.ExprGrammarParser.ExprContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class SvcLogicExpressionFactory {
-	
-	private static final Logger LOG = LoggerFactory
-			.getLogger(SvcLogicExpressionFactory.class);
+public class SvcLogicExpressionFactory implements SvcLogicExpressionParser {
 
-	
-	public static SvcLogicExpression parse(String exprStr) throws IOException
-	{
-		InputStream exprStream = new ByteArrayInputStream(exprStr.getBytes());
-		CharStream input = new ANTLRInputStream(exprStream);
-		ExprGrammarLexer lexer = new ExprGrammarLexer(input);
-		CommonTokenStream tokens = new CommonTokenStream(lexer);
-		ExprGrammarParser parser = new ExprGrammarParser(tokens);
-
-		lexer.removeErrorListeners();
-		lexer.addErrorListener(SvcLogicExprParserErrorListener.getInstance());		
-		parser.removeErrorListeners();
-		parser.addErrorListener(SvcLogicExprParserErrorListener.getInstance());
-
-		ExprContext expression = null;
-		
-		try {
-			expression = parser.expr();
-		} catch (Exception e) {
-			String errorMsg = e.getMessage();
-			
-			LOG.error(errorMsg);
-			throw new SvcLogicParserException(errorMsg);
-		}
-		
-	
-		ParseTreeWalker walker = new ParseTreeWalker();
-		SvcLogicExprListener listener = new SvcLogicExprListener();
-		walker.walk(listener, expression);
-		
-		
-		return(listener.getParsedExpr());
-	}
-	
-	public static void main(String argv[]) {
+    private static final Logger LOG = LoggerFactory.getLogger(SvcLogicExpressionFactory.class);
 
 
-		System.setProperty(org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "debug");
+    @Override
+    public SvcLogicExpression parse(String exprStr) throws IOException {
+        InputStream exprStream = new ByteArrayInputStream(exprStr.getBytes());
+        CharStream input = new ANTLRInputStream(exprStream);
+        ExprGrammarLexer lexer = new ExprGrammarLexer(input);
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        ExprGrammarParser parser = new ExprGrammarParser(tokens);
 
-		StringBuffer sbuff = new StringBuffer();
-		
-		for (int i = 0 ; i < argv.length ; i++)
-		{
-			if (sbuff.length() > 0)
-			{
-				sbuff.append(" ");
-			}
-			sbuff.append(argv[i]);
-		}
-		
-		try {
-			SvcLogicExpressionFactory.parse(sbuff.toString());
-		} catch (IOException e) {
-			LOG.error("Exception in SvcLogicExpressionFactory.parse",e);
-		}
-	}
+        lexer.removeErrorListeners();
+        lexer.addErrorListener(SvcLogicExprParserErrorListener.getInstance());
+        parser.removeErrorListeners();
+        parser.addErrorListener(SvcLogicExprParserErrorListener.getInstance());
+
+        ExprContext expression = null;
+
+        try {
+            expression = parser.expr();
+        } catch (Exception e) {
+            String errorMsg = e.getMessage();
+
+            LOG.error(errorMsg);
+            throw new SvcLogicParserException(errorMsg);
+        }
+
+
+        ParseTreeWalker walker = new ParseTreeWalker();
+        SvcLogicExprListener listener = new SvcLogicExprListener();
+        walker.walk(listener, expression);
+
+
+        return (listener.getParsedExpr());
+    }
+
 }

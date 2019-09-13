@@ -26,54 +26,59 @@ package org.onap.ccsdk.sli.core.sli.provider.base;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-
-import org.onap.ccsdk.sli.core.sli.ExitNodeException;
-import org.onap.ccsdk.sli.core.sli.MetricLogger;
-import org.onap.ccsdk.sli.core.sli.SvcLogicContext;
-import org.onap.ccsdk.sli.core.sli.SvcLogicException;
-import org.onap.ccsdk.sli.core.sli.SvcLogicGraph;
-import org.onap.ccsdk.sli.core.sli.SvcLogicNode;
-import org.onap.ccsdk.sli.core.sli.SvcLogicStore;
+import org.onap.ccsdk.sli.core.api.SvcLogicContext;
+import org.onap.ccsdk.sli.core.api.SvcLogicGraph;
+import org.onap.ccsdk.sli.core.api.SvcLogicNode;
+import org.onap.ccsdk.sli.core.api.SvcLogicServiceBase;
+import org.onap.ccsdk.sli.core.api.exceptions.ExitNodeException;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicException;
+import org.onap.ccsdk.sli.core.api.lang.SvcLogicExpressionParser;
+import org.onap.ccsdk.sli.core.api.util.SvcLogicResolver;
+import org.onap.ccsdk.sli.core.api.util.SvcLogicStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 
 public class SvcLogicServiceImplBase implements SvcLogicServiceBase {
-	protected SvcLogicResolver resolver;
-    protected static final Map<String, AbstractSvcLogicNodeExecutor> BUILTIN_NODES = new HashMap<String, AbstractSvcLogicNodeExecutor>() {
-        {
-            put("block", new BlockNodeExecutor());
-            put("call", new CallNodeExecutor());
-            put("configure", new ConfigureNodeExecutor());
-            put("delete", new DeleteNodeExecutor());
-            put("execute", new ExecuteNodeExecutor());
-            put("exists", new ExistsNodeExecutor());
-            put("for", new ForNodeExecutor());
-            put("get-resource", new GetResourceNodeExecutor());
-            put("is-available", new IsAvailableNodeExecutor());
-            put("notify", new NotifyNodeExecutor());
-            put("record", new RecordNodeExecutor());
-            put("release", new ReleaseNodeExecutor());
-            put("reserve", new ReserveNodeExecutor());
-            put("return", new ReturnNodeExecutor());
-            put("save", new SaveNodeExecutor());
-            put("set", new SetNodeExecutor());
-            put("switch", new SwitchNodeExecutor());
-            put("update", new UpdateNodeExecutor());
-            put("break", new BreakNodeExecutor());
-            put("while", new WhileNodeExecutor());
-            put("exit", new ExitNodeExecutor());
-        }
-    };
+    protected SvcLogicResolver resolver;
+    protected SvcLogicExpressionParser parser;
+
+    protected final Map<String, AbstractSvcLogicNodeExecutor> BUILTIN_NODES =
+            new HashMap<String, AbstractSvcLogicNodeExecutor>() {
+                {
+                    put("block", new BlockNodeExecutor());
+                    put("call", new CallNodeExecutor());
+                    put("configure", new ConfigureNodeExecutor());
+                    put("delete", new DeleteNodeExecutor());
+                    put("execute", new ExecuteNodeExecutor());
+                    put("exists", new ExistsNodeExecutor());
+                    put("for", new ForNodeExecutor());
+                    put("get-resource", new GetResourceNodeExecutor());
+                    put("is-available", new IsAvailableNodeExecutor());
+                    put("notify", new NotifyNodeExecutor());
+                    put("record", new RecordNodeExecutor());
+                    put("release", new ReleaseNodeExecutor());
+                    put("reserve", new ReserveNodeExecutor());
+                    put("return", new ReturnNodeExecutor());
+                    put("save", new SaveNodeExecutor());
+                    put("set", new SetNodeExecutor(parser));
+                    put("switch", new SwitchNodeExecutor());
+                    put("update", new UpdateNodeExecutor());
+                    put("break", new BreakNodeExecutor());
+                    put("while", new WhileNodeExecutor());
+                    put("exit", new ExitNodeExecutor());
+                }
+            };
 
     private static final Logger LOG = LoggerFactory.getLogger(SvcLogicServiceImplBase.class);
     protected HashMap<String, AbstractSvcLogicNodeExecutor> nodeExecutors = null;
     protected Properties properties;
     protected SvcLogicStore store;
-    protected static final String CURRENT_GRAPH="currentGraph";
+    protected static final String CURRENT_GRAPH = "currentGraph";
 
-    public SvcLogicServiceImplBase(SvcLogicStore store) {
-    	this.store = store;
+    public SvcLogicServiceImplBase(SvcLogicStore store, SvcLogicExpressionParser parser) {
+        this.store = store;
+        this.parser = parser;
     }
 
     protected void registerExecutors() {
@@ -103,34 +108,36 @@ public class SvcLogicServiceImplBase implements SvcLogicServiceBase {
 
         SvcLogicNode curNode = graph.getRootNode();
         LOG.info("About to execute graph {}", graph.toString());
-		try {
-			while (curNode != null) {
-				SvcLogicNode nextNode = executeNode(curNode, ctx);
-				curNode = nextNode;
-			}
-		} catch (ExitNodeException e) {
+        try {
+            while (curNode != null) {
+                SvcLogicNode nextNode = executeNode(curNode, ctx);
+                curNode = nextNode;
+            }
+        } catch (ExitNodeException e) {
             LOG.debug("SvcLogicServiceImpl caught ExitNodeException");
-		}
+        }
         MDC.remove("nodeId");
         MDC.remove(CURRENT_GRAPH);
 
         return (ctx);
     }
-    
-	public SvcLogicNode executeNode(SvcLogicNode node, SvcLogicContext ctx) throws SvcLogicException {
+
+    public SvcLogicNode executeNode(SvcLogicNode node, SvcLogicContext ctx) throws SvcLogicException {
         if (node == null) {
             return (null);
         }
 
-		LOG.info("About to execute node #{} {} node in graph {}", node.getNodeId(), node.getNodeType(), node.getGraph().toString());
+        LOG.info("About to execute node #{} {} node in graph {}", node.getNodeId(), node.getNodeType(),
+                node.getGraph().toString());
 
         AbstractSvcLogicNodeExecutor executor = nodeExecutors.get(node.getNodeType());
 
         if (executor != null) {
-    		MDC.put("nodeId", node.getNodeId() + " (" + node.getNodeType() + ")");
+            MDC.put("nodeId", node.getNodeId() + " (" + node.getNodeType() + ")");
             return (executor.execute(this, node, ctx));
         } else {
-            throw new SvcLogicException("Attempted to execute a node of type " + node.getNodeType() + ", but no executor was registered for this type");
+            throw new SvcLogicException("Attempted to execute a node of type " + node.getNodeType()
+                    + ", but no executor was registered for this type");
         }
     }
 
@@ -140,29 +147,29 @@ public class SvcLogicServiceImplBase implements SvcLogicServiceBase {
     }
 
     @Override
-	public Properties execute(String module, String rpc, String version, String mode, Properties props)
-			throws SvcLogicException {
-		LOG.info("Fetching service logic from data store");
-		SvcLogicGraph graph = store.fetch(module, rpc, version, mode);
+    public Properties execute(String module, String rpc, String version, String mode, Properties props)
+            throws SvcLogicException {
+        LOG.info("Fetching service logic from data store");
+        SvcLogicGraph graph = store.fetch(module, rpc, version, mode);
 
-		if (graph == null) {
-			Properties retProps = new Properties();
-			retProps.setProperty("error-code", "401");
-			retProps.setProperty("error-message",
-					"No service logic found for [" + module + "," + rpc + "," + version + "," + mode + "]");
-			return (retProps);
-		}
+        if (graph == null) {
+            Properties retProps = new Properties();
+            retProps.setProperty("error-code", "401");
+            retProps.setProperty("error-message",
+                    "No service logic found for [" + module + "," + rpc + "," + version + "," + mode + "]");
+            return (retProps);
+        }
 
-		SvcLogicContext ctx = new SvcLogicContext(props);
-		ctx.setAttribute(CURRENT_GRAPH, graph.toString());
-		ctx.setAttribute("X-ECOMP-RequestID", MDC.get("X-ECOMP-RequestID"));
-		execute(graph, ctx);
-		return (ctx.toProperties());
-	}
+        SvcLogicContext ctx = new SvcLogicContextImpl(props);
+        ctx.setAttribute(CURRENT_GRAPH, graph.toString());
+        ctx.setAttribute("X-ECOMP-RequestID", MDC.get("X-ECOMP-RequestID"));
+        execute(graph, ctx);
+        return (ctx.toProperties());
+    }
 
-	@Override
-	public SvcLogicStore getStore() throws SvcLogicException {
-		return this.store;
-	}
+    @Override
+    public SvcLogicStore getStore() throws SvcLogicException {
+        return this.store;
+    }
 
 }
