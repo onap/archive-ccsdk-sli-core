@@ -1,12 +1,15 @@
 package org.onap.ccsdk.sli.core.sli;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Properties;
 import org.junit.Test;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicException;
+import org.onap.ccsdk.sli.core.api.util.SvcLogicLoader;
+import org.onap.ccsdk.sli.core.api.util.SvcLogicStore;
 
 public class TestSvcLogicLoader {
 
@@ -27,8 +30,8 @@ public class TestSvcLogicLoader {
         if (graphDirectory == null) {
             fail("Cannot find graphs directory");
         }
-        SvcLogicLoader loader = new SvcLogicLoader(graphDirectory.getAbsolutePath(), store);
-        loader.loadAndActivate();
+        SvcLogicLoader loader = new SvcLogicLoaderImpl(store);
+        loader.loadAndActivate(graphDirectory.getAbsolutePath());
 
 
     }

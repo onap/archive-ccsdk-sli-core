@@ -22,9 +22,8 @@
 package org.onap.ccsdk.sli.core.sli.provider;
 
 import java.util.Properties;
-
-import org.onap.ccsdk.sli.core.sli.SvcLogicException;
-import org.onap.ccsdk.sli.core.sli.provider.base.SvcLogicServiceBase;
+import org.onap.ccsdk.sli.core.api.SvcLogicServiceBase;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicException;
 import org.opendaylight.controller.md.sal.dom.api.DOMDataBroker;
 
 public interface SvcLogicService extends SvcLogicServiceBase {

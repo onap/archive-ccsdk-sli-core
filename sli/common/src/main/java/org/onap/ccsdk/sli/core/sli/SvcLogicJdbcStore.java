@@ -35,6 +35,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
+import org.onap.ccsdk.sli.core.api.SvcLogicGraph;
+import org.onap.ccsdk.sli.core.api.exceptions.ConfigurationException;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicException;
+import org.onap.ccsdk.sli.core.api.util.SvcLogicStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -359,7 +363,7 @@ public class SvcLogicJdbcStore implements SvcLogicStore {
     }
 
     @Override
-    public SvcLogicGraph fetch(String module, String rpc, String version, String mode) throws SvcLogicException {
+    public SvcLogicGraphImpl fetch(String module, String rpc, String version, String mode) throws SvcLogicException {
 
 
         if (!isDbConnValid()) {
@@ -372,7 +376,7 @@ public class SvcLogicJdbcStore implements SvcLogicStore {
             }
         }
 
-        SvcLogicGraph retval = null;
+        SvcLogicGraphImpl retval = null;
         ResultSet results = null;
 
         PreparedStatement fetchGraphStmt;
@@ -404,8 +408,8 @@ public class SvcLogicJdbcStore implements SvcLogicStore {
                 Object graphObj = gStream.readObject();
                 gStream.close();
 
-                if (graphObj instanceof SvcLogicGraph) {
-                    retval = (SvcLogicGraph) graphObj;
+                if (graphObj instanceof SvcLogicGraphImpl) {
+                    retval = (SvcLogicGraphImpl) graphObj;
                 } else {
                     throw new ConfigurationException("invalid type for graph (" + graphObj.getClass().getName());
 

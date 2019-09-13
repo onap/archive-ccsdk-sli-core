@@ -4,19 +4,19 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import java.util.LinkedList;
 import org.junit.Test;
-import org.onap.ccsdk.sli.core.sli.SvcLogicContext;
-import org.onap.ccsdk.sli.core.sli.SvcLogicGraph;
-import org.onap.ccsdk.sli.core.sli.SvcLogicNode;
-import org.onap.ccsdk.sli.core.sli.SvcLogicParser;
-import org.onap.ccsdk.sli.core.sli.provider.base.SetNodeExecutor;
+import org.onap.ccsdk.sli.core.api.SvcLogicGraph;
+import org.onap.ccsdk.sli.core.api.SvcLogicNode;
+import org.onap.ccsdk.sli.core.api.util.SvcLogicParser;
+import org.onap.ccsdk.sli.core.sli.SvcLogicContextImpl;
+import org.onap.ccsdk.sli.core.sli.SvcLogicParserImpl;
 
 public class SetNodeExecutorTest {
     @Test
     public void clearProperties() throws Exception {
         SetNodeExecutor sne = new SetNodeExecutor();
-        SvcLogicContext ctx = new SvcLogicContext();
+        SvcLogicContextImpl ctx = new SvcLogicContextImpl();
 
-        SvcLogicParser slp = new SvcLogicParser();
+        SvcLogicParser slp = new SvcLogicParserImpl();
         LinkedList<SvcLogicGraph> graph = slp.parse("src/test/resources/clearValues.xml");
         SvcLogicNode root = graph.getFirst().getRootNode();
         SvcLogicNode nodeOne = root.getOutcomeValue("1");
@@ -39,9 +39,9 @@ public class SetNodeExecutorTest {
     @Test
     public void clearMultipleArrayProperties() throws Exception {
         SetNodeExecutor sne = new SetNodeExecutor();
-        SvcLogicContext ctx = new SvcLogicContext();
+        SvcLogicContextImpl ctx = new SvcLogicContextImpl();
 
-        SvcLogicParser slp = new SvcLogicParser();
+        SvcLogicParser slp = new SvcLogicParserImpl();
         LinkedList<SvcLogicGraph> graph = slp.parse("src/test/resources/clearMultipleArrayValues.xml");
         SvcLogicNode root = graph.getFirst().getRootNode();
         SvcLogicNode nodeOne = root.getOutcomeValue("1");
@@ -65,9 +65,9 @@ public class SetNodeExecutorTest {
     @Test
     public void clearSingleArrayProperties() throws Exception {
         SetNodeExecutor sne = new SetNodeExecutor();
-        SvcLogicContext ctx = new SvcLogicContext();
+        SvcLogicContextImpl ctx = new SvcLogicContextImpl();
 
-        SvcLogicParser slp = new SvcLogicParser();
+        SvcLogicParser slp = new SvcLogicParserImpl();
         LinkedList<SvcLogicGraph> graph = slp.parse("src/test/resources/clearSingleArrayValues.xml");
         SvcLogicNode root = graph.getFirst().getRootNode();
         SvcLogicNode nodeOne = root.getOutcomeValue("1");
@@ -94,9 +94,9 @@ public class SetNodeExecutorTest {
     @Test
     public void clearSingleSubArrayProperties() throws Exception {
         SetNodeExecutor sne = new SetNodeExecutor();
-        SvcLogicContext ctx = new SvcLogicContext();
+        SvcLogicContextImpl ctx = new SvcLogicContextImpl();
 
-        SvcLogicParser slp = new SvcLogicParser();
+        SvcLogicParser slp = new SvcLogicParserImpl();
         LinkedList<SvcLogicGraph> graph = slp.parse("src/test/resources/clearSingleSubArrayValues.xml");
         SvcLogicNode root = graph.getFirst().getRootNode();
         SvcLogicNode nodeOne = root.getOutcomeValue("1");
@@ -131,9 +131,9 @@ public class SetNodeExecutorTest {
     @Test
     public void clearSubArrayProperties() throws Exception {
         SetNodeExecutor sne = new SetNodeExecutor();
-        SvcLogicContext ctx = new SvcLogicContext();
+        SvcLogicContextImpl ctx = new SvcLogicContextImpl();
 
-        SvcLogicParser slp = new SvcLogicParser();
+        SvcLogicParser slp = new SvcLogicParserImpl();
         LinkedList<SvcLogicGraph> graph = slp.parse("src/test/resources/clearSubArrayValues.xml");
         SvcLogicNode root = graph.getFirst().getRootNode();
         SvcLogicNode nodeOne = root.getOutcomeValue("1");
@@ -165,9 +165,9 @@ public class SetNodeExecutorTest {
     @Test
     public void subtreeCopy() throws Exception {
         SetNodeExecutor sne = new SetNodeExecutor();
-        SvcLogicContext ctx = new SvcLogicContext();
+        SvcLogicContextImpl ctx = new SvcLogicContextImpl();
 
-        SvcLogicParser slp = new SvcLogicParser();
+        SvcLogicParser slp = new SvcLogicParserImpl();
         LinkedList<SvcLogicGraph> graph = slp.parse("src/test/resources/copyValues.xml");
         SvcLogicNode root = graph.getFirst().getRootNode();
         SvcLogicNode nodeOne = root.getOutcomeValue("1");
@@ -187,10 +187,10 @@ public class SetNodeExecutorTest {
     @Test
     public void clearNestedSubArrayProperties() throws Exception { 
         SetNodeExecutor sne = new SetNodeExecutor(); 
-        SvcLogicContext ctx = new SvcLogicContext(); 
+        SvcLogicContextImpl ctx = new SvcLogicContextImpl(); 
  
-        SvcLogicParser slp = new SvcLogicParser(); 
-        LinkedList<SvcLogicGraph> graph = slp.parse("src/test/resources/clearNestedSubArrayValues.xml"); 
+        SvcLogicParser slp = new SvcLogicParserImpl(); 
+        LinkedList<SvcLogicGraph> graph = slp.parse("src/test/resources/clearNestedSubArrayValues.xml");
         SvcLogicNode root = graph.getFirst().getRootNode(); 
         SvcLogicNode nodeOne = root.getOutcomeValue("1"); 
         SvcLogicNode nodeTwo = root.getOutcomeValue("2"); 

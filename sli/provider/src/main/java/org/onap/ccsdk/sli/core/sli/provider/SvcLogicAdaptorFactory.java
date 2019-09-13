@@ -22,8 +22,7 @@
 package org.onap.ccsdk.sli.core.sli.provider;
 
 import java.util.HashMap;
-
-import org.onap.ccsdk.sli.core.sli.SvcLogicAdaptor;
+import org.onap.ccsdk.sli.core.api.extensions.SvcLogicAdaptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
