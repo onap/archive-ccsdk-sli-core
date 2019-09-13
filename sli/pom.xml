@@ -21,12 +21,12 @@
     </organization>
 
     <modules>
-        <module>provider-base</module>
+        <module>api</module>
+        <module>impl</module>
         <module>model</module>
-        <module>common</module>
-        <module>provider</module>
-        <module>recording</module>
+        <module>odlsli</module>
         <module>features</module>
         <module>installer</module>
+        <module>sliboot</module>
     </modules>
 </project>
