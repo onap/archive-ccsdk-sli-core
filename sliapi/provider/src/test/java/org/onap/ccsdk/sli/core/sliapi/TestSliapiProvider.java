@@ -6,55 +6,47 @@ package org.onap.ccsdk.sli.core.sliapi;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.concurrent.Future;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.onap.ccsdk.sli.core.sli.SvcLogicParser;
-import org.onap.ccsdk.sli.core.sli.SvcLogicStore;
-import org.onap.ccsdk.sli.core.sli.SvcLogicStoreFactory;
-import org.onap.ccsdk.sli.core.sli.provider.SvcLogicPropertiesProviderImpl;
-import org.onap.ccsdk.sli.core.sli.provider.SvcLogicServiceImpl;
-import org.onap.ccsdk.sli.core.sli.provider.base.AbstractSvcLogicNodeExecutor;
-import org.onap.ccsdk.sli.core.sli.provider.base.BlockNodeExecutor;
-import org.onap.ccsdk.sli.core.sli.provider.base.CallNodeExecutor;
-import org.onap.ccsdk.sli.core.sli.provider.base.ConfigureNodeExecutor;
-import org.onap.ccsdk.sli.core.sli.provider.base.DeleteNodeExecutor;
-import org.onap.ccsdk.sli.core.sli.provider.base.ExecuteNodeExecutor;
-import org.onap.ccsdk.sli.core.sli.provider.base.ExistsNodeExecutor;
-import org.onap.ccsdk.sli.core.sli.provider.base.ForNodeExecutor;
-import org.onap.ccsdk.sli.core.sli.provider.base.GetResourceNodeExecutor;
-import org.onap.ccsdk.sli.core.sli.provider.base.IsAvailableNodeExecutor;
-import org.onap.ccsdk.sli.core.sli.provider.base.NotifyNodeExecutor;
-import org.onap.ccsdk.sli.core.sli.provider.base.RecordNodeExecutor;
-import org.onap.ccsdk.sli.core.sli.provider.base.ReleaseNodeExecutor;
-import org.onap.ccsdk.sli.core.sli.provider.base.ReserveNodeExecutor;
-import org.onap.ccsdk.sli.core.sli.provider.base.ReturnNodeExecutor;
-import org.onap.ccsdk.sli.core.sli.provider.base.SaveNodeExecutor;
-import org.onap.ccsdk.sli.core.sli.provider.base.SetNodeExecutor;
-import org.onap.ccsdk.sli.core.sli.provider.base.SwitchNodeExecutor;
-import org.onap.ccsdk.sli.core.sli.provider.base.UpdateNodeExecutor;
-import org.onap.ccsdk.sli.core.sli.provider.base.WhileNodeExecutor;
-import org.opendaylight.controller.md.sal.binding.api.DataBroker;
-import org.opendaylight.controller.md.sal.binding.api.NotificationPublishService;
-import org.opendaylight.controller.sal.binding.api.BindingAwareBroker;
-import org.opendaylight.controller.sal.binding.api.RpcProviderRegistry;
+import org.onap.ccsdk.sli.core.api.SvcLogicGraph;
+import org.onap.ccsdk.sli.core.api.util.SvcLogicParser;
+import org.onap.ccsdk.sli.core.api.util.SvcLogicStore;
+import org.onap.ccsdk.sli.core.parser.SvcLogicExpressionParserImpl;
+import org.onap.ccsdk.sli.core.parser.SvcLogicParserImpl;
+import org.onap.ccsdk.sli.core.sli.provider.base.HashMapResolver;
+import org.onap.ccsdk.sli.core.sli.provider.base.InMemorySvcLogicStore;
+import org.onap.ccsdk.sli.core.sli.provider.base.SvcLogicServiceImpl;
+import org.onap.ccsdk.sli.core.sli.provider.base.executors.AbstractSvcLogicNodeExecutor;
+import org.onap.ccsdk.sli.core.sli.provider.base.executors.BlockNodeExecutor;
+import org.onap.ccsdk.sli.core.sli.provider.base.executors.CallNodeExecutor;
+import org.onap.ccsdk.sli.core.sli.provider.base.executors.ConfigureNodeExecutor;
+import org.onap.ccsdk.sli.core.sli.provider.base.executors.DeleteNodeExecutor;
+import org.onap.ccsdk.sli.core.sli.provider.base.executors.ExecuteNodeExecutor;
+import org.onap.ccsdk.sli.core.sli.provider.base.executors.ExistsNodeExecutor;
+import org.onap.ccsdk.sli.core.sli.provider.base.executors.ForNodeExecutor;
+import org.onap.ccsdk.sli.core.sli.provider.base.executors.GetResourceNodeExecutor;
+import org.onap.ccsdk.sli.core.sli.provider.base.executors.IsAvailableNodeExecutor;
+import org.onap.ccsdk.sli.core.sli.provider.base.executors.NotifyNodeExecutor;
+import org.onap.ccsdk.sli.core.sli.provider.base.executors.RecordNodeExecutor;
+import org.onap.ccsdk.sli.core.sli.provider.base.executors.ReleaseNodeExecutor;
+import org.onap.ccsdk.sli.core.sli.provider.base.executors.ReserveNodeExecutor;
+import org.onap.ccsdk.sli.core.sli.provider.base.executors.ReturnNodeExecutor;
+import org.onap.ccsdk.sli.core.sli.provider.base.executors.SaveNodeExecutor;
+import org.onap.ccsdk.sli.core.sli.provider.base.executors.SetNodeExecutor;
+import org.onap.ccsdk.sli.core.sli.provider.base.executors.SwitchNodeExecutor;
+import org.onap.ccsdk.sli.core.sli.provider.base.executors.UpdateNodeExecutor;
+import org.onap.ccsdk.sli.core.sli.provider.base.executors.WhileNodeExecutor;
 import org.opendaylight.yang.gen.v1.org.onap.ccsdk.sli.core.sliapi.rev161110.ExecuteGraphInput;
 import org.opendaylight.yang.gen.v1.org.onap.ccsdk.sli.core.sliapi.rev161110.ExecuteGraphInputBuilder;
 import org.opendaylight.yang.gen.v1.org.onap.ccsdk.sli.core.sliapi.rev161110.HealthcheckInput;
-import org.opendaylight.yang.gen.v1.org.onap.ccsdk.sli.core.sliapi.rev161110.SLIAPIService;
 import org.opendaylight.yang.gen.v1.org.onap.ccsdk.sli.core.sliapi.rev161110.VlbcheckInput;
 import org.opendaylight.yang.gen.v1.org.onap.ccsdk.sli.core.sliapi.rev161110.execute.graph.input.SliParameter;
 import org.opendaylight.yang.gen.v1.org.onap.ccsdk.sli.core.sliapi.rev161110.execute.graph.input.SliParameterBuilder;
@@ -64,11 +56,8 @@ import org.opendaylight.yang.gen.v1.org.onap.ccsdk.sli.core.sliapi.rev161110.exe
  *
  */
 public class TestSliapiProvider {
-
     private SliapiProvider provider;
-
     private static final String HEALTHCHECK_DG = "sli_healthcheck.xml";
-
     private static final Map<String, AbstractSvcLogicNodeExecutor> BUILTIN_NODES = new HashMap<String, AbstractSvcLogicNodeExecutor>() {
         {
             put("block", new BlockNodeExecutor());
@@ -86,7 +75,7 @@ public class TestSliapiProvider {
             put("reserve", new ReserveNodeExecutor());
             put("return", new ReturnNodeExecutor());
             put("save", new SaveNodeExecutor());
-            put("set", new SetNodeExecutor());
+                    put("set", new SetNodeExecutor(new SvcLogicExpressionParserImpl()));
             put("switch", new SwitchNodeExecutor());
             put("update", new UpdateNodeExecutor());
             put("while", new WhileNodeExecutor());
@@ -99,20 +88,7 @@ public class TestSliapiProvider {
      */
     @Before
     public void setUp() throws Exception {
-        DataBroker dataBroker = mock(DataBroker.class);
-        NotificationPublishService notifyService = mock(NotificationPublishService.class);
-        RpcProviderRegistry rpcRegistry = mock(RpcProviderRegistry.class);
-        BindingAwareBroker.RpcRegistration<SLIAPIService> rpcRegistration = (BindingAwareBroker.RpcRegistration<SLIAPIService>) mock(
-                BindingAwareBroker.RpcRegistration.class);
-        when(rpcRegistry.addRpcImplementation(any(Class.class), any(SLIAPIService.class))).thenReturn(rpcRegistration);
-
-        // Load svclogic.properties and get a SvcLogicStore
-        InputStream propStr = TestSliapiProvider.class.getResourceAsStream("/svclogic.properties");
-        Properties svcprops = new Properties();
-        svcprops.load(propStr);
-
-        SvcLogicStore store = SvcLogicStoreFactory.getSvcLogicStore(svcprops);
-
+        SvcLogicStore store = new InMemorySvcLogicStore();
         assertNotNull(store);
 
         // Load the DG for the healthcheck api
@@ -120,20 +96,25 @@ public class TestSliapiProvider {
         if (testCaseUrl == null) {
             fail("Cannot find " + HEALTHCHECK_DG);
         }
-        SvcLogicParser.load(testCaseUrl.getPath(), store);
-        SvcLogicParser.activate("sli", "healthcheck", "1.0.0", "sync", store);
+
+        SvcLogicParser parser = new SvcLogicParserImpl();
+        LinkedList<SvcLogicGraph> graphs = parser.parse(testCaseUrl.getPath());
+        for (SvcLogicGraph graph : graphs) {
+            store.store(graph);
+        }
+
+        store.activate("sli", "healthcheck", "1.0.0", "sync");
 
         // Create a ServiceLogicService and initialize it
-        SvcLogicServiceImpl svc = new SvcLogicServiceImpl(new SvcLogicPropertiesProviderImpl());
+        SvcLogicServiceImpl svc = new SvcLogicServiceImpl(new InMemorySvcLogicStore(),
+                new SvcLogicExpressionParserImpl(), new HashMapResolver());
+
         for (String nodeType : BUILTIN_NODES.keySet()) {
             svc.registerExecutor(nodeType, BUILTIN_NODES.get(nodeType));
         }
 
         // Finally ready to create SliapiProvider
-        provider = new SliapiProvider(dataBroker, notifyService, rpcRegistry, svc);
-        provider.setDataBroker(dataBroker);
-        provider.setNotificationService(notifyService);
-        provider.setRpcRegistry(rpcRegistry);
+        provider = new SliapiProvider(svc);
     }
 
     /**
