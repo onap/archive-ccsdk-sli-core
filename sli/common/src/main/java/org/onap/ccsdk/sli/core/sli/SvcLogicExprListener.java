@@ -25,8 +25,8 @@ package org.onap.ccsdk.sli.core.sli;
 
 import java.util.LinkedList;
 import java.util.List;
-
 import org.antlr.v4.runtime.tree.TerminalNode;
+import org.onap.ccsdk.sli.core.api.lang.SvcLogicExpression;
 import org.onap.ccsdk.sli.core.sli.ExprGrammarParser.AddExprContext;
 import org.onap.ccsdk.sli.core.sli.ExprGrammarParser.AtomContext;
 import org.onap.ccsdk.sli.core.sli.ExprGrammarParser.CompareExprContext;
@@ -39,6 +39,10 @@ import org.onap.ccsdk.sli.core.sli.ExprGrammarParser.RelExprContext;
 import org.onap.ccsdk.sli.core.sli.ExprGrammarParser.VariableContext;
 import org.onap.ccsdk.sli.core.sli.ExprGrammarParser.VariableLeadContext;
 import org.onap.ccsdk.sli.core.sli.ExprGrammarParser.VariableTermContext;
+import org.onap.ccsdk.sli.core.sli.provider.base.lang.SvcLogicAtomImpl;
+import org.onap.ccsdk.sli.core.sli.provider.base.lang.SvcLogicBinaryExpressionImpl;
+import org.onap.ccsdk.sli.core.sli.provider.base.lang.SvcLogicFunctionCallImpl;
+import org.onap.ccsdk.sli.core.sli.provider.base.lang.SvcLogicVariableTermImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -104,14 +108,14 @@ public class SvcLogicExprListener extends ExprGrammarBaseListener
 	@Override
 	public void enterAtom(AtomContext ctx) {
 		String atomText = ctx.getText();	
-		SvcLogicAtom newAtom = new SvcLogicAtom(atomText);
+		SvcLogicAtomImpl newAtom = new SvcLogicAtomImpl(atomText);
 		pushExpr(newAtom);
 	}
 
 
 	@Override
 	public void enterMultExpr(MultExprContext ctx) {
-		SvcLogicBinaryExpression curBinExpr = new SvcLogicBinaryExpression();
+		SvcLogicBinaryExpressionImpl curBinExpr = new SvcLogicBinaryExpressionImpl();
 		pushExpr(curBinExpr);
 		
 		List<TerminalNode> opList = ctx.MULTOP();
@@ -138,7 +142,7 @@ public class SvcLogicExprListener extends ExprGrammarBaseListener
 		List<TerminalNode> opList = ctx.ADDOP();
 		
 
-		SvcLogicBinaryExpression curBinExpr = new SvcLogicBinaryExpression();
+		SvcLogicBinaryExpressionImpl curBinExpr = new SvcLogicBinaryExpressionImpl();
 		pushExpr(curBinExpr);
 
 		
@@ -165,7 +169,7 @@ public class SvcLogicExprListener extends ExprGrammarBaseListener
 		}
 		
 
-		pushExpr(new SvcLogicFunctionCall(ctx.IDENTIFIER().getText()));
+		pushExpr(new SvcLogicFunctionCallImpl(ctx.IDENTIFIER().getText()));
 	}
 
 	@Override
@@ -189,7 +193,7 @@ public class SvcLogicExprListener extends ExprGrammarBaseListener
 		List<TerminalNode> opList = ctx.RELOP();
 		
 
-		SvcLogicBinaryExpression curBinExpr = new SvcLogicBinaryExpression();
+		SvcLogicBinaryExpressionImpl curBinExpr = new SvcLogicBinaryExpressionImpl();
 		pushExpr(curBinExpr);
 
 		
@@ -210,7 +214,7 @@ public class SvcLogicExprListener extends ExprGrammarBaseListener
 		
 		TerminalNode nd = ctx.COMPAREOP();
 
-		SvcLogicBinaryExpression curBinExpr = new SvcLogicBinaryExpression();
+		SvcLogicBinaryExpressionImpl curBinExpr = new SvcLogicBinaryExpressionImpl();
 		pushExpr(curBinExpr);
 
 		curBinExpr.addOperator(nd.getText());
@@ -260,7 +264,7 @@ public class SvcLogicExprListener extends ExprGrammarBaseListener
 		{
 			name = name.substring(0, subscrStart);
 		}
-		SvcLogicVariableTerm vterm = new SvcLogicVariableTerm(name);
+		SvcLogicVariableTermImpl vterm = new SvcLogicVariableTermImpl(name);
 		pushExpr(vterm);
 	}
 

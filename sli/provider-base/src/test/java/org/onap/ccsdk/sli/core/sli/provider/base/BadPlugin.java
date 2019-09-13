@@ -22,14 +22,12 @@
 package org.onap.ccsdk.sli.core.sli.provider.base;
 
 import java.util.Map;
-
-import org.onap.ccsdk.sli.core.sli.SvcLogicContext;
-import org.onap.ccsdk.sli.core.sli.SvcLogicException;
-import org.onap.ccsdk.sli.core.sli.SvcLogicJavaPlugin;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicException;
+import org.onap.ccsdk.sli.core.api.extensions.SvcLogicJavaPlugin;
 
 
 public class BadPlugin implements SvcLogicJavaPlugin {
-    public String selectLunch(Map<String, String> parameters, SvcLogicContext ctx) throws SvcLogicException {
+    public String selectLunch(Map<String, String> parameters, SvcLogicContextImpl ctx) throws SvcLogicException {
         String day = parameters.get("day");
         if (day == null || day.length() < 1) {
             throw new SvcLogicException("What day is it?");

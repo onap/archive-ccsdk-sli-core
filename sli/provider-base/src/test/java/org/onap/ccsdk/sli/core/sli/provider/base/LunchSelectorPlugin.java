@@ -22,10 +22,8 @@
 package org.onap.ccsdk.sli.core.sli.provider.base;
 
 import java.util.Map;
-
-import org.onap.ccsdk.sli.core.sli.SvcLogicContext;
-import org.onap.ccsdk.sli.core.sli.SvcLogicException;
-import org.onap.ccsdk.sli.core.sli.SvcLogicJavaPlugin;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicException;
+import org.onap.ccsdk.sli.core.api.extensions.SvcLogicJavaPlugin;
 
 
 
@@ -47,7 +45,7 @@ public class LunchSelectorPlugin implements SvcLogicJavaPlugin {
         }
     }
 
-    public String selectLunch(Map<String, String> parameters, SvcLogicContext ctx) throws Exception {
+    public String selectLunch(Map<String, String> parameters, SvcLogicContextImpl ctx) throws Exception {
         String day = parameters.get("day");
         if (day == null || day.length() < 1) {
             throw new UnknownLunchDayException("What day is it?");
@@ -72,7 +70,7 @@ public class LunchSelectorPlugin implements SvcLogicJavaPlugin {
         throw new SvcLogicException("Lunch cannot be served");
     }
 
-    public Sandwhich makeLunch(Map<String, String> parameters, SvcLogicContext ctx) throws SvcLogicException {
+    public Sandwhich makeLunch(Map<String, String> parameters, SvcLogicContextImpl ctx) throws SvcLogicException {
         return new Sandwhich("ham", "american");
     }
 }
