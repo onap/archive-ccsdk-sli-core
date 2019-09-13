@@ -21,7 +21,7 @@
 
 package org.onap.ccsdk.sli.core.sliapi;
 
-import org.onap.ccsdk.sli.core.sli.provider.MdsalHelper;
+import org.onap.ccsdk.sli.core.odlsli.MdsalHelper;
 import org.opendaylight.yang.gen.v1.org.onap.ccsdk.sli.core.sliapi.rev161110.ExecuteGraphInputBuilder;
 import org.opendaylight.yang.gen.v1.org.onap.ccsdk.sli.core.sliapi.rev161110.execute.graph.input.SliParameterBuilder;
 import org.slf4j.Logger;
