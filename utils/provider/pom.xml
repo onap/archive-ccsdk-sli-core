@@ -18,9 +18,7 @@
     <description>
         The SLI Core Utilities Package provides common functionality for setting up SLI connectivity.
     </description>
-    <organization>
-        <name>ONAP</name>
-    </organization>
+
 
     <dependencies>
         <dependency>
@@ -32,7 +30,6 @@
 			<artifactId>org.osgi.core</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
         <!-- Testing Dependencies -->
         <dependency>
             <groupId>org.mockito</groupId>

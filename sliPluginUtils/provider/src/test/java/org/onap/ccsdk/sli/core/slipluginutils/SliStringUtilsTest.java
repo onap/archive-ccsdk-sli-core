@@ -26,14 +26,14 @@ package org.onap.ccsdk.sli.core.slipluginutils;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.Before;
 import org.junit.Test;
-import org.onap.ccsdk.sli.core.sli.SvcLogicContext;
-import org.onap.ccsdk.sli.core.sli.SvcLogicException;
+import org.onap.ccsdk.sli.core.api.SvcLogicContext;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicException;
+import org.onap.ccsdk.sli.core.sli.provider.base.SvcLogicContextImpl;
+
 
 /**
  * @author km991u
@@ -49,7 +49,7 @@ public class SliStringUtilsTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		this.ctx = new SvcLogicContext();
+		this.ctx = new SvcLogicContextImpl();
 		param = new HashMap<String, String>();
 	}
 
@@ -284,7 +284,7 @@ public class SliStringUtilsTest {
 	@Test(expected = Exception.class)
 	public void testSplitForEmptyParams() throws Exception {
 		SliStringUtils utils = new SliStringUtils();
-		ctx = new SvcLogicContext();
+		ctx = new SvcLogicContextImpl();
 		param = new HashMap<>();
 		utils.split(param, ctx);
 	}
@@ -292,7 +292,7 @@ public class SliStringUtilsTest {
 	@Test(expected = Exception.class)
 	public void testSubstringForEmptyParams() throws Exception {
 		SliStringUtils utils = new SliStringUtils();
-		ctx = new SvcLogicContext();
+		ctx = new SvcLogicContextImpl();
 		param = new HashMap<>();
 		utils.substring(param, ctx);
 	}
