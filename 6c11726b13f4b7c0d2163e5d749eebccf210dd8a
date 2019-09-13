@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6134a0e5_439dd1ea",
+        "filename": "filters/provider/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 87
+      },
+      "writtenOn": "2019-09-13T14:50:39Z",
+      "side": 1,
+      "message": "In general, SNAPSHOT dependencies are not allowed and will cause the staging build to fail.  Please use a released version here.",
+      "range": {
+        "startLine": 23,
+        "startChar": 20,
+        "endLine": 23,
+        "endChar": 35
+      },
+      "revId": "6c11726b13f4b7c0d2163e5d749eebccf210dd8a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
