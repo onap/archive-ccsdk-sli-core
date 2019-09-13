@@ -21,7 +21,10 @@
 
 package org.onap.ccsdk.sli.core.sli;
 
-public class SvcLogicVariableTerm extends SvcLogicExpression {
+import org.onap.ccsdk.sli.core.api.lang.SvcLogicExpression;
+import org.onap.ccsdk.sli.core.sli.lang.SvcLogicExpressionImpl;
+
+public class SvcLogicVariableTerm extends SvcLogicExpressionImpl {
 	
 	private String name = null;
 	

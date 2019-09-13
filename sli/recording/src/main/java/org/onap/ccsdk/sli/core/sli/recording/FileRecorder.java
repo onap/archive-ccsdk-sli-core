@@ -31,10 +31,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 import java.util.TimeZone;
+import org.onap.ccsdk.sli.core.api.exceptions.ConfigurationException;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicException;
+import org.onap.ccsdk.sli.core.api.extensions.SvcLogicRecorder;
 
-import org.onap.ccsdk.sli.core.sli.ConfigurationException;
-import org.onap.ccsdk.sli.core.sli.SvcLogicException;
-import org.onap.ccsdk.sli.core.sli.SvcLogicRecorder;
+
 
 
 public class FileRecorder implements SvcLogicRecorder {

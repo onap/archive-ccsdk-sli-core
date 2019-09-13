@@ -23,12 +23,14 @@
 
 package org.onap.ccsdk.sli.core.sli.provider.base;
 
-import org.onap.ccsdk.sli.core.sli.SvcLogicContext;
-import org.onap.ccsdk.sli.core.sli.SvcLogicException;
-import org.onap.ccsdk.sli.core.sli.SvcLogicExpression;
-import org.onap.ccsdk.sli.core.sli.SvcLogicGraph;
-import org.onap.ccsdk.sli.core.sli.SvcLogicNode;
-import org.onap.ccsdk.sli.core.sli.SvcLogicStore;
+
+import org.onap.ccsdk.sli.core.api.SvcLogicContext;
+import org.onap.ccsdk.sli.core.api.SvcLogicGraph;
+import org.onap.ccsdk.sli.core.api.SvcLogicNode;
+import org.onap.ccsdk.sli.core.api.SvcLogicServiceBase;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicException;
+import org.onap.ccsdk.sli.core.api.lang.SvcLogicExpression;
+import org.onap.ccsdk.sli.core.api.util.SvcLogicStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,7 +46,7 @@ public class CallNodeExecutor extends AbstractSvcLogicNodeExecutor {
 
 		String outValue = "not-found";
 
-		SvcLogicGraph myGraph = node.getGraph();
+        SvcLogicGraph myGraph = node.getGraph();
 
 		if (myGraph == null)
 		{

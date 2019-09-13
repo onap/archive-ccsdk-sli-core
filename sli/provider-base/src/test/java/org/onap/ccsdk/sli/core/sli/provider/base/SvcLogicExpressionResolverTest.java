@@ -25,18 +25,17 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
-
-import org.onap.ccsdk.sli.core.sli.SvcLogicContext;
-import org.onap.ccsdk.sli.core.sli.SvcLogicExprListener;
-import org.onap.ccsdk.sli.core.sli.SvcLogicExpression;
+import org.onap.ccsdk.sli.core.api.SvcLogicGraph;
+import org.onap.ccsdk.sli.core.api.SvcLogicNode;
+import org.onap.ccsdk.sli.core.api.lang.SvcLogicExpression;
+import org.onap.ccsdk.sli.core.api.util.SvcLogicParser;
+import org.onap.ccsdk.sli.core.sli.SvcLogicContextImpl;
 import org.onap.ccsdk.sli.core.sli.SvcLogicExpressionFactory;
-import org.onap.ccsdk.sli.core.sli.SvcLogicGraph;
-import org.onap.ccsdk.sli.core.sli.SvcLogicNode;
-import org.onap.ccsdk.sli.core.sli.provider.base.SvcLogicExpressionResolver;
-import org.onap.ccsdk.sli.core.sli.SvcLogicParser;
+import org.onap.ccsdk.sli.core.sli.SvcLogicGraphImpl;
+import org.onap.ccsdk.sli.core.sli.SvcLogicNodeImpl;
+import org.onap.ccsdk.sli.core.sli.SvcLogicParserImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
@@ -53,9 +52,9 @@ public class SvcLogicExpressionResolverTest extends TestCase {
 		
 		try
 		{
-			SvcLogicContext ctx = new SvcLogicContext();
-			SvcLogicGraph graph = new SvcLogicGraph();
-			SvcLogicNode node = new SvcLogicNode(1, "return", graph);
+			SvcLogicContextImpl ctx = new SvcLogicContextImpl();
+			SvcLogicGraphImpl graph = new SvcLogicGraphImpl();
+            SvcLogicNode node = new SvcLogicNodeImpl(1, "return", graph);
 			graph.setRootNode(node);
 
 			String line = null;
@@ -125,9 +124,9 @@ public class SvcLogicExpressionResolverTest extends TestCase {
     public void testSvcLogicExpressions() throws Exception {
 	SwitchNodeExecutor switchNodeExecutor = new SwitchNodeExecutor();
 	SetNodeExecutor setNodeExecutor = new SetNodeExecutor();
-	SvcLogicContext ctx = new SvcLogicContext();
-	SvcLogicParser slp = new SvcLogicParser();
-	LinkedList<SvcLogicGraph> graph = slp.parse("src/test/resources/expressions.xml");
+	SvcLogicContextImpl ctx = new SvcLogicContextImpl();
+	SvcLogicParser slp = new SvcLogicParserImpl();
+        LinkedList<SvcLogicGraph> graph = slp.parse("src/test/resources/expressions.xml");
 	SvcLogicNode root = graph.getFirst().getRootNode();
 //Test a set node that makes use of arithmetic operations
 /*	

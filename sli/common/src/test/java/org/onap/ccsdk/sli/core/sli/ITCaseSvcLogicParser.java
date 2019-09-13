@@ -26,7 +26,6 @@ package org.onap.ccsdk.sli.core.sli;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,12 +37,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.onap.ccsdk.sli.core.api.SvcLogicGraph;
+import org.onap.ccsdk.sli.core.api.exceptions.ConfigurationException;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicException;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicParserException;
+import org.onap.ccsdk.sli.core.api.util.SvcLogicParser;
+import org.onap.ccsdk.sli.core.api.util.SvcLogicStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -91,7 +95,7 @@ public class ITCaseSvcLogicParser {
     }
 
     /**
-     * Test method for {@link org.onap.ccsdk.sli.core.sli.SvcLogicParser#parse(java.lang.String)}.
+     * Test method for {@link org.onap.ccsdk.sli.core.sli.SvcLogicParserImpl#parse(java.lang.String)}.
      */
     @Test
     public void testParseValidXml() {
@@ -115,9 +119,9 @@ public class ITCaseSvcLogicParser {
                     
                     // Test parsing and printing
                     try {
-                        SvcLogicParser parser = new SvcLogicParser();
+                        SvcLogicParser parser = new SvcLogicParserImpl();
                         
-                        for (SvcLogicGraph graph : parser.parse(testCaseUrl.getPath()))  {
+                        for (SvcLogicGraph graph : parser.parse(testCaseUrl.getPath())) {
                             System.out.println("XML for graph "+graph.getModule()+":"+graph.getRpc());
                             graph.printAsXml(System.out);
                             System.out.println("GV for graph "+graph.getModule()+":"+graph.getRpc());
@@ -129,7 +133,7 @@ public class ITCaseSvcLogicParser {
                     }
 
                     try {
-                        SvcLogicParser.load(testCaseUrl.getPath(), store);
+                        SvcLogicParserImpl.load(testCaseUrl.getPath(), store);
                     } catch (Exception e) {
 
                         fail("Validation failure [" + e.getMessage() + "]");
@@ -245,7 +249,7 @@ public class ITCaseSvcLogicParser {
                     }
 
                     try {
-                        SvcLogicParser.load(testCaseUrl.getPath(), dblibStore);
+                        SvcLogicParserImpl.load(testCaseUrl.getPath(), dblibStore);
                     } catch (Exception e) {
 
                         fail("Validation failure [" + e.getMessage() + "]");
@@ -278,7 +282,7 @@ public class ITCaseSvcLogicParser {
                 if (testCaseUrl == null) {
                     fail("Could not resolve test case file " + testCaseFile);
                 }
-                SvcLogicParser.validate(testCaseUrl.getPath(), store);
+                SvcLogicParserImpl.validate(testCaseUrl.getPath(), store);
             }
         }
     }
