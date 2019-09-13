@@ -19,26 +19,23 @@
  * ============LICENSE_END=========================================================
  */
 
-package org.onap.ccsdk.sli.core.sli;
+package org.onap.ccsdk.sli.core.api.exceptions;
 
-public class ExitNodeException extends SvcLogicException {
-	
-	/**
-	 * 
-	 */
+
+public class BreakNodeException extends SvcLogicException {
 	private static final long serialVersionUID = 1L;
 
-	public ExitNodeException()
+	public BreakNodeException()
 	{
 		super();
 	}
 	
-	public ExitNodeException(String message)
+	public BreakNodeException(String message)
 	{
 		super(message);
 	}
 	
-	public ExitNodeException(String message, Throwable t)
+	public BreakNodeException(String message, Throwable t)
 	{
 		super(message, t);
 	}

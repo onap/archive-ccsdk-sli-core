@@ -19,12 +19,14 @@
  * ============LICENSE_END=========================================================
  */
 
-package org.onap.ccsdk.sli.core.sli;
+package org.onap.ccsdk.sli.core.api.extensions;
 
 import java.util.Map;
+import org.onap.ccsdk.sli.core.api.SvcLogicContext;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicException;
+
 
 public interface SvcLogicResource {
-	
 	public enum QueryStatus {
 		SUCCESS,
 		NOT_FOUND,

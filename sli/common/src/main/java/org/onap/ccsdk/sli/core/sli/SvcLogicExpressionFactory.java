@@ -24,11 +24,11 @@ package org.onap.ccsdk.sli.core.sli;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
+import org.onap.ccsdk.sli.core.api.lang.SvcLogicExpression;
 import org.onap.ccsdk.sli.core.sli.ExprGrammarParser.ExprContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

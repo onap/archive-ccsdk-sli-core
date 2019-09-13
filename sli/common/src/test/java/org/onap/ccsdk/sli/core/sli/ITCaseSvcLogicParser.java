@@ -26,7 +26,6 @@ package org.onap.ccsdk.sli.core.sli;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,12 +37,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.onap.ccsdk.sli.core.api.SvcLogicGraph;
+import org.onap.ccsdk.sli.core.api.exceptions.ConfigurationException;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicException;
+import org.onap.ccsdk.sli.core.api.util.SvcLogicStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -117,7 +119,7 @@ public class ITCaseSvcLogicParser {
                     try {
                         SvcLogicParser parser = new SvcLogicParser();
                         
-                        for (SvcLogicGraph graph : parser.parse(testCaseUrl.getPath()))  {
+                        for (SvcLogicGraph graph : parser.parse(testCaseUrl.getPath())) {
                             System.out.println("XML for graph "+graph.getModule()+":"+graph.getRpc());
                             graph.printAsXml(System.out);
                             System.out.println("GV for graph "+graph.getModule()+":"+graph.getRpc());

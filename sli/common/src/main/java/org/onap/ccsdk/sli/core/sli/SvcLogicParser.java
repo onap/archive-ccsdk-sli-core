@@ -31,6 +31,12 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
+import org.onap.ccsdk.sli.core.api.SvcLogicGraph;
+import org.onap.ccsdk.sli.core.api.SvcLogicNode;
+import org.onap.ccsdk.sli.core.api.exceptions.ConfigurationException;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicException;
+import org.onap.ccsdk.sli.core.api.lang.SvcLogicExpression;
+import org.onap.ccsdk.sli.core.api.util.SvcLogicStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
@@ -67,7 +73,7 @@ public class SvcLogicParser {
         private String module = null;
         private String version = null;
         private LinkedList<SvcLogicGraph> graphs = null;
-        private SvcLogicGraph curGraph = null;
+        private SvcLogicGraphImpl curGraph = null;
         private SvcLogicNode curNode = null;
         private LinkedList<SvcLogicNode> nodeStack = null;
         private int curNodeId = 0;
@@ -117,7 +123,7 @@ public class SvcLogicParser {
                             + "Cannot nest module tags");
                 }
 
-                curGraph = new SvcLogicGraph();
+                curGraph = new SvcLogicGraphImpl();
                 curGraph.setModule(module);
                 curGraph.setVersion(version);
                 this.curNodeId = 1;
@@ -194,9 +200,9 @@ public class SvcLogicParser {
 
             try {
                 if (nodeName != null && nodeName.length() > 0) {
-                    thisNode = new SvcLogicNode(curNodeId++, qName, nodeName, curGraph);
+                    thisNode = new SvcLogicNodeImpl(curNodeId++, qName, nodeName, curGraph);
                 } else {
-                    thisNode = new SvcLogicNode(curNodeId++, qName, curGraph);
+                    thisNode = new SvcLogicNodeImpl(curNodeId++, qName, curGraph);
                 }
 
                 if (curGraph.getRootNode() == null) {

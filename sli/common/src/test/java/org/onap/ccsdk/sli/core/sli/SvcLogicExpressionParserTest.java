@@ -24,10 +24,9 @@ package org.onap.ccsdk.sli.core.sli;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
+import org.onap.ccsdk.sli.core.api.lang.SvcLogicExpression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import junit.framework.TestCase;
 
 public class SvcLogicExpressionParserTest extends TestCase {

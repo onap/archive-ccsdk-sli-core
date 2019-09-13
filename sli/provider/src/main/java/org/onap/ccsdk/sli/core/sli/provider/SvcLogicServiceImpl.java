@@ -24,17 +24,16 @@
 package org.onap.ccsdk.sli.core.sli.provider;
 
 import java.util.Properties;
-
+import org.onap.ccsdk.sli.core.api.SvcLogicGraph;
+import org.onap.ccsdk.sli.core.api.exceptions.ConfigurationException;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicException;
+import org.onap.ccsdk.sli.core.api.util.SvcLogicPropertiesProvider;
+import org.onap.ccsdk.sli.core.api.util.SvcLogicStore;
 import org.onap.ccsdk.sli.core.dblib.DbLibService;
-import org.onap.ccsdk.sli.core.sli.ConfigurationException;
-import org.onap.ccsdk.sli.core.sli.SvcLogicContext;
+import org.onap.ccsdk.sli.core.sli.SvcLogicContextImpl;
 import org.onap.ccsdk.sli.core.sli.SvcLogicDblibStore;
-import org.onap.ccsdk.sli.core.sli.SvcLogicException;
-import org.onap.ccsdk.sli.core.sli.SvcLogicGraph;
-import org.onap.ccsdk.sli.core.sli.SvcLogicStore;
 import org.onap.ccsdk.sli.core.sli.SvcLogicStoreFactory;
 import org.onap.ccsdk.sli.core.sli.provider.base.AbstractSvcLogicNodeExecutor;
-import org.onap.ccsdk.sli.core.sli.provider.base.SvcLogicPropertiesProvider;
 import org.onap.ccsdk.sli.core.sli.provider.base.SvcLogicServiceImplBase;
 import org.opendaylight.controller.md.sal.dom.api.DOMDataBroker;
 import org.osgi.framework.BundleContext;
@@ -104,7 +103,7 @@ public class SvcLogicServiceImpl extends SvcLogicServiceImplBase implements SvcL
             return (retProps);
         }
 
-        SvcLogicContext ctx = new SvcLogicContext(props);
+        SvcLogicContextImpl ctx = new SvcLogicContextImpl(props);
         ctx.setAttribute(CURRENT_GRAPH, graph.toString());
         ctx.setAttribute("X-ECOMP-RequestID", MDC.get("X-ECOMP-RequestID"));
         ctx.setDomDataBroker(domDataBroker);

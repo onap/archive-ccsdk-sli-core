@@ -19,27 +19,24 @@
  * ============LICENSE_END=========================================================
  */
 
-package org.onap.ccsdk.sli.core.sli;
+package org.onap.ccsdk.sli.core.api.exceptions;
 
-public class ConfigurationException extends SvcLogicException {
-
-	/**
-	 * 
-	 */
+public class SvcLogicException extends Exception {
 	private static final long serialVersionUID = 1L;
-	
-	public ConfigurationException()
+
+	public SvcLogicException()
 	{
 		super();
 	}
 	
-	public ConfigurationException(String msg)
+	public SvcLogicException(String message)
 	{
-		super(msg);
+		super(message);
+	}
+	
+	public SvcLogicException(String message, Throwable t)
+	{
+		super(message, t);
 	}
 
-	public ConfigurationException(String msg, Throwable t)
-	{
-		super(msg, t);
-	}
 }

@@ -21,10 +21,12 @@
 
 package org.onap.ccsdk.sli.core.sli.provider.base;
 
-import org.onap.ccsdk.sli.core.sli.SvcLogicContext;
-import org.onap.ccsdk.sli.core.sli.SvcLogicException;
-import org.onap.ccsdk.sli.core.sli.SvcLogicNode;
-import org.onap.ccsdk.sli.core.sli.SvcLogicResource;
+
+import org.onap.ccsdk.sli.core.api.SvcLogicContext;
+import org.onap.ccsdk.sli.core.api.SvcLogicNode;
+import org.onap.ccsdk.sli.core.api.SvcLogicServiceBase;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicException;
+import org.onap.ccsdk.sli.core.api.extensions.SvcLogicResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
