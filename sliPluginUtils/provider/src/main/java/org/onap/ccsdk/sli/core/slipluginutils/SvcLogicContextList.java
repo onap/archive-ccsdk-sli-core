@@ -26,9 +26,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.ListIterator;
 import java.util.Map;
-
 import org.apache.commons.lang3.StringUtils;
-import org.onap.ccsdk.sli.core.sli.SvcLogicContext;
+import org.onap.ccsdk.sli.core.api.SvcLogicContext;
 
 /**
  * A utility class used to manage list manipulation in the context memory.

@@ -21,24 +21,20 @@
 
 package org.onap.ccsdk.sli.core.slipluginutils;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
-import org.onap.ccsdk.sli.core.sli.SvcLogicConstants;
-import org.onap.ccsdk.sli.core.sli.SvcLogicContext;
-import org.onap.ccsdk.sli.core.sli.SvcLogicException;
-import org.onap.ccsdk.sli.core.slipluginutils.SliPluginUtils.LogLevel;
+import org.onap.ccsdk.sli.core.api.SvcLogicContext;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicException;
+import org.onap.ccsdk.sli.core.sli.provider.base.SvcLogicContextImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.google.gson.JsonObject;
+
+import static org.junit.Assert.*;
 
 public class SliPluginUtils_StaticFunctionsTest {
     private static final Logger LOG = LoggerFactory.getLogger(SliPluginUtils_StaticFunctionsTest.class);
@@ -48,7 +44,7 @@ public class SliPluginUtils_StaticFunctionsTest {
 
     @Before
     public void setUp() throws Exception {
-        this.ctx = new SvcLogicContext();
+        this.ctx = new SvcLogicContextImpl();
         parameters = new HashMap<String, String>();
     }
 
@@ -233,7 +229,7 @@ public class SliPluginUtils_StaticFunctionsTest {
 
     @Test
     public void containsKey() throws Exception {
-        ctx = new SvcLogicContext();
+        ctx = new SvcLogicContextImpl();
         parameters.put(SliStringUtils.INPUT_PARAM_KEY, "key_does_not_exist");
         String result = SliPluginUtils.containsKey(parameters, ctx);
         assertEquals(SliStringUtils.FALSE_CONSTANT, result);
@@ -289,7 +285,7 @@ public class SliPluginUtils_StaticFunctionsTest {
         obj.addProperty("name", "testName");
         obj.addProperty("age", 27);
         obj.addProperty("salary", 600000);
-        SvcLogicContext ctx = new SvcLogicContext();
+        SvcLogicContext ctx = new SvcLogicContextImpl();
         SliPluginUtils.writeJsonObject(obj, ctx, "root");
         assertEquals("testName", ctx.getAttribute("root.name"));
         assertEquals("27", ctx.getAttribute("root.age"));
@@ -306,7 +302,7 @@ public class SliPluginUtils_StaticFunctionsTest {
     public void testGetArrayLength() {
         ctx.setAttribute("key_length", "test");
         Logger log = LoggerFactory.getLogger(getClass());
-        SliPluginUtils.getArrayLength(ctx, "key", log, LogLevel.INFO, "invalid input");
+        SliPluginUtils.getArrayLength(ctx, "key", log, SliPluginUtils.LogLevel.INFO, "invalid input");
     }
 
     @Test
@@ -314,14 +310,14 @@ public class SliPluginUtils_StaticFunctionsTest {
         Map<String, String> parameters = new HashMap<>();
         parameters.put("root", "RootVal");
         parameters.put("valueRoot", "ValueRootVal");
-        assertEquals(SvcLogicConstants.SUCCESS, SliPluginUtils.setPropertiesForRoot(parameters, ctx));
+        assertEquals("success", SliPluginUtils.setPropertiesForRoot(parameters, ctx));
     }
 
     @Test
     public void testJsonStringToCtxToplevelArray() throws Exception {
         String path = "src/test/resources/ArrayMenu.json";
         String content = new String(Files.readAllBytes(Paths.get(path)));
-        SvcLogicContext ctx = new SvcLogicContext();
+        SvcLogicContext ctx = new SvcLogicContextImpl();
         ctx.setAttribute("input", content);
         Map<String, String> parameters = new HashMap<String, String>();
         parameters.put("outputPath", "testPath");
@@ -365,7 +361,7 @@ public class SliPluginUtils_StaticFunctionsTest {
         String path = "src/test/resources/ObjectMenu.json";
         String content = new String(Files.readAllBytes(Paths.get(path)));
 
-        SvcLogicContext ctx = new SvcLogicContext();
+        SvcLogicContext ctx = new SvcLogicContextImpl();
         ctx.setAttribute("input", content);
 
         Map<String, String> parameters = new HashMap<String, String>();
@@ -411,7 +407,7 @@ public class SliPluginUtils_StaticFunctionsTest {
         String path = "src/test/resources/2dArray.json";
         String content = new String(Files.readAllBytes(Paths.get(path)));
 
-        SvcLogicContext ctx = new SvcLogicContext();
+        SvcLogicContext ctx = new SvcLogicContextImpl();
         ctx.setAttribute("input", content);
 
         Map<String, String> parameters = new HashMap<String, String>();
@@ -436,7 +432,7 @@ public class SliPluginUtils_StaticFunctionsTest {
         String path = "src/test/resources/3dArray.json";
         String content = new String(Files.readAllBytes(Paths.get(path)));
 
-        SvcLogicContext ctx = new SvcLogicContext();
+        SvcLogicContext ctx = new SvcLogicContextImpl();
         ctx.setAttribute("input", content);
 
         Map<String, String> parameters = new HashMap<String, String>();
@@ -467,7 +463,7 @@ public class SliPluginUtils_StaticFunctionsTest {
         String path = "src/test/resources/Widget.json";
         String content = new String(Files.readAllBytes(Paths.get(path)));
 
-        SvcLogicContext ctx = new SvcLogicContext();
+        SvcLogicContext ctx = new SvcLogicContextImpl();
         ctx.setAttribute("input", content);
 
         Map<String, String> parameters = new HashMap<String, String>();
@@ -500,7 +496,7 @@ public class SliPluginUtils_StaticFunctionsTest {
         String path = "src/test/resources/EmbeddedEscapedJson.json";
         String content = new String(Files.readAllBytes(Paths.get(path)));
 
-        SvcLogicContext ctx = new SvcLogicContext();
+        SvcLogicContext ctx = new SvcLogicContextImpl();
         ctx.setAttribute("input", content);
 
         Map<String, String> parameters = new HashMap<String, String>();
@@ -534,7 +530,7 @@ public class SliPluginUtils_StaticFunctionsTest {
         String path = "src/test/resources/EscapedJson.json";
         String content = new String(Files.readAllBytes(Paths.get(path)));
 
-        SvcLogicContext ctx = new SvcLogicContext();
+        SvcLogicContext ctx = new SvcLogicContextImpl();
         ctx.setAttribute("input", content);
 
         Map<String, String> parameters = new HashMap<String, String>();
