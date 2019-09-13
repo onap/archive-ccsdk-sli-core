@@ -25,8 +25,8 @@ package org.onap.ccsdk.sli.core.sli;
 
 import java.util.LinkedList;
 import java.util.List;
-
 import org.antlr.v4.runtime.tree.TerminalNode;
+import org.onap.ccsdk.sli.core.api.lang.SvcLogicExpression;
 import org.onap.ccsdk.sli.core.sli.ExprGrammarParser.AddExprContext;
 import org.onap.ccsdk.sli.core.sli.ExprGrammarParser.AtomContext;
 import org.onap.ccsdk.sli.core.sli.ExprGrammarParser.CompareExprContext;

@@ -30,17 +30,22 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
-import java.util.HashSet;
 import java.util.TreeMap;
-
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.onap.ccsdk.sli.core.api.SvcLogicGraph;
+import org.onap.ccsdk.sli.core.api.SvcLogicNode;
+import org.onap.ccsdk.sli.core.api.exceptions.DuplicateValueException;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicException;
+import org.onap.ccsdk.sli.core.api.lang.SvcLogicExpression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SvcLogicNode implements Serializable {
+public class SvcLogicNodeImpl implements Serializable, SvcLogicNode {
 	
 	private static final Logger LOG = LoggerFactory
 			.getLogger(SvcLogicExprListener.class);
@@ -51,14 +56,14 @@ public class SvcLogicNode implements Serializable {
 	private int nodeId;
 	private String nodeType;
 	private boolean visited;
-	private SvcLogicGraph graph;
+    private SvcLogicGraph graph;
 
 
 	private HashMap<String, SvcLogicExpression> attributes;
-	private HashMap<String, SvcLogicNode> outcomes;
+    private HashMap<String, SvcLogicNode> outcomes;
 	private HashMap<String, SvcLogicExpression> parameters;
 	
-	public SvcLogicNode(int nodeId, String nodeType, SvcLogicGraph graph)
+    public SvcLogicNodeImpl(int nodeId, String nodeType, SvcLogicGraph graph)
 	{
 		this.nodeId = nodeId;
 		nodeName = "";
@@ -70,7 +75,8 @@ public class SvcLogicNode implements Serializable {
 		
 	}
 	
-	public SvcLogicNode(int nodeId, String nodeType, String nodeName, SvcLogicGraph graph) throws DuplicateValueException
+    public SvcLogicNodeImpl(int nodeId, String nodeType, String nodeName, SvcLogicGraph graph)
+            throws DuplicateValueException
 	{
 		this.nodeId = nodeId;
 		this.nodeName = nodeName;
@@ -98,7 +104,7 @@ public class SvcLogicNode implements Serializable {
 		return nodeType;
 	}
 	
-	public SvcLogicGraph getGraph()
+    public SvcLogicGraph getGraph()
 	{
 		return graph;
 	}
@@ -207,23 +213,23 @@ public class SvcLogicNode implements Serializable {
 		
 		if (recursive)
 		{
-			Set<Map.Entry<String, SvcLogicNode>> outcomeSet = getOutcomeSet();
+            Set<Entry<String, SvcLogicNode>> outcomeSet = getOutcomeSet();
 			
 			if (outcomeSet == null)
 			{
 				return;
 			}
 			
-			for (Iterator<Map.Entry<String, SvcLogicNode>> iter = outcomeSet.iterator(); iter.hasNext();)
+            for (Iterator<Entry<String, SvcLogicNode>> iter = outcomeSet.iterator(); iter.hasNext();)
 			{
-				Map.Entry<String, SvcLogicNode> curOutcome = iter.next();
-				SvcLogicNode outNode = curOutcome.getValue();
+                Entry<String, SvcLogicNode> curOutcome = iter.next();
+                SvcLogicNode outNode = curOutcome.getValue();
 				outNode.setVisited(visited, recursive);
 			}
 		}
 	}
 	
-	public void addOutcome(String outcomeValue, SvcLogicNode node) throws SvcLogicException
+    public void addOutcome(String outcomeValue, SvcLogicNode node) throws SvcLogicException
 	{
 		if (outcomes == null)
 		{
@@ -241,7 +247,7 @@ public class SvcLogicNode implements Serializable {
 		outcomes.put(outcomeValue, node);
 	}
 	
-	public Set<Map.Entry<String, SvcLogicNode>> getOutcomeSet()
+    public Set<Map.Entry<String, SvcLogicNode>> getOutcomeSet()
 	{
 		if (outcomes == null)
 		{
@@ -310,14 +316,14 @@ public class SvcLogicNode implements Serializable {
 		
 		if (outcomes != null)
 		{
-			TreeMap<String, SvcLogicNode> sortedOutcomes = new TreeMap<>(outcomes);
-			Set<Map.Entry<String, SvcLogicNode>> outcomeSet = sortedOutcomes.entrySet();
+            TreeMap<String, SvcLogicNode> sortedOutcomes = new TreeMap<>(outcomes);
+            Set<Entry<String, SvcLogicNode>> outcomeSet = sortedOutcomes.entrySet();
 			
-			for (Iterator<Map.Entry<String, SvcLogicNode>> iter = outcomeSet.iterator(); iter.hasNext();)
+            for (Iterator<Entry<String, SvcLogicNode>> iter = outcomeSet.iterator(); iter.hasNext();)
 			{
-				Map.Entry<String, SvcLogicNode> curOutcome = iter.next();
+                Entry<String, SvcLogicNode> curOutcome = iter.next();
 				String outValue = curOutcome.getKey();
-				SvcLogicNode outNode = curOutcome.getValue();
+                SvcLogicNode outNode = curOutcome.getValue();
 				pstr.println("node"+nodeId+" -> node"+outNode.getNodeId()+" [label=\""+outValue+"\"];");
 				outNode.printAsGv(pstr);
 			}
@@ -384,19 +390,19 @@ public class SvcLogicNode implements Serializable {
 		// Print outcomes (if any)
 		if (outcomes != null)
 		{
-			Set<Map.Entry<String, SvcLogicNode>> outcomeSet = outcomes.entrySet();
-			for (Iterator<Map.Entry<String, SvcLogicNode>> iter = outcomeSet.iterator() ; iter.hasNext();)
+            Set<Entry<String, SvcLogicNode>> outcomeSet = outcomes.entrySet();
+            for (Iterator<Entry<String, SvcLogicNode>> iter = outcomeSet.iterator(); iter.hasNext();)
 			{
 				for (int i = 0 ; i < indentLvl+1 ; i++)
 				{
 					pstr.print("  ");
 				}
 				pstr.print("<outcome");
-				Map.Entry<String, SvcLogicNode> curAttr = iter.next();
+                Entry<String, SvcLogicNode> curAttr = iter.next();
 				pstr.print(" value='");
 				pstr.print(curAttr.getKey());
 				pstr.print("'>\n");
-				SvcLogicNode outNode = curAttr.getValue();
+                SvcLogicNode outNode = curAttr.getValue();
 				outNode.printAsXml(pstr, indentLvl+2);
 				for (int i = 0 ; i < indentLvl+1 ; i++)
 				{
@@ -419,7 +425,7 @@ public class SvcLogicNode implements Serializable {
 	}
 
 
-	public SvcLogicNode getOutcomeValue(String value)
+    public SvcLogicNode getOutcomeValue(String value)
 	{
 
 		if (value.length() == 0) {

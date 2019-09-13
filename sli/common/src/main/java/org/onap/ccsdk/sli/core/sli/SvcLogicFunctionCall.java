@@ -21,6 +21,8 @@
 
 package org.onap.ccsdk.sli.core.sli;
 
+import org.onap.ccsdk.sli.core.api.lang.SvcLogicExpression;
+
 public class SvcLogicFunctionCall extends SvcLogicExpression {
 	
 	private String functionName;

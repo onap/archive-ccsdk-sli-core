@@ -28,9 +28,8 @@ import java.io.InputStream;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.Vector;
-
-import org.onap.ccsdk.sli.core.sli.ConfigurationException;
-import org.onap.ccsdk.sli.core.sli.provider.base.SvcLogicPropertiesProvider;
+import org.onap.ccsdk.sli.core.api.exceptions.ConfigurationException;
+import org.onap.ccsdk.sli.core.api.util.SvcLogicPropertiesProvider;
 import org.onap.ccsdk.sli.core.utils.JREFileResolver;
 import org.onap.ccsdk.sli.core.utils.KarafRootFileResolver;
 import org.onap.ccsdk.sli.core.utils.PropertiesFileResolver;

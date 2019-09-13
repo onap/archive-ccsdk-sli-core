@@ -19,12 +19,24 @@
  * ============LICENSE_END=========================================================
  */
 
-package org.onap.ccsdk.sli.core.sli;
+package org.onap.ccsdk.sli.core.api.exceptions;
 
-import java.util.Map;
+public class ExitNodeException extends SvcLogicException {
+	private static final long serialVersionUID = 1L;
 
-public interface SvcLogicRecorder {
+	public ExitNodeException()
+	{
+		super();
+	}
 	
-	void record(Map<String, String> parmMap) throws SvcLogicException;
+	public ExitNodeException(String message)
+	{
+		super(message);
+	}
+	
+	public ExitNodeException(String message, Throwable t)
+	{
+		super(message, t);
+	}
 
 }

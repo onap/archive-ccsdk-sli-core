@@ -19,18 +19,23 @@
  * ============LICENSE_END=========================================================
  */
 
-package org.onap.ccsdk.sli.core.sli;
+package org.onap.ccsdk.sli.core.api.exceptions;
 
-import java.util.Properties;
+public class DuplicateValueException extends SvcLogicException {
+	private static final long serialVersionUID = 1L;
 
-public interface SvcLogicStore {
+	public DuplicateValueException()
+	{
+		super();
+	}
 	
-	public void init(Properties props) throws SvcLogicException;
-	public boolean hasGraph(String module, String rpc, String version, String mode) throws SvcLogicException;
-	public SvcLogicGraph fetch(String module, String rpc, String version, String mode) throws SvcLogicException;
-	public void store(SvcLogicGraph graph) throws SvcLogicException;
-	public void delete(String module, String rpc, String version, String mode) throws SvcLogicException;
-	public void activate(SvcLogicGraph graph) throws SvcLogicException;
-	public void activate(String module, String rpc, String version, String mode) throws SvcLogicException;
-
+	public DuplicateValueException(String message)
+	{
+		super(message);
+	}
+	
+	public DuplicateValueException(String message, Throwable t)
+	{
+		super(message, t);
+	}
 }

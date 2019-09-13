@@ -26,14 +26,15 @@ package org.onap.ccsdk.sli.core.sli.provider.base;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-
-import org.onap.ccsdk.sli.core.sli.ExitNodeException;
-import org.onap.ccsdk.sli.core.sli.MetricLogger;
-import org.onap.ccsdk.sli.core.sli.SvcLogicContext;
-import org.onap.ccsdk.sli.core.sli.SvcLogicException;
-import org.onap.ccsdk.sli.core.sli.SvcLogicGraph;
-import org.onap.ccsdk.sli.core.sli.SvcLogicNode;
-import org.onap.ccsdk.sli.core.sli.SvcLogicStore;
+import org.onap.ccsdk.sli.core.api.SvcLogicContext;
+import org.onap.ccsdk.sli.core.api.SvcLogicGraph;
+import org.onap.ccsdk.sli.core.api.SvcLogicNode;
+import org.onap.ccsdk.sli.core.api.SvcLogicServiceBase;
+import org.onap.ccsdk.sli.core.api.exceptions.ExitNodeException;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicException;
+import org.onap.ccsdk.sli.core.api.util.SvcLogicResolver;
+import org.onap.ccsdk.sli.core.api.util.SvcLogicStore;
+import org.onap.ccsdk.sli.core.sli.SvcLogicContextImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -143,7 +144,7 @@ public class SvcLogicServiceImplBase implements SvcLogicServiceBase {
 	public Properties execute(String module, String rpc, String version, String mode, Properties props)
 			throws SvcLogicException {
 		LOG.info("Fetching service logic from data store");
-		SvcLogicGraph graph = store.fetch(module, rpc, version, mode);
+        SvcLogicGraph graph = store.fetch(module, rpc, version, mode);
 
 		if (graph == null) {
 			Properties retProps = new Properties();
@@ -153,7 +154,7 @@ public class SvcLogicServiceImplBase implements SvcLogicServiceBase {
 			return (retProps);
 		}
 
-		SvcLogicContext ctx = new SvcLogicContext(props);
+        SvcLogicContext ctx = new SvcLogicContextImpl(props);
 		ctx.setAttribute(CURRENT_GRAPH, graph.toString());
 		ctx.setAttribute("X-ECOMP-RequestID", MDC.get("X-ECOMP-RequestID"));
 		execute(graph, ctx);

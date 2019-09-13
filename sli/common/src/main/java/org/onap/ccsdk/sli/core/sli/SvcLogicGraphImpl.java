@@ -28,8 +28,11 @@ import java.io.PrintStream;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import org.onap.ccsdk.sli.core.api.SvcLogicGraph;
+import org.onap.ccsdk.sli.core.api.SvcLogicNode;
+import org.onap.ccsdk.sli.core.api.exceptions.DuplicateValueException;
 
-public class SvcLogicGraph implements Serializable {
+public class SvcLogicGraphImpl implements Serializable, SvcLogicGraph {
 	
 	/**
 	 * 
@@ -47,7 +50,7 @@ public class SvcLogicGraph implements Serializable {
 	private Map<String, SvcLogicNode> namedNodes;
 	private SvcLogicNode rootNode;
 	
-	public SvcLogicGraph()
+	public SvcLogicGraphImpl()
 	{
 		attributes = new HashMap<>();
 		namedNodes = new HashMap<>();
@@ -163,34 +166,29 @@ public class SvcLogicGraph implements Serializable {
 	}
 	
 	
-	
-	public void printAsGv(PrintStream pstr)
-	{
-		pstr.println("digraph g {");
-		pstr.println("START [label=\"START\\n"+module+":"+rpc+"\"];");
-		
-		if (rootNode != null)
-		{
-			pstr.println("START -> node"+rootNode.getNodeId()+";");
-			rootNode.setVisited(false, true);
-			rootNode.printAsGv(pstr);
-		}
-		pstr.println("}");
-	}
-	
-	public void printAsXml(PrintStream pstr)
-	{
-		pstr.println("<service-logic module='"+getModule()+"' version='"+getVersion()+"'>");
-		pstr.println("  <method rpc='"+getRpc()+"' mode='"+getMode()+"'>");
-		if (rootNode != null)
-		{
-			rootNode.setVisited(false, true);
-			rootNode.printAsXml(pstr, 2);
-		}
-		pstr.println("  </method>");
-		pstr.println("</service-logic>");
-	}
-	
+    public void printAsGv(PrintStream pstr) {
+        pstr.println("digraph g {");
+        pstr.println("START [label=\"START\\n" + module + ":" + rpc + "\"];");
+
+        if (rootNode != null) {
+            pstr.println("START -> node" + rootNode.getNodeId() + ";");
+            rootNode.setVisited(false, true);
+            rootNode.printAsGv(pstr);
+        }
+        pstr.println("}");
+    }
+
+    public void printAsXml(PrintStream pstr) {
+        pstr.println("<service-logic module='" + getModule() + "' version='" + getVersion() + "'>");
+        pstr.println(" <method rpc='" + getRpc() + "' mode='" + getMode() + "'>");
+        if (rootNode != null) {
+            rootNode.setVisited(false, true);
+            rootNode.printAsXml(pstr, 2);
+        }
+        pstr.println(" </method>");
+        pstr.println("</service-logic>");
+    }
+
 	@Override
 	public String toString() {
 	    return "SvcLogicGraph [module=" + module + ", rpc=" + rpc + ", mode=" + mode + ", version=" + version + ", md5sum=" + md5sum + "]";

@@ -1,6 +1,6 @@
 /*-
  * ============LICENSE_START=======================================================
- * ONAP : CCSDK
+ * openECOMP : SDN-C
  * ================================================================================
  * Copyright (C) 2017 AT&T Intellectual Property. All rights
  * 						reserved.
@@ -19,12 +19,39 @@
  * ============LICENSE_END=========================================================
  */
 
-package org.onap.ccsdk.sli.core.sli;
+package org.onap.ccsdk.sli.core.api.util;
 
-/**
- * A marker interface, used to indicate that a class exposes methods that can be
- * called from an <execute> node.  Such methods must have the signature:
- *   void methodName(Map, SvcLogicContext)
- */
-public interface SvcLogicJavaPlugin {
+public class ActivationEntry {
+    public String getModule() {
+        return module;
+    }
+
+    public String getRpc() {
+        return rpc;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public String getMode() {
+        return mode;
+    }
+
+    private String module;
+    private String rpc;
+    private String version;
+    private String mode;
+
+    public ActivationEntry(String module, String rpc, String version, String mode) {
+        this.module = module;
+        this.rpc = rpc;
+        this.version = version;
+        this.mode = mode;
+    }
+    
+    @Override
+    public String toString() {
+        return "ActivationEntry [module=" + module + ", rpc=" + rpc + ", version=" + version + ", mode=" + mode + "]";
+    }
 }

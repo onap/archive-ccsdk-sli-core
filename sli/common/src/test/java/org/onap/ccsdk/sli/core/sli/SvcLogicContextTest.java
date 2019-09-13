@@ -36,7 +36,7 @@ import junit.framework.TestCase;
 
 public class SvcLogicContextTest extends TestCase {
 	private static final Logger LOG = LoggerFactory
-			.getLogger(SvcLogicContext.class);
+			.getLogger(SvcLogicContextImpl.class);
 	
 	public void testMerge() {
 		
@@ -46,7 +46,7 @@ public class SvcLogicContextTest extends TestCase {
 			DocumentBuilder db = dbf.newDocumentBuilder();
 
 			Document theDocument = db.parse(testStr);
-			SvcLogicContext ctx = new SvcLogicContext();
+			SvcLogicContextImpl ctx = new SvcLogicContextImpl();
 			ctx.mergeDocument("test-merge", theDocument);
 			Properties props = ctx.toProperties();
 			LOG.info("SvcLogicContext contains the following : ");

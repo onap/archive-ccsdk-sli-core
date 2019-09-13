@@ -25,6 +25,7 @@ package org.onap.ccsdk.sli.core.sli;
 
 import java.util.LinkedList;
 import java.util.List;
+import org.onap.ccsdk.sli.core.api.lang.SvcLogicExpression;
 
 public class SvcLogicBinaryExpression extends SvcLogicExpression {
 	

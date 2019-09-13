@@ -3,10 +3,10 @@
  */
 package org.onap.ccsdk.sli.core.sli.recording;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 import java.util.HashMap;
 import org.junit.Test;
-import org.onap.ccsdk.sli.core.sli.SvcLogicException;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicException;
 
 /**
  * @author dt5972

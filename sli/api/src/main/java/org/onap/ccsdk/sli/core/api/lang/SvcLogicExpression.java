@@ -5,6 +5,8 @@
  * Copyright (C) 2017 AT&T Intellectual Property. All rights
  * 						reserved.
  * ================================================================================
+ * Modifications Copyright (C) 2018 IBM.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -19,27 +21,32 @@
  * ============LICENSE_END=========================================================
  */
 
-package org.onap.ccsdk.sli.core.sli;
+package org.onap.ccsdk.sli.core.api.lang;
 
-public class DuplicateValueException extends SvcLogicException {
+import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
-	public DuplicateValueException()
+public abstract class SvcLogicExpression implements Serializable {
+	
+	private List<SvcLogicExpression> operands = new LinkedList<>();
+	
+	
+	public void addOperand(SvcLogicExpression expr)
 	{
-		super();
+		operands.add(expr);
+	}
+
+	public List<SvcLogicExpression> getOperands() {
+		return operands;
 	}
 	
-	public DuplicateValueException(String message)
+	public int numOperands()
 	{
-		super(message);
+		return(operands.size());
 	}
 	
-	public DuplicateValueException(String message, Throwable t)
-	{
-		super(message, t);
-	}
+	public abstract String asParsedExpr();
+
 }

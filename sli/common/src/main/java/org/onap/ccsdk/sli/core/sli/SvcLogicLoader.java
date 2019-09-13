@@ -34,6 +34,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import org.onap.ccsdk.sli.core.api.SvcLogicGraph;
+import org.onap.ccsdk.sli.core.api.exceptions.ConfigurationException;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicException;
+import org.onap.ccsdk.sli.core.api.util.ActivationEntry;
+import org.onap.ccsdk.sli.core.api.util.SvcLogicStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -74,10 +79,9 @@ public class SvcLogicLoader {
     protected void activateGraphs(List<ActivationEntry> activationEntries) {
         for (ActivationEntry entry : activationEntries) {
             try {
-                if (store.hasGraph(entry.module, entry.rpc, entry.version, entry.mode)) {
-                    LOGGER.info("Activating SvcLogicGraph [module=" + entry.module + ", rpc=" + entry.rpc + ", mode="
-                            + entry.mode + ", version=" + entry.version + "]");
-                    store.activate(entry.module, entry.rpc, entry.version, entry.mode);
+                if (store.hasGraph(entry.getModule(), entry.getRpc(), entry.getVersion(), entry.getMode())) {
+                    LOGGER.info("Performing active on {}", entry.toString());
+                    store.activate(entry.getModule(), entry.getRpc(), entry.getVersion(), entry.getMode());
                 } else {
                     LOGGER.error("hasGraph returned false for " + entry.toString());
                 }

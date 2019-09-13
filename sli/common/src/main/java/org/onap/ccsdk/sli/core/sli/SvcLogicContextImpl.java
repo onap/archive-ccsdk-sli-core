@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
-
+import org.onap.ccsdk.sli.core.api.SvcLogicContext;
 import org.opendaylight.controller.md.sal.dom.api.DOMDataBroker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,9 +36,9 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 
 
-public class SvcLogicContext {
+public class SvcLogicContextImpl implements SvcLogicContext {
 
-	private static final Logger LOG = LoggerFactory.getLogger(SvcLogicContext.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SvcLogicContextImpl.class);
 
 	private HashMap<String, String> attributes;
 
@@ -46,13 +46,13 @@ public class SvcLogicContext {
 
 	private String status = "success";
 
-	public SvcLogicContext()
+	public SvcLogicContextImpl()
 	{
 		this.attributes = new HashMap<> ();
 
 	}
 
-	public SvcLogicContext(Properties props)
+	public SvcLogicContextImpl(Properties props)
 	{
 		this.attributes = new HashMap<> ();
 

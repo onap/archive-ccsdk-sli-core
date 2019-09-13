@@ -5,8 +5,6 @@
  * Copyright (C) 2017 AT&T Intellectual Property. All rights
  * 						reserved.
  * ================================================================================
- * Modifications Copyright (C) 2018 IBM.
- * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -21,32 +19,24 @@
  * ============LICENSE_END=========================================================
  */
 
-package org.onap.ccsdk.sli.core.sli;
-
-import java.io.Serializable;
-import java.util.LinkedList;
-import java.util.List;
+package org.onap.ccsdk.sli.core.api.exceptions;
 
 
-public abstract class SvcLogicExpression implements Serializable {
+public class ConfigurationException extends SvcLogicException {
+	private static final long serialVersionUID = 1L;
 	
-	private List<SvcLogicExpression> operands = new LinkedList<>();
-	
-	
-	public void addOperand(SvcLogicExpression expr)
+	public ConfigurationException()
 	{
-		operands.add(expr);
-	}
-
-	public List<SvcLogicExpression> getOperands() {
-		return operands;
+		super();
 	}
 	
-	public int numOperands()
+	public ConfigurationException(String msg)
 	{
-		return(operands.size());
+		super(msg);
 	}
-	
-	public abstract String asParsedExpr();
 
+	public ConfigurationException(String msg, Throwable t)
+	{
+		super(msg, t);
+	}
 }

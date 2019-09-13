@@ -1,9 +1,9 @@
-package org.onap.ccsdk.sli.core.sli.provider.base;
+package org.onap.ccsdk.sli.core.api.util;
 
-import org.onap.ccsdk.sli.core.sli.SvcLogicAdaptor;
-import org.onap.ccsdk.sli.core.sli.SvcLogicJavaPlugin;
-import org.onap.ccsdk.sli.core.sli.SvcLogicRecorder;
-import org.onap.ccsdk.sli.core.sli.SvcLogicResource;
+import org.onap.ccsdk.sli.core.api.extensions.SvcLogicAdaptor;
+import org.onap.ccsdk.sli.core.api.extensions.SvcLogicJavaPlugin;
+import org.onap.ccsdk.sli.core.api.extensions.SvcLogicRecorder;
+import org.onap.ccsdk.sli.core.api.extensions.SvcLogicResource;
 
 public interface SvcLogicResolver {
     

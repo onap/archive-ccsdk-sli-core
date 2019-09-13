@@ -19,28 +19,26 @@
  * ============LICENSE_END=========================================================
  */
 
-package org.onap.ccsdk.sli.core.sli;
+package org.onap.ccsdk.sli.core.api.util;
 
-public class SvcLogicException extends Exception {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+import java.util.Properties;
+import org.onap.ccsdk.sli.core.api.SvcLogicGraph;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicException;
 
-	public SvcLogicException()
-	{
-		super();
-	}
-	
-	public SvcLogicException(String message)
-	{
-		super(message);
-	}
-	
-	public SvcLogicException(String message, Throwable t)
-	{
-		super(message, t);
-	}
+public interface SvcLogicStore {
+
+    public void init(Properties props) throws SvcLogicException;
+
+    public boolean hasGraph(String module, String rpc, String version, String mode) throws SvcLogicException;
+
+    public SvcLogicGraph fetch(String module, String rpc, String version, String mode) throws SvcLogicException;
+
+    public void store(SvcLogicGraph graph) throws SvcLogicException;
+
+    public void delete(String module, String rpc, String version, String mode) throws SvcLogicException;
+
+    public void activate(SvcLogicGraph graph) throws SvcLogicException;
+
+    public void activate(String module, String rpc, String version, String mode) throws SvcLogicException;
 
 }

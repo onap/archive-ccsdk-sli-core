@@ -19,28 +19,13 @@
  * ============LICENSE_END=========================================================
  */
 
-package org.onap.ccsdk.sli.core.sli;
+package org.onap.ccsdk.sli.core.api.extensions;
 
-public class BreakNodeException extends SvcLogicException {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+import java.util.Map;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicException;
 
-	public BreakNodeException()
-	{
-		super();
-	}
-	
-	public BreakNodeException(String message)
-	{
-		super(message);
-	}
-	
-	public BreakNodeException(String message, Throwable t)
-	{
-		super(message, t);
-	}
+public interface SvcLogicRecorder {
+
+    void record(Map<String, String> parmMap) throws SvcLogicException;
 
 }

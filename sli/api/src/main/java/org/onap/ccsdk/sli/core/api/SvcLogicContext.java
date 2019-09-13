@@ -1,8 +1,9 @@
 /*-
  * ============LICENSE_START=======================================================
- * onap
+ * ONAP : CCSDK
  * ================================================================================
- * Copyright (C) 2016 - 2017 ONAP
+ * Copyright (C) 2017 AT&T Intellectual Property. All rights
+ * 						reserved.
  * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,11 +19,25 @@
  * ============LICENSE_END=========================================================
  */
 
-package org.onap.ccsdk.sli.core.sli.provider.base;
+package org.onap.ccsdk.sli.core.api;
 
 import java.util.Properties;
+import java.util.Set;
 
-public interface SvcLogicPropertiesProvider {
+public interface SvcLogicContext {
 
-    public Properties getProperties();;
+    public String getAttribute(String name);
+
+    public void setAttribute(String name, String value);
+
+    public Set<String> getAttributeKeySet();
+
+    public String getStatus();
+
+    public void setStatus(String status);
+
+    public Properties toProperties();
+
+    public String resolve(String ctxVarName);
+
 }

@@ -24,18 +24,17 @@
 package org.onap.ccsdk.sli.core.sli.provider.base;
 
 import java.util.List;
-
 import org.apache.commons.lang.StringUtils;
+import org.onap.ccsdk.sli.core.api.SvcLogicContext;
+import org.onap.ccsdk.sli.core.api.SvcLogicNode;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicException;
+import org.onap.ccsdk.sli.core.api.lang.SvcLogicExpression;
 import org.onap.ccsdk.sli.core.sli.SvcLogicAtom;
-import org.onap.ccsdk.sli.core.sli.SvcLogicBinaryExpression;
-import org.onap.ccsdk.sli.core.sli.SvcLogicContext;
-import org.onap.ccsdk.sli.core.sli.SvcLogicException;
-import org.onap.ccsdk.sli.core.sli.SvcLogicExpression;
-import org.onap.ccsdk.sli.core.sli.SvcLogicFunctionCall;
-import org.onap.ccsdk.sli.core.sli.SvcLogicNode;
-import org.onap.ccsdk.sli.core.sli.SvcLogicVariableTerm;
 import org.onap.ccsdk.sli.core.sli.SvcLogicAtom.AtomType;
+import org.onap.ccsdk.sli.core.sli.SvcLogicBinaryExpression;
 import org.onap.ccsdk.sli.core.sli.SvcLogicBinaryExpression.OperatorType;
+import org.onap.ccsdk.sli.core.sli.SvcLogicFunctionCall;
+import org.onap.ccsdk.sli.core.sli.SvcLogicVariableTerm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,7 +46,7 @@ public class SvcLogicExpressionResolver {
     private static final String EXPRESSION_DEBUG_PATTERN = "Expression: {} resolves to {}: which has the value {}";
 
 	public static String evaluate(SvcLogicExpression expr, SvcLogicNode node,
-			SvcLogicContext ctx) throws SvcLogicException {
+            SvcLogicContext ctx) throws SvcLogicException {
 		if (expr == null) {
 			return (null);
 		}
@@ -146,7 +145,8 @@ public class SvcLogicExpressionResolver {
 		}
 	}
 
-	private static String evalArithExpression(SvcLogicBinaryExpression binExpr, SvcLogicNode node, SvcLogicContext ctx) throws SvcLogicException {
+    private static String evalArithExpression(SvcLogicBinaryExpression binExpr, SvcLogicNode node, SvcLogicContext ctx)
+            throws SvcLogicException {
 		List<SvcLogicExpression> operands = binExpr.getOperands();
 		List<OperatorType> operators = binExpr.getOperators();
 		if (operands.size() != (operators.size()+1))
@@ -295,7 +295,8 @@ public class SvcLogicExpressionResolver {
 		
 	}
 	
-	private static String evalLogicExpression(SvcLogicBinaryExpression expr, SvcLogicNode node, SvcLogicContext ctx) throws SvcLogicException
+    private static String evalLogicExpression(SvcLogicBinaryExpression expr, SvcLogicNode node, SvcLogicContext ctx)
+            throws SvcLogicException
 	{
 		boolean retval;
 		
@@ -334,7 +335,8 @@ public class SvcLogicExpressionResolver {
 		return(Boolean.toString(retval));
 	}
 	
-	private static String evalFunctionCall(SvcLogicFunctionCall func, SvcLogicNode node, SvcLogicContext ctx) throws SvcLogicException
+    private static String evalFunctionCall(SvcLogicFunctionCall func, SvcLogicNode node, SvcLogicContext ctx)
+            throws SvcLogicException
 	{
 		String funcName = func.getFunctionName();
 		List<SvcLogicExpression> operands = func.getOperands();
@@ -443,7 +445,7 @@ public class SvcLogicExpressionResolver {
 	}
 	
 	public static String evaluateAsKey(SvcLogicExpression expr, SvcLogicNode node,
-			SvcLogicContext ctx) throws SvcLogicException {
+            SvcLogicContext ctx) throws SvcLogicException {
 		if (expr == null) {
 			return (null);
 		}
@@ -571,7 +573,8 @@ public class SvcLogicExpressionResolver {
 		}
 	}
 	
-	public static String resolveVariableName(SvcLogicExpression atom, SvcLogicNode node, SvcLogicContext ctx) throws SvcLogicException
+    public static String resolveVariableName(SvcLogicExpression atom, SvcLogicNode node, SvcLogicContext ctx)
+            throws SvcLogicException
 	{
 		StringBuffer varNameBuff = new StringBuffer();
 		
