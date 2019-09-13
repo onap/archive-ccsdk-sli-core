@@ -25,14 +25,13 @@ package org.onap.ccsdk.sli.core.slipluginutils;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
 import java.util.HashMap;
 import java.util.Random;
-
 import org.junit.Before;
 import org.junit.Test;
-import org.onap.ccsdk.sli.core.sli.SvcLogicContext;
-import org.onap.ccsdk.sli.core.sli.SvcLogicException;
+import org.onap.ccsdk.sli.core.api.SvcLogicContext;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicException;
+import org.onap.ccsdk.sli.core.sli.provider.base.SvcLogicContextImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,7 +45,7 @@ public class SliPluginUtils_ctxSortList {
 
 	@Before
 	public void setUp() throws Exception {
-		this.ctx = new SvcLogicContext();
+		this.ctx = new SvcLogicContextImpl();
 		this.parameters = new HashMap<String, String>();
 	}
 
