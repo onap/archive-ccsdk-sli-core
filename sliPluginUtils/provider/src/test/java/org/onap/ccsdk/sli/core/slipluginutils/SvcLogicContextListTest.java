@@ -23,12 +23,11 @@ package org.onap.ccsdk.sli.core.slipluginutils;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-
 import java.util.HashMap;
-
 import org.junit.Before;
 import org.junit.Test;
-import org.onap.ccsdk.sli.core.sli.SvcLogicContext;
+import org.onap.ccsdk.sli.core.api.SvcLogicContext;
+import org.onap.ccsdk.sli.core.sli.provider.base.SvcLogicContextImpl;
 
 public class SvcLogicContextListTest {
 	//private static final Logger LOG = LoggerFactory.getLogger(SvcLogicContextTest.class);
@@ -36,7 +35,7 @@ public class SvcLogicContextListTest {
 
 	@Before
 	public void setUp() throws Exception {
-		this.ctx = new SvcLogicContext();
+		this.ctx = new SvcLogicContextImpl();
 	}
 
 	// TODO: javadoc
@@ -285,7 +284,7 @@ public class SvcLogicContextListTest {
 		SvcLogicContextList list = new SvcLogicContextList( ctx, "list" );
 
 		// Erase context memory
-		ctx = new SvcLogicContext();
+		ctx = new SvcLogicContextImpl();
 
 		// Write list back into context memory
 		list.writeToContext(ctx);
