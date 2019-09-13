@@ -22,6 +22,30 @@
       "revId": "6c11726b13f4b7c0d2163e5d749eebccf210dd8a",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d529fecc_c1cbb2b4",
+        "filename": "filters/provider/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1219
+      },
+      "writtenOn": "2019-09-13T20:12:30Z",
+      "side": 1,
+      "message": "I have been working with Prudence all week to cut the release version, hopefully it happens today",
+      "parentUuid": "6134a0e5_439dd1ea",
+      "range": {
+        "startLine": 23,
+        "startChar": 20,
+        "endLine": 23,
+        "endChar": 35
+      },
+      "revId": "6c11726b13f4b7c0d2163e5d749eebccf210dd8a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
