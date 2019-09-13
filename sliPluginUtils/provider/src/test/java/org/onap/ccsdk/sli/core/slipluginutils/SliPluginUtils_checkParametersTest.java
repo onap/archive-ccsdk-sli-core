@@ -23,13 +23,19 @@
 
 package org.onap.ccsdk.sli.core.slipluginutils;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Test;
-import org.onap.ccsdk.sli.core.sli.SvcLogicContext;
-import org.onap.ccsdk.sli.core.sli.SvcLogicException;
+import org.onap.ccsdk.sli.core.api.SvcLogicContext;
+import org.onap.ccsdk.sli.core.api.exceptions.SvcLogicException;
+import org.onap.ccsdk.sli.core.sli.provider.base.SvcLogicContextImpl;
+import org.onap.ccsdk.sli.core.slipluginutils.SliPluginUtils.LogLevel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.google.gson.JsonObject;
 
 public class SliPluginUtils_checkParametersTest {
 
@@ -60,7 +66,7 @@ public class SliPluginUtils_checkParametersTest {
 
     @Test
     public void testSunnyRequiredParameters() throws Exception {
-        SvcLogicContext ctx = new SvcLogicContext();
+        SvcLogicContext ctx = new SvcLogicContextImpl();
         ctx.setAttribute("param1", "hello");
         ctx.setAttribute("param2", "world");
         ctx.setAttribute("param3", "!");
@@ -76,7 +82,7 @@ public class SliPluginUtils_checkParametersTest {
     @Test
     public void testSunnyRequiredParametersWithPrefix() throws Exception {
         String prefixValue = "my.unique.path.";
-        SvcLogicContext ctx = new SvcLogicContext();
+        SvcLogicContext ctx = new SvcLogicContextImpl();
         ctx.setAttribute(prefixValue + "param1", "hello");
         ctx.setAttribute(prefixValue + "param2", "world");
         ctx.setAttribute(prefixValue + "param3", "!");
@@ -92,7 +98,7 @@ public class SliPluginUtils_checkParametersTest {
 
     @Test(expected = SvcLogicException.class)
     public void testRainyMissingRequiredParameters() throws Exception {
-        SvcLogicContext ctx = new SvcLogicContext();
+        SvcLogicContext ctx = new SvcLogicContextImpl();
         ctx.setAttribute("param1", "hello");
         ctx.setAttribute("param3", "!");
 
@@ -106,12 +112,102 @@ public class SliPluginUtils_checkParametersTest {
 
     @Test(expected = SvcLogicException.class)
     public void testEmptyRequiredParameters() throws Exception {
-        SvcLogicContext ctx = new SvcLogicContext();
+        SvcLogicContext ctx = new SvcLogicContextImpl();
         ctx.setAttribute("param1", "hello");
         ctx.setAttribute("param3", "!");
 
         Map<String, String> parameters = new HashMap<String, String>();
 
         SliPluginUtils.requiredParameters(parameters, ctx);
+    }
+
+    @Test(expected = SvcLogicException.class)
+    public void testJsonStringToCtx() throws Exception {
+        SvcLogicContext ctx = new SvcLogicContextImpl();
+        Map<String, String> parameters = new HashMap<String, String>();
+        parameters.put("outputPath", "testPath");
+        parameters.put("isEscaped", "true");
+        parameters.put("source", "//{/name1/:value1/}//");
+        SliPluginUtils.jsonStringToCtx(parameters, ctx);
+    }
+
+    @Test
+    public void testGetAttributeValue() throws Exception {
+        SvcLogicContext ctx = new SvcLogicContextImpl();
+        Map<String, String> parameters = new HashMap<String, String>();
+        parameters.put("outputPath", "testPath");
+        parameters.put("source", "testSource");
+        SliPluginUtils.getAttributeValue(parameters, ctx);
+        assertNull(ctx.getAttribute(parameters.get("outputPath")));
+    }
+
+    @Test
+    public void testCtxListContains() throws Exception {
+        SvcLogicContext ctx = new SvcLogicContextImpl();
+        Map<String, String> parameters = new HashMap<String, String>();
+        parameters.put("list", "10_length");
+        parameters.put("keyName", "testName");
+        parameters.put("keyValue", "testValue");
+        ctx.setAttribute("10_length", "10");
+        assertEquals("false", SliPluginUtils.ctxListContains(parameters, ctx));
+
+    }
+    
+    @Test(expected= SvcLogicException.class)
+    public void testPrintContextForNullParameters() throws SvcLogicException
+    {
+        SvcLogicContext ctx = new SvcLogicContextImpl();
+        Map<String, String> parameters = new HashMap<String, String>();
+        SliPluginUtils.printContext(parameters, ctx);
+    }
+    
+    @Test
+    public void testPrintContext() throws SvcLogicException
+    {
+        SvcLogicContext ctx = new SvcLogicContextImpl();
+        Map<String, String> parameters = new HashMap<String, String>();
+        parameters.put("filename","testFileName");
+        SliPluginUtils.printContext(parameters, ctx);
+    }
+    
+    @Test
+    public void testWriteJsonObject() throws SvcLogicException
+    {
+        JsonObject obj=new JsonObject();
+        obj.addProperty("name","testName");
+        obj.addProperty("age",27);
+        obj.addProperty("salary",600000);
+        SvcLogicContext ctx = new SvcLogicContextImpl();
+        SliPluginUtils.writeJsonObject(obj, ctx,"root");
+        assertEquals("testName", ctx.getAttribute("root.name"));
+        assertEquals("27", ctx.getAttribute("root.age"));
+        assertEquals("600000", ctx.getAttribute("root.salary"));
+    }
+    
+    @Test
+    public void testCtxKeyEmpty()
+    {
+        SvcLogicContext ctx = new SvcLogicContextImpl();
+        ctx.setAttribute("key", "");
+        assertTrue(SliPluginUtils.ctxKeyEmpty(ctx, "key"));
+    }
+    
+    @Test
+    public void testGetArrayLength()
+    {
+        SvcLogicContext ctx = new SvcLogicContextImpl();
+        ctx.setAttribute("key_length", "test");
+        Logger log = LoggerFactory.getLogger(getClass());
+        SliPluginUtils.getArrayLength(ctx, "key", log , LogLevel.INFO, "invalid input");
+    }
+    
+    @Test
+    public void testSetPropertiesForRoot()
+    {
+        SvcLogicContext ctx = new SvcLogicContextImpl();
+        Map<String, String> parameters= new HashMap<>();
+        parameters.put("root","RootVal");
+        parameters.put("valueRoot", "ValueRootVal");
+        assertEquals("success",SliPluginUtils.setPropertiesForRoot(parameters,ctx));
     }
 }
