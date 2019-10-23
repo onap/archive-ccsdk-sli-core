@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "22ec1070_502d95a9",
+        "filename": "sliPluginUtils/provider/src/main/java/org/onap/ccsdk/sli/core/slipluginutils/SliPluginUtils.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1114,
+      "author": {
+        "id": 1219
+      },
+      "writtenOn": "2019-10-23T13:39:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "eca957cb_89b37160",
+      "range": {
+        "startLine": 1114,
+        "startChar": 37,
+        "endLine": 1114,
+        "endChar": 43
+      },
+      "revId": "c2e07749c5f3d8e933d8b1575653700df585690d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "912c44d5_fdf66b88",
         "filename": "sliPluginUtils/provider/src/test/java/org/onap/ccsdk/sli/core/slipluginutils/SliPluginUtils_StaticFunctionsTest.java",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "c2e07749c5f3d8e933d8b1575653700df585690d",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "043830e7_36ba3af6",
+        "filename": "sliPluginUtils/provider/src/test/java/org/onap/ccsdk/sli/core/slipluginutils/SliPluginUtils_StaticFunctionsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1219
+      },
+      "writtenOn": "2019-10-23T13:39:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "912c44d5_fdf66b88",
+      "range": {
+        "startLine": 252,
+        "startChar": 22,
+        "endLine": 252,
+        "endChar": 56
+      },
+      "revId": "c2e07749c5f3d8e933d8b1575653700df585690d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "97656e4e_da95a03b",
+        "filename": "sliPluginUtils/provider/src/test/java/org/onap/ccsdk/sli/core/slipluginutils/SliPluginUtils_StaticFunctionsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1219
+      },
+      "writtenOn": "2019-10-23T13:39:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0ed8f632_b71eeb0f",
+      "range": {
+        "startLine": 257,
+        "startChar": 23,
+        "endLine": 257,
+        "endChar": 56
+      },
+      "revId": "c2e07749c5f3d8e933d8b1575653700df585690d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "69246ca3_40fe11ad",
         "filename": "sliPluginUtils/provider/src/test/java/org/onap/ccsdk/sli/core/slipluginutils/SliPluginUtils_StaticFunctionsTest.java",
         "patchSetId": 1
@@ -91,6 +163,30 @@
       "revId": "c2e07749c5f3d8e933d8b1575653700df585690d",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d1dc1e4_4a4521ca",
+        "filename": "sliPluginUtils/provider/src/test/java/org/onap/ccsdk/sli/core/slipluginutils/SliPluginUtils_StaticFunctionsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1219
+      },
+      "writtenOn": "2019-10-23T13:39:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "69246ca3_40fe11ad",
+      "range": {
+        "startLine": 262,
+        "startChar": 23,
+        "endLine": 262,
+        "endChar": 56
+      },
+      "revId": "c2e07749c5f3d8e933d8b1575653700df585690d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
