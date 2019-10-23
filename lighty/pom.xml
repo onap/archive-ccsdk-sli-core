@@ -10,24 +10,12 @@
     </parent>
 
     <groupId>org.onap.ccsdk.sli.core</groupId>
-    <artifactId>sli</artifactId>
+    <artifactId>ccsdk-core-lighty-aggregator</artifactId>
     <version>0.7.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>ccsdk-sli-core :: sli</name>
-    <description>The Service Logic Interpreter (SLI) allows service planners to design the flow of logic within the SDN controller in an XML format, without a need for custom Java code. </description>
-    <organization>
-        <name>ONAP</name>
-    </organization>
-
     <modules>
-        <module>provider-base</module>
-        <module>model</module>
-        <module>common</module>
-        <module>provider</module>
-        <module>recording</module>
-        <module>features</module>
-        <module>installer</module>
-        <module>lighty</module>
+        <module>ccsdk-core-lighty</module>
+        <module>ccsdk-lighty-dependency-versions</module>
     </modules>
 </project>
