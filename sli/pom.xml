@@ -27,5 +27,6 @@
         <module>provider</module>
         <module>recording</module>
         <module>installer</module>
+        <module>lighty</module>
     </modules>
 </project>
