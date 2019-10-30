@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "48736535_8fa1e716",
+        "filename": "sli/common/src/main/java/org/onap/ccsdk/sli/core/sli/MessageWriter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 865
+      },
+      "writtenOn": "2019-10-30T18:53:33Z",
+      "side": 1,
+      "message": "Can be removed !",
+      "revId": "17bbf8be295cb8e2cfc4faf466ada9c899089c63",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a93a46e_2f537be5",
+        "filename": "sli/common/src/main/java/org/onap/ccsdk/sli/core/sli/MessageWriter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 865
+      },
+      "writtenOn": "2019-10-30T18:53:33Z",
+      "side": 1,
+      "message": "Can be removed !",
+      "revId": "17bbf8be295cb8e2cfc4faf466ada9c899089c63",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
