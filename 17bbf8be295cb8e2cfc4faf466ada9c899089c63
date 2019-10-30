@@ -33,6 +33,24 @@
       "revId": "17bbf8be295cb8e2cfc4faf466ada9c899089c63",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "505c1826_edf6a72f",
+        "filename": "sli/common/src/main/java/org/onap/ccsdk/sli/core/sli/MessageWriter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1219
+      },
+      "writtenOn": "2019-10-30T19:37:17Z",
+      "side": 1,
+      "message": "I think this entire class should probably just be deleted",
+      "parentUuid": "4a93a46e_2f537be5",
+      "revId": "17bbf8be295cb8e2cfc4faf466ada9c899089c63",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
