@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c77a50bc_046941e4",
+        "filename": "sli/provider-base/src/main/java/org/onap/ccsdk/sli/core/sli/provider/base/SvcLogicServiceImplBase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 865
+      },
+      "writtenOn": "2019-11-01T16:23:15Z",
+      "side": 1,
+      "message": "Shouldn\u0027t it be:\n\nctx.setAttribute(\"X-ECOMP-RequestID\", MDC.get(ONAPLogConstants.MDCs.REQUEST_ID));",
+      "range": {
+        "startLine": 157,
+        "startChar": 57,
+        "endLine": 157,
+        "endChar": 72
+      },
+      "revId": "20d4c9fe85a324ce16c72f2cb381fc8b941b3dff",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
