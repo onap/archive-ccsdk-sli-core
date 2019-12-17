@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "781fbac9_9034a0e1",
+        "filename": "sliPluginUtils/provider/src/main/java/org/onap/ccsdk/sli/core/slipluginutils/SliPluginUtils.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 858,
+      "author": {
+        "id": 865
+      },
+      "writtenOn": "2019-12-17T20:40:32Z",
+      "side": 1,
+      "message": "What if it\u0027s again an Array inside ? kind of two dimansional !\n\n[\n  [\n    {\n    \"id\": \"1\",\n    \"type\": \"pizza\",\n    \"name\": \"plain\",\n    \"calories\": 1000,\n    \"vegetarian\": true\n    }\n  ]\n]",
+      "revId": "6cea3befcf0f7d1e838e48dd750ed315ed634dec",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "60bc8e64_3b8cbf7d",
         "filename": "sliPluginUtils/provider/src/test/java/org/onap/ccsdk/sli/core/slipluginutils/SliPluginUtils_StaticFunctionsTest.java",
         "patchSetId": 1
