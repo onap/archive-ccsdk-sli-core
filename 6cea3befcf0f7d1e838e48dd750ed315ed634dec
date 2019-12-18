@@ -51,6 +51,24 @@
       "revId": "6cea3befcf0f7d1e838e48dd750ed315ed634dec",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2fade0ad_800b4b91",
+        "filename": "sliPluginUtils/provider/src/test/java/org/onap/ccsdk/sli/core/slipluginutils/SliPluginUtils_StaticFunctionsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 865
+      },
+      "writtenOn": "2019-12-18T14:34:37Z",
+      "side": 1,
+      "message": "If Json top level element is Array, then I guess Prefix provided by user should be array to.\nWe shouldn\u0027t prepend it with dot (.) always ! Rest is up to Usecase.",
+      "parentUuid": "d6bcb3fb_396b22b7",
+      "revId": "6cea3befcf0f7d1e838e48dd750ed315ed634dec",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
