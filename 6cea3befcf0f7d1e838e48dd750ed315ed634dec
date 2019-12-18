@@ -33,6 +33,24 @@
       "revId": "6cea3befcf0f7d1e838e48dd750ed315ed634dec",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6bcb3fb_396b22b7",
+        "filename": "sliPluginUtils/provider/src/test/java/org/onap/ccsdk/sli/core/slipluginutils/SliPluginUtils_StaticFunctionsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1219
+      },
+      "writtenOn": "2019-12-18T13:53:56Z",
+      "side": 1,
+      "message": "testPath is the prefix, a prefix is always prepended with a period.\n\nNormally the name of attribute such as topping is included, but in this case the array is top level with no attribute name.",
+      "parentUuid": "60bc8e64_3b8cbf7d",
+      "revId": "6cea3befcf0f7d1e838e48dd750ed315ed634dec",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
