@@ -16,6 +16,21 @@
 
 	<name>ccsdk-sli-core :: dblib :: ${project.artifactId}</name>
 
+	<properties>
+		<mariadb.connector.version>2.5.2</mariadb.connector.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.onap.ccsdk.parent</groupId>
+				<artifactId>dependencies-odl-bom</artifactId>
+				<version>1.5.1-SNAPSHOT</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<dependencies>
 
@@ -28,6 +43,7 @@
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
 			<artifactId>mariadb-java-client</artifactId>
+			<version>${mariadb.connector.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
