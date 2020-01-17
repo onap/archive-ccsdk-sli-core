@@ -23,6 +23,14 @@
 	
 	<properties>
 		<sitePath>content/sites/site/org/onap/ccsdk/sli/core/${project.version}/</sitePath>
+
+		<!-- Sonar properties -->
+		<sonar.language>java</sonar.language>
+		<sonar.coverage.jacoco.xmlReportPaths>
+			tests/target/site/jacoco-aggregate/jacoco.xml
+		</sonar.coverage.jacoco.xmlReportPaths>
+		<sonar.projectVersion>${project.version}</sonar.projectVersion>
+		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
 	</properties>
 
 	<modules>
@@ -34,6 +42,7 @@
 		<module>sliapi</module>
 		<module>features</module>
 		<module>artifacts</module>
+		<module>tests</module>
 	</modules>
 
 	<scm>
