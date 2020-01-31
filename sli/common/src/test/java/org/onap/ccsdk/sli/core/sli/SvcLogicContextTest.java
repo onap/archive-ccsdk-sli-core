@@ -24,20 +24,17 @@ package org.onap.ccsdk.sli.core.sli;
 import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.Properties;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
-
 import junit.framework.TestCase;
 
 public class SvcLogicContextTest extends TestCase {
 	private static final Logger LOG = LoggerFactory
 			.getLogger(SvcLogicContext.class);
-	
+
 	public void testMerge() {
 		
 		try {
@@ -61,5 +58,13 @@ public class SvcLogicContextTest extends TestCase {
 		}
 		
 	}
+
+    public void testIsSuccess() {
+        SvcLogicContext ctx = new SvcLogicContext();
+        ctx.setStatus(SvcLogicConstants.SUCCESS);
+        assertTrue(ctx.isSuccess());
+        ctx.setStatus(SvcLogicConstants.FAILURE);
+        assertFalse(ctx.isSuccess());
+    }
 
 }
