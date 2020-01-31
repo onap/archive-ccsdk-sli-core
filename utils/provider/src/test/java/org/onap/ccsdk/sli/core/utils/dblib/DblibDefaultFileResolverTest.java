@@ -11,15 +11,15 @@ public class DblibDefaultFileResolverTest {
 
     @Test
     public void resolveFile() throws Exception {
-        final PropertiesFileResolver resolver = new DblibDefaultFileResolver("success");
+        final PropertiesFileResolver resolver = new DblibDefaultFileResolver(SvcLogicConstants.SUCCESS);
         final Optional<File> file = resolver.resolveFile("doesnotexist.cfg");
         assertFalse(file.isPresent());
     }
 
     @Test
     public void getSuccessfulResolutionMessage() throws Exception {
-        final PropertiesFileResolver resolver = new DblibDefaultFileResolver("success");
-        assertEquals("success", resolver.getSuccessfulResolutionMessage());
+        final PropertiesFileResolver resolver = new DblibDefaultFileResolver(SvcLogicConstants.SUCCESS);
+        assertEquals(SvcLogicConstants.SUCCESS, resolver.getSuccessfulResolutionMessage());
     }
 
 }

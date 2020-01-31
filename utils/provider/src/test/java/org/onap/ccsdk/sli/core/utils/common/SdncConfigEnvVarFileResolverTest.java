@@ -10,15 +10,15 @@ import org.onap.ccsdk.sli.core.utils.PropertiesFileResolver;
 public class SdncConfigEnvVarFileResolverTest {
     @Test
     public void resolveFile() throws Exception {
-        final PropertiesFileResolver resolver = new SdncConfigEnvVarFileResolver("success");
+        final PropertiesFileResolver resolver = new SdncConfigEnvVarFileResolver(SvcLogicConstants.SUCCESS);
         final Optional<File> file = resolver.resolveFile("doesnotexist.cfg");
         assertFalse(file.isPresent());
     }
 
     @Test
     public void getSuccessfulResolutionMessage() throws Exception {
-        final PropertiesFileResolver resolver = new SdncConfigEnvVarFileResolver("success");
-        assertEquals("success", resolver.getSuccessfulResolutionMessage());
+        final PropertiesFileResolver resolver = new SdncConfigEnvVarFileResolver(SvcLogicConstants.SUCCESS);
+        assertEquals(SvcLogicConstants.SUCCESS, resolver.getSuccessfulResolutionMessage());
     }
 
 }

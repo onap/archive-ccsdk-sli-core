@@ -313,7 +313,7 @@ public class SliPluginUtils_StaticFunctionsTest {
         Map<String, String> parameters = new HashMap<>();
         parameters.put("root", "RootVal");
         parameters.put("valueRoot", "ValueRootVal");
-        assertEquals("success", SliPluginUtils.setPropertiesForRoot(parameters, ctx));
+        assertEquals(SvcLogicConstants.SUCCESS, SliPluginUtils.setPropertiesForRoot(parameters, ctx));
     }
 
     @Test
@@ -526,6 +526,10 @@ public class SliPluginUtils_StaticFunctionsTest {
         assertEquals("0.2.0.0/16", ctx.getAttribute("testPath.input.parameters[0].value.[0].id"));
         assertEquals("ge04::/64", ctx.getAttribute("testPath.input.parameters[0].value.[1].id"));
         assertEquals("2", ctx.getAttribute("testPath.input.parameters[0].value._length"));
+
+        for (String key : ctx.getAttributeKeySet()) {
+            System.out.println(key + " = " + ctx.getAttribute(key));
+        }
     }
 
     @Test

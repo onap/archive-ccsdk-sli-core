@@ -58,7 +58,7 @@ public class PluginTest extends TestCase {
         SvcLogicNode node = new SvcLogicNode(1, "return", graph);
         String emitsOutcome = SvcLogicExpressionResolver.evaluate(node.getAttribute("emitsOutcome"),  node, ctx);
         String outValue = executor.mapOutcome(o, emitsOutcome);
-        assertEquals("success",outValue);
+        assertEquals(SvcLogicConstants.SUCCESS,outValue);
     }
 
     //Newer plugins can set the attribute emitsOutcome to true, if so they should return a string
@@ -107,7 +107,7 @@ public class PluginTest extends TestCase {
         SvcLogicNode node = new SvcLogicNode(1, "return", graph);
         String emitsOutcome = SvcLogicExpressionResolver.evaluate(node.getAttribute("emitsOutcome"),  node, ctx);
         String outValue = executor.mapOutcome(o, emitsOutcome);
-        assertEquals("success",outValue);
+        assertEquals(SvcLogicConstants.SUCCESS,outValue);
     }
 
 }

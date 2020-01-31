@@ -144,7 +144,7 @@ public class SliPluginUtils_ctxSortList {
 		parameters.put("keyName", "testKey");
 		parameters.put("keyValue", "testValue");
 
-		assertEquals("success", SliPluginUtils.setPropertiesForList(parameters, ctx));
+		assertEquals(SvcLogicConstants.SUCCESS, SliPluginUtils.setPropertiesForList(parameters, ctx));
 
 	}
 }

@@ -41,7 +41,7 @@ public class ExistsNodeExecutor extends AbstractSvcLogicNodeExecutor {
         String key = SvcLogicExpressionResolver.evaluateAsKey(node.getAttribute("key"), node, ctx);
         String pfx = SvcLogicExpressionResolver.evaluate(node.getAttribute("pfx"), node, ctx);
 
-        String outValue = "failure";
+        String outValue = SvcLogicConstants.FAILURE;
 
         if (LOG.isDebugEnabled()) {
             LOG.debug("exists node encountered - looking for resource class " + plugin);
@@ -64,7 +64,7 @@ public class ExistsNodeExecutor extends AbstractSvcLogicNodeExecutor {
                 }
             } catch (SvcLogicException e) {
                 LOG.error("Caught exception from resource plugin", e);
-                outValue = "failure";
+                outValue = SvcLogicConstants.FAILURE;
             }
         } else {
             LOG.warn("Could not find SvcLogicResource object for plugin " + plugin);

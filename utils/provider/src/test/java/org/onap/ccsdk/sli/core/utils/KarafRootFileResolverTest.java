@@ -7,8 +7,8 @@ import org.junit.Test;
 public class KarafRootFileResolverTest {
     @Test
     public void getSuccessfulResolutionMessage() throws Exception {
-        final PropertiesFileResolver resolver = new KarafRootFileResolver("success", null);
-        assertEquals("success", resolver.getSuccessfulResolutionMessage());
+        final PropertiesFileResolver resolver = new KarafRootFileResolver(SvcLogicConstants.SUCCESS, null);
+        assertEquals(SvcLogicConstants.SUCCESS, resolver.getSuccessfulResolutionMessage());
     }
 
 }

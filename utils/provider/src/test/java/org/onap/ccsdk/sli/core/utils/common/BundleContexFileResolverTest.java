@@ -9,8 +9,8 @@ public class BundleContexFileResolverTest {
 
     @Test
     public void getSuccessfulResolutionMessage() throws Exception {
-        final PropertiesFileResolver resolver = new BundleContextFileResolver("success", BundleContexFileResolverTest.class);
-        assertEquals("success", resolver.getSuccessfulResolutionMessage());
+        final PropertiesFileResolver resolver = new BundleContextFileResolver(SvcLogicConstants.SUCCESS, BundleContexFileResolverTest.class);
+        assertEquals(SvcLogicConstants.SUCCESS, resolver.getSuccessfulResolutionMessage());
     }
 
 }

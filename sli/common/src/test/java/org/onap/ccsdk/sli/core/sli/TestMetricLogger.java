@@ -15,7 +15,7 @@ public class TestMetricLogger {
         logger = new MetricLogger();
         logger.resetContext();
         logger.logRequest("svcInstance1", "svcName", "svcPartner", "targetEntity", "targetServiceName", "targetVirtualEntity", "hello-world");
-        logger.logResponse("200", "200", "SUCCESS");
+        logger.logResponse("200", "200", SvcLogicConstants.SUCCESS);
 
     }
 
