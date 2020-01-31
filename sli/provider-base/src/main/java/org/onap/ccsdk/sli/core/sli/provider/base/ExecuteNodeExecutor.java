@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
 public class ExecuteNodeExecutor extends AbstractSvcLogicNodeExecutor {
 	private static final Logger LOG = LoggerFactory
 			.getLogger(ExecuteNodeExecutor.class);
-	private static final String FAILURE="failure";
+	private static final String FAILURE=SvcLogicConstants.FAILURE;
 
 	private static final String pluginErrorMessage = "Could not execute plugin. SvcLogic status will be set to failure.";
 	public SvcLogicNode execute(SvcLogicServiceBase svc, SvcLogicNode node,
@@ -119,10 +119,10 @@ public class ExecuteNodeExecutor extends AbstractSvcLogicNodeExecutor {
             if (nodeEmitsOutcome) {
                 return (String) o;
             } else {
-                return "success";
+                return SvcLogicConstants.SUCCESS;
             }
         } else {
-            return "success";
+            return SvcLogicConstants.SUCCESS;
         }
     }
 

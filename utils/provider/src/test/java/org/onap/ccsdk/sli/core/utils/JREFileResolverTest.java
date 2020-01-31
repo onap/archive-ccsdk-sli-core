@@ -8,8 +8,8 @@ public class JREFileResolverTest {
 
     @Test
     public void getSuccessfulResolutionMessage() throws Exception {
-        final PropertiesFileResolver resolver = new JREFileResolver("success", JREFileResolverTest.class);
-        assertEquals("success", resolver.getSuccessfulResolutionMessage());
+        final PropertiesFileResolver resolver = new JREFileResolver(SvcLogicConstants.SUCCESS, JREFileResolverTest.class);
+        assertEquals(SvcLogicConstants.SUCCESS, resolver.getSuccessfulResolutionMessage());
     }
 
 }

@@ -313,7 +313,7 @@ public class SliPluginUtils_StaticFunctionsTest {
         Map<String, String> parameters = new HashMap<>();
         parameters.put("root", "RootVal");
         parameters.put("valueRoot", "ValueRootVal");
-        assertEquals("success", SliPluginUtils.setPropertiesForRoot(parameters, ctx));
+        assertEquals(SvcLogicConstants.SUCCESS, SliPluginUtils.setPropertiesForRoot(parameters, ctx));
     }
 
     @Test

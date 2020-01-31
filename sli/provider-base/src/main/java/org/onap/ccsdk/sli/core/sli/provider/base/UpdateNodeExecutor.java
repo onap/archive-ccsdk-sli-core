@@ -51,7 +51,7 @@ public class UpdateNodeExecutor extends AbstractSvcLogicNodeExecutor {
 
         Map<String, String> parmMap = getResolvedParameters(node,ctx);
 
-        String outValue = "failure";
+        String outValue = SvcLogicConstants.FAILURE;
 
         if (LOG.isDebugEnabled()) {
             LOG.debug("save node encountered - looking for resource class " + plugin);
@@ -66,18 +66,18 @@ public class UpdateNodeExecutor extends AbstractSvcLogicNodeExecutor {
             try {
                 switch (resourcePlugin.update(resourceType, key, parmMap, pfx, ctx)) {
                     case SUCCESS:
-                        outValue = "success";
+                        outValue = SvcLogicConstants.SUCCESS;
                         break;
                     case NOT_FOUND:
                         outValue = "not-found";
                         break;
                     case FAILURE:
                     default:
-                        outValue = "failure";
+                        outValue = SvcLogicConstants.FAILURE;
                 }
             } catch (SvcLogicException e) {
                 LOG.error("Caught exception from resource plugin", e);
-                outValue = "failure";
+                outValue = SvcLogicConstants.FAILURE;
             }
         } else {
             LOG.warn("Could not find SvcLogicResource object for plugin " + plugin);

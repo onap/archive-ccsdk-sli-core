@@ -42,12 +42,12 @@ public class BlockNodeExecutor extends AbstractSvcLogicNodeExecutor {
 		boolean isAtomic = "true".equalsIgnoreCase(atomicStr);
 		
 		// Initialize status to success so that at least one outcome will execute
-		ctx.setStatus("success");
+		ctx.setStatus(SvcLogicConstants.SUCCESS);
 		
 		int numOutcomes = node.getNumOutcomes();
 
 		for (int i = 0; i < numOutcomes; i++) {
-			if ("failure".equals(ctx.getStatus()) && isAtomic) {
+			if (SvcLogicConstants.FAILURE.equals(ctx.getStatus()) && isAtomic) {
 				LOG.info("Block - stopped executing nodes due to failure status");
 				return(null);
 			}

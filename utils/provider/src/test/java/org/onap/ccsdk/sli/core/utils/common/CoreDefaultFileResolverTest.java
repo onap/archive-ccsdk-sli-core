@@ -11,15 +11,15 @@ public class CoreDefaultFileResolverTest {
 
     @Test
     public void resolveFile() throws Exception {
-        final PropertiesFileResolver resolver = new CoreDefaultFileResolver("success");
+        final PropertiesFileResolver resolver = new CoreDefaultFileResolver(SvcLogicConstants.SUCCESS);
         final Optional<File> file = resolver.resolveFile("doesnotexist.cfg");
         assertFalse(file.isPresent());
     }
 
     @Test
     public void getSuccessfulResolutionMessage() throws Exception {
-        final PropertiesFileResolver resolver = new CoreDefaultFileResolver("success");
-        assertEquals("success", resolver.getSuccessfulResolutionMessage());
+        final PropertiesFileResolver resolver = new CoreDefaultFileResolver(SvcLogicConstants.SUCCESS);
+        assertEquals(SvcLogicConstants.SUCCESS, resolver.getSuccessfulResolutionMessage());
     }
 
 }
