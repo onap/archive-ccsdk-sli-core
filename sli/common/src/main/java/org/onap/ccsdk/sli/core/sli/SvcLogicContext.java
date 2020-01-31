@@ -40,7 +40,7 @@ public class SvcLogicContext {
 
 	private HashMap<String, String> attributes;
 
-	private String status = "success";
+    private String status = SvcLogicConstants.SUCCESS;
 
 	public SvcLogicContext()
 	{
@@ -91,7 +91,9 @@ public class SvcLogicContext {
 	{
 		return attributes.keySet();
 	}
-
+  public Boolean isSuccess() {
+        return status.equals(SvcLogicConstants.SUCCESS);
+  }
 	public String getStatus() {
 		return status;
 	}
