@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "20d2c9fc_287b60d4",
+        "filename": "sli/provider/src/main/java/org/onap/ccsdk/sli/core/sli/provider/MdsalHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 698,
+      "author": {
+        "id": 865
+      },
+      "writtenOn": "2020-02-03T16:09:28Z",
+      "side": 1,
+      "message": "Can we have it at trace level and have \u0027e\u0027 added to log statement ?",
+      "revId": "888690a5849d6ac78d643c0c5149c3377387d1e2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
