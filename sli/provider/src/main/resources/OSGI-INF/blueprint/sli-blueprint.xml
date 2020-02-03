@@ -19,4 +19,18 @@
         </interfaces>
     </service>
 
+    <bean id="fileRecorder" class="FileRecorder" />
+    <!-- Implementation name was chosen over interface name due to the fact that this Service
+         was previously registered using the implementation name rather than the interface name.
+         To ensure backwards compatibility with abstractions polling the Service Registry for the
+         fileRecorder, the implementation name was chosen here. -->
+    <service ref="fileRecorder" interface="FileRecorder" />
+
+    <bean id="slf4jRecorder" class="Slf4jRecorder" />
+    <!-- Implementation name was chosen over interface name due to the fact that this Service
+         was previously registered using the implementation name rather than the interface name.
+         To ensure backwards compatibility with abstractions polling the Service Registry for the
+         slf4jRecorder, the implementation name was chosen here. -->
+    <service ref="slf4jRecorder" interface="Slf4jRecorder" />
+
 </blueprint>
