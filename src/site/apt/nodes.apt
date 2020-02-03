@@ -104,7 +104,7 @@ Supported node types
 
 +-----------------+
 <block>
-  <record plugin="org.onap.ccsdk.sli.core.sli.recording.FileRecorder">
+  <record plugin="org.onap.ccsdk.sli.core.sli.FileRecorder">
     <parameter name="file" value="/tmp/sample_r1.log" />
     <parameter name="field1" value="__TIMESTAMP__"/>
     <parameter name="field2" value="RESERVED"/>
@@ -188,7 +188,7 @@ Supported node types
 
 +-------------------+
 <for index="i" start="0" end="`$service-data.universal-cpe-ft.l2-switch-interfaces_length`">
-   <record plugin="org.onap.ccsdk.sli.core.sli.recording.Slf4jRecorder">
+   <record plugin="org.onap.ccsdk.sli.core.sli.Slf4jRecorder">
       <parameter name="logger" value="message-log"/>
       <parameter name="level" value="info"/>
       <parameter name="field1" value="`'current l2-switch-interface name is ' + $service-data.universal-cpe-ft.l2-switch-interfaces[$i].name`"/>
@@ -382,7 +382,7 @@ Supported node types
   <parameter name="mtu" value="$asePort.resource-mtu" />
   <outcome value="success">
     <block>
-      <record plugin="org.onap.ccsdk.sli.core.sli.recording.FileRecorder">
+      <record plugin="org.onap.ccsdk.sli.core.sli.FileRecorder">
         <parameter name="file" value="/tmp/sample_r1.log" />
         <parameter name="field1" value="__TIMESTAMP__"/>
         <parameter name="field2" value="ACTIVE"/>
@@ -503,7 +503,7 @@ Supported node types
 *** Example
 
 +-------------------+
-<record plugin="org.onap.ccsdk.sli.core.sli.recording.FileRecorder">
+<record plugin="org.onap.ccsdk.sli.core.sli.FileRecorder">
   <parameter name="file" value="/tmp/sample_r1.log" />
   <parameter name="field1" value="__TIMESTAMP__"/>
   <parameter name="field2" value="ACTIVE"/>
