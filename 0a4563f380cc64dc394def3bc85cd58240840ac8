@@ -33,6 +33,24 @@
       "revId": "0a4563f380cc64dc394def3bc85cd58240840ac8",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e34132f_71ba4ec2",
+        "filename": "sliapi/springboot/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 87
+      },
+      "writtenOn": "2020-02-21T19:01:33Z",
+      "side": 1,
+      "message": "Actually this should change to sli-provider at the moment, since I need SvcLogicServiceImpl.  Unfortunately, that means our jar will still contain embedded OpenDaylight jars until we do a bit more refactoring.  Let\u0027s do that in another change though.",
+      "parentUuid": "7b52ff93_b677188b",
+      "revId": "0a4563f380cc64dc394def3bc85cd58240840ac8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
