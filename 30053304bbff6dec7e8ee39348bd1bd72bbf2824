@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b408a72b_64098501",
+        "filename": "sli/provider/src/main/resources/OSGI-INF/blueprint/sli-blueprint.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1219
+      },
+      "writtenOn": "2020-02-21T16:07:23Z",
+      "side": 1,
+      "message": "Doesn\u0027t the class need to be fully qualified? org.onap.ccsdk.sli.core.sli.recording.FileRecorder",
+      "revId": "30053304bbff6dec7e8ee39348bd1bd72bbf2824",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be82ffe7_482d07d7",
+        "filename": "sli/provider/src/main/resources/OSGI-INF/blueprint/sli-blueprint.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1219
+      },
+      "writtenOn": "2020-02-21T16:07:23Z",
+      "side": 1,
+      "message": "Doesn\u0027t the interface need to be fully qualified? org.onap.ccsdk.sli.core.sli.recording.FileRecorder",
+      "revId": "30053304bbff6dec7e8ee39348bd1bd72bbf2824",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5d2b162_a931027f",
+        "filename": "sli/provider/src/main/resources/OSGI-INF/blueprint/sli-blueprint.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1219
+      },
+      "writtenOn": "2020-02-21T16:07:23Z",
+      "side": 1,
+      "message": "Doesn\u0027t the class need to be fully qualified? org.onap.ccsdk.sli.core.sli.recording.Slf4jRecorder",
+      "revId": "30053304bbff6dec7e8ee39348bd1bd72bbf2824",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c987fd90_016e7f52",
+        "filename": "sli/provider/src/main/resources/OSGI-INF/blueprint/sli-blueprint.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1219
+      },
+      "writtenOn": "2020-02-21T16:07:23Z",
+      "side": 1,
+      "message": "Doesn\u0027t the interface need to be fully qualified? org.onap.ccsdk.sli.core.sli.recording.Slf4jRecorder",
+      "revId": "30053304bbff6dec7e8ee39348bd1bd72bbf2824",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58a2a694_5e563e5e",
+        "filename": "sli/provider/src/main/resources/org/opendaylight/blueprint/sli-blueprint.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1219
+      },
+      "writtenOn": "2020-02-21T16:07:23Z",
+      "side": 1,
+      "message": "Is this whole file dead? Can we delete it and rely on src/main/resources/OSGI-INF/blueprint/sli-blueprint.xml  instead?",
+      "revId": "30053304bbff6dec7e8ee39348bd1bd72bbf2824",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
