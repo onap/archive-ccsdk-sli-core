@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a6b38417_a2f7eea1",
+        "filename": "sliapi/springboot/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1219
+      },
+      "writtenOn": "2020-02-21T15:59:25Z",
+      "side": 1,
+      "message": "before final check in please run mvn tidy:pom\nthat will organize the poms so they are easier to read",
+      "revId": "0a4563f380cc64dc394def3bc85cd58240840ac8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b52ff93_b677188b",
+        "filename": "sliapi/springboot/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1219
+      },
+      "writtenOn": "2020-02-21T15:59:25Z",
+      "side": 1,
+      "message": "Will this change to \n\t\u003cgroupId\u003eorg.onap.ccsdk.sli.core\u003c/groupId\u003e\n\t\u003cartifactId\u003esli-provider-base\u003c/artifactId\u003e",
+      "revId": "0a4563f380cc64dc394def3bc85cd58240840ac8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
