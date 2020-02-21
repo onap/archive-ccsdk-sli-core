@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "18165116_215e7f81",
+        "filename": "sli/provider/src/main/resources/OSGI-INF/blueprint/sli-blueprint.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 87
+      },
+      "writtenOn": "2020-02-21T19:01:33Z",
+      "side": 1,
+      "message": "Yes, they do ... I found that when I did local testing and found the container wouldn\u0027t come up because of that.",
+      "parentUuid": "b408a72b_64098501",
+      "revId": "30053304bbff6dec7e8ee39348bd1bd72bbf2824",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "be82ffe7_482d07d7",
         "filename": "sli/provider/src/main/resources/OSGI-INF/blueprint/sli-blueprint.xml",
         "patchSetId": 7
@@ -81,6 +99,24 @@
       "writtenOn": "2020-02-21T16:07:23Z",
       "side": 1,
       "message": "Is this whole file dead? Can we delete it and rely on src/main/resources/OSGI-INF/blueprint/sli-blueprint.xml  instead?",
+      "revId": "30053304bbff6dec7e8ee39348bd1bd72bbf2824",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e4faf31_b57f5ae7",
+        "filename": "sli/provider/src/main/resources/org/opendaylight/blueprint/sli-blueprint.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 87
+      },
+      "writtenOn": "2020-02-21T19:01:33Z",
+      "side": 1,
+      "message": "I\u0027m concerned that if we remove this, it could end up breaking a downstream that hasn\u0027t moved to Neon yet.   That new directory structure is new for Neon.",
+      "parentUuid": "58a2a694_5e563e5e",
       "revId": "30053304bbff6dec7e8ee39348bd1bd72bbf2824",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
