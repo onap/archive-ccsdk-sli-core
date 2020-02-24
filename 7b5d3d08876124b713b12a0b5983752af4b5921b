@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "928b938d_f5ec2699",
+        "filename": "sli/common/src/main/java/org/onap/ccsdk/sli/core/sli/ErrorLogger.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 865
+      },
+      "writtenOn": "2020-02-24T18:44:42Z",
+      "side": 1,
+      "message": "200 as Error Code ?",
+      "revId": "7b5d3d08876124b713b12a0b5983752af4b5921b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d720a2f_19129d29",
+        "filename": "sli/provider-base/src/main/java/org/onap/ccsdk/sli/core/sli/recording/Slf4jRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 865
+      },
+      "writtenOn": "2020-02-24T18:44:42Z",
+      "side": 1,
+      "message": "Should format be: \"yyyy-MM-dd\u0027T\u0027HH:mm:ss.SSS\u0027Z\u0027\"",
+      "revId": "7b5d3d08876124b713b12a0b5983752af4b5921b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
