@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b7e0b1d_b95382ba",
+        "filename": "sliapi/springboot/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1219
+      },
+      "writtenOn": "2020-02-27T16:18:39Z",
+      "side": 1,
+      "message": "Can we change this back to sli-provider-base?",
+      "range": {
+        "startLine": 49,
+        "startChar": 2,
+        "endLine": 49,
+        "endChar": 3
+      },
+      "revId": "6dfe407599f794d66dc06e16d14df935c2337e00",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac0306b4_e298c796",
+        "filename": "sliapi/springboot/src/main/java/org/onap/ccsdk/sli/core/sliapi/springboot/RestconfApiController.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1219
+      },
+      "writtenOn": "2020-02-27T16:18:39Z",
+      "side": 1,
+      "message": "we should move this into one shared class, can we a separate PR if needed",
+      "revId": "6dfe407599f794d66dc06e16d14df935c2337e00",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e15f47a0_e573327c",
+        "filename": "sliapi/springboot/src/main/java/org/onap/ccsdk/sli/core/sliapi/springboot/RestconfApiController.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1219
+      },
+      "writtenOn": "2020-02-27T16:18:39Z",
+      "side": 1,
+      "message": "we should move this into one shared class, can we a separate PR if needed",
+      "revId": "6dfe407599f794d66dc06e16d14df935c2337e00",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd8bf379_24035fc6",
+        "filename": "sliapi/springboot/src/main/resources/svclogic.properties",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1219
+      },
+      "writtenOn": "2020-02-27T16:18:39Z",
+      "side": 1,
+      "message": "this is a new default value? should we update the readme or not needed?",
+      "revId": "6dfe407599f794d66dc06e16d14df935c2337e00",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}

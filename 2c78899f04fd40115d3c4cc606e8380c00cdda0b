@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "02221007_7c06c17c",
+        "filename": "sliapi/springboot/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1219
+      },
+      "writtenOn": "2020-02-27T16:18:39Z",
+      "side": 0,
+      "message": "Can this line be restored? Basically maven expects folders under generated-sources to be top level. Swagger adds a swagger folder before the java packaging folders. Out of the box my compile failed with the default settings.",
+      "revId": "2c78899f04fd40115d3c4cc606e8380c00cdda0b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
