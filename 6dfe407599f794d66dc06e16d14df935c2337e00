@@ -42,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "52efdb1e_f96a242b",
+        "filename": "sliapi/springboot/src/main/java/org/onap/ccsdk/sli/core/sliapi/springboot/RestconfApiController.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 87
+      },
+      "writtenOn": "2020-02-27T17:59:20Z",
+      "side": 1,
+      "message": "This one and writeJsonObject probably really belong as changes in the SvcLogicContext class itself.  It already has a \u0027mergeDocument\u0027 method for XML, and it would be good to add one for Json.  I\u0027ll make that a separate change request though to keep this one focused.",
+      "parentUuid": "ac0306b4_e298c796",
+      "revId": "6dfe407599f794d66dc06e16d14df935c2337e00",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e15f47a0_e573327c",
         "filename": "sliapi/springboot/src/main/java/org/onap/ccsdk/sli/core/sliapi/springboot/RestconfApiController.java",
         "patchSetId": 2
