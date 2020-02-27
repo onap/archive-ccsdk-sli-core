@@ -73,6 +73,24 @@
       "revId": "6dfe407599f794d66dc06e16d14df935c2337e00",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "171f0431_89afde62",
+        "filename": "sliapi/springboot/src/main/resources/svclogic.properties",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 87
+      },
+      "writtenOn": "2020-02-27T17:57:26Z",
+      "side": 1,
+      "message": "I\u0027ll get rid of that - it really belongs in application.properties.  Doesn\u0027t work anyway (need to set it from command line).",
+      "parentUuid": "dd8bf379_24035fc6",
+      "revId": "6dfe407599f794d66dc06e16d14df935c2337e00",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
