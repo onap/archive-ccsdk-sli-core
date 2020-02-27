@@ -2,6 +2,7 @@ package org.onap.ccsdk.sli.core.sliapi.springboot;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.onap.ccsdk.sli.core.sliapi.model.ExecuteGraphInput;
@@ -25,8 +26,6 @@ public class RestconfApiControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    @MockBean
-    private RestconfApiController restconfApiController;
 
     @Test
     public void testHealthcheck() throws Exception {
@@ -82,8 +81,7 @@ public class RestconfApiControllerTest {
 
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post(url).contentType(MediaType.APPLICATION_JSON_VALUE).content(jsonString)).andReturn();
 
-        // Note: this really should return 401 (and truly does), but mockito always returns a 200.
-        assertEquals(200, mvcResult.getResponse().getStatus());
+        assertEquals(401, mvcResult.getResponse().getStatus());
 
     }
 

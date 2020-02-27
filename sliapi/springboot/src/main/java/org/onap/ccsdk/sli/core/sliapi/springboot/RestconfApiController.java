@@ -75,7 +75,7 @@ public class RestconfApiController implements RestconfApi {
 			return;
 		}
 
-		String serviceLogicDirectory = System.getProperty("serviceLogicDirectory");
+		String serviceLogicDirectory = System.getProperty("serviceLogicDirectory", "src/main/resources");
 		System.out.println("serviceLogicDirectory is " + serviceLogicDirectory);
 		SvcLogicLoader loader = new SvcLogicLoader(serviceLogicDirectory, store);
 
