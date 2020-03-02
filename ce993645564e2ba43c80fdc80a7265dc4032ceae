@@ -16,6 +16,24 @@
       "revId": "ce993645564e2ba43c80fdc80a7265dc4032ceae",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b15bf198_a5359a17",
+        "filename": "sli/common/src/main/java/org/onap/ccsdk/sli/core/sli/SvcLogicContext.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 87
+      },
+      "writtenOn": "2020-03-02T16:05:18Z",
+      "side": 1,
+      "message": "Sorry, didn\u0027t see this until I merged it.  I\u0027ll address in a later change (not really needed for first sprint)",
+      "parentUuid": "b5a98094_931ba123",
+      "revId": "ce993645564e2ba43c80fdc80a7265dc4032ceae",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
