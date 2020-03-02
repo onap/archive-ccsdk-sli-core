@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b5a98094_931ba123",
+        "filename": "sli/common/src/main/java/org/onap/ccsdk/sli/core/sli/SvcLogicContext.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 865
+      },
+      "writtenOn": "2020-03-02T14:23:32Z",
+      "side": 1,
+      "message": "need else case where child element is again an array (MultiDimentional Array)",
+      "revId": "ce993645564e2ba43c80fdc80a7265dc4032ceae",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
