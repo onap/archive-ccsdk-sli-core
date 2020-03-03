@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.onap.ccsdk.sli.core.sliapi.model.ExecuteGraphInput;
 import org.onap.ccsdk.sli.core.sliapi.model.ExecutegraphinputInput;
 import org.onap.ccsdk.sli.core.sliapi.model.ResponseFields;
+import org.onap.ccsdk.sli.core.sliapi.springboot.controllers.swagger.RestconfApiController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
