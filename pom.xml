@@ -5,13 +5,13 @@
 	<parent>
 		<groupId>org.onap.ccsdk.parent</groupId>
 		<artifactId>odlparent-lite</artifactId>
-		<version>1.5.2</version>
+		<version>2.0.0-SNAPSHOT</version>
 		<relativePath/>
 	</parent>
 
 	<groupId>org.onap.ccsdk.sli.core</groupId>
 	<artifactId>ccsdk-sli-core</artifactId>
-	<version>0.7.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>ccsdk-sli-core</name>
@@ -20,10 +20,6 @@
 	<organization>
 		<name>ONAP</name>
 	</organization>
-	
-	<properties>
-		<sitePath>content/sites/site/org/onap/ccsdk/sli/core/${project.version}/</sitePath>
-	</properties>
 
 	<modules>
         <module>utils</module>
@@ -42,7 +38,16 @@
 		<url>${onap.git.protocol}://${onap.git.host}/projects/${onap.git.project}/repos/sdnc-core/browse</url>
 		<tag>sdnc-core-1.1.0</tag>
 	</scm>
+	<distributionManagement>
+		<site>
+			<id>ecomp-site</id>
+			<url>dav:${onap.nexus.url}/${sitePath}</url>
+		</site>
+	</distributionManagement>
 
+	<properties>
+		<sitePath>content/sites/site/org/onap/ccsdk/sli/core/${project.version}/</sitePath>
+	</properties>
 
 	<profiles>
 		<profile>
@@ -123,11 +128,4 @@
 		</profile>
 
 	</profiles>
-
-	<distributionManagement>
-		<site>
-			<id>ecomp-site</id>
-			<url>dav:${onap.nexus.url}/${sitePath}</url>
-		</site>
-	</distributionManagement>
 </project>
