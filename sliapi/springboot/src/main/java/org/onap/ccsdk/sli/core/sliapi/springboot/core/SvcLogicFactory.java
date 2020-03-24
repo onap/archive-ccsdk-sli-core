@@ -63,7 +63,11 @@ public class SvcLogicFactory {
       @Override
       public Properties getProperties() {
         Properties props = new Properties();
-        String propPath = "src/main/resources/svclogic.properties";
+
+        String propPath = System.getenv("SVCLOGIC_PROPERTIES");
+        if ((propPath == null) || propPath.length() == 0) {
+          propPath = "src/main/resources/svclogic.properties";
+        }
         System.out.println(propPath);
         try (FileInputStream fileInputStream = new FileInputStream(propPath)) {
           props = new Properties();
