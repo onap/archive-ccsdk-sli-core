@@ -311,6 +311,36 @@ public class SliStringUtils implements SvcLogicJavaPlugin {
                 .replace(parameters.get(INPUT_PARAM_TARGET), parameters.get("replacement"))));
     }
 
+   /**
+	 * exposes base64decoding algo
+	 * writes the length of source to outputPath
+	 * @param parameters HashMap<String,String> of parameters passed by the DG to this function
+	 * <table border="1">
+	 *  <thead><th>parameter</th><th>Mandatory/Optional</th><th>description</th></thead>
+	 *  <tbody>
+	 *      <tr><td>encodedValue</td><td>Mandatory</td><td>source string</td></tr>
+	 *      <tr><td>decodedValue</td><td>Mandatory</td><td>Destination path</td></tr>
+	 *  </tbody>
+	 * </table>
+	 * @param ctx Reference to context memory
+	 * @throws SvcLogicException
+	 * @since 11.0.2
+	 */
+    public static void base64DecodingAlgo(Map<String, String> parameters, SvcLogicContext ctx) throws SvcLogicException{
+		try {
+			SliPluginUtils.checkParameters(parameters, new String[]{"encodedValue","decodedValue"}, LOG);
+
+			Base64.Decoder decoder = Base64.getDecoder();
+			byte[] decodedByteArray = decoder.decode(parameters.get("encodedValue"));
+			//Verify the decoded string
+			String decodeVal = new String(decodedByteArray);
+			ctx.setAttribute(parameters.get("decodedValue"), decodeVal);
+		}catch (Exception exc){
+			LOG.error("Exception occure "+exc.getMessage());
+			throw new SvcLogicException(exc.getMessage());
+		}
+	}
+
     /**
      * exposes replaceAll to directed graph
      * writes the length of source to outputPath
