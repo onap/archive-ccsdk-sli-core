@@ -71,7 +71,11 @@
         <dependency>
             <groupId>org.opendaylight.mdsal.binding.model.ietf</groupId>
             <artifactId>rfc6991</artifactId>
-        </dependency>       
+        </dependency>
+		<dependency>
+			<groupId>org.opendaylight.bgpcep</groupId>
+			<artifactId>bgp-concepts</artifactId>
+		</dependency>
         <dependency>
             <groupId>org.opendaylight.controller</groupId>
             <artifactId>sal-core-api</artifactId>
