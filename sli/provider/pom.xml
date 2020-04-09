@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.onap.ccsdk.parent</groupId>
 		<artifactId>binding-parent</artifactId>
-		<version>1.5.2</version>
+		<version>1.5.3-SNAPSHOT</version>
 		<relativePath/>
 	</parent>
 
@@ -69,14 +69,23 @@
 		<dependency>
 			<groupId>org.opendaylight.controller</groupId>
 			<artifactId>sal-binding-api</artifactId>
+			<scope>provided</scope>
 		</dependency>
         <dependency>
             <groupId>org.opendaylight.mdsal.binding.model.ietf</groupId>
             <artifactId>rfc6991</artifactId>
-        </dependency>       
+			<scope>provided</scope>
+        </dependency>
+		<dependency>
+			<groupId>org.opendaylight.bgpcep</groupId>
+			<artifactId>bgp-concepts</artifactId>
+			<version>0.11.1</version>
+			<scope>provided</scope>
+		</dependency>
         <dependency>
             <groupId>org.opendaylight.controller</groupId>
             <artifactId>sal-core-api</artifactId>
+			<scope>provided</scope>
         </dependency>
 		<!-- Testing Dependencies -->
 		<dependency>
