@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cd047906_b88fc671",
+        "filename": "sli/provider/src/main/java/org/onap/ccsdk/sli/core/sli/provider/MdsalHelper.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 1219
+      },
+      "writtenOn": "2020-04-13T17:19:47Z",
+      "side": 1,
+      "message": "Can we enhance the existing unit test so that it covers this block?",
+      "revId": "6c887e89972b48d220722af749030296fea6bd72",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
