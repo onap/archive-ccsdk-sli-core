@@ -19,13 +19,13 @@
 	<properties>
 		<application.name>ccsdk-sliapi</application.name>
 		<features.boot>${application.name}</features.boot>
-        <features.repositories>mvn:org.onap.ccsdk.sli.core/${features.boot}/${project.version}/xml/features</features.repositories>
+		<features.repositories>mvn:org.onap.ccsdk.sli.core/${features.boot}/${project.version}/xml/features</features.repositories>
 		<include.transitive.dependencies>false</include.transitive.dependencies>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
-		
+
 			<dependency>
 				<groupId>org.onap.ccsdk.sli.core</groupId>
 				<artifactId>sli-common</artifactId>
