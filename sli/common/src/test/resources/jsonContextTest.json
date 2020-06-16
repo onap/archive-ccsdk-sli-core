@@ -1,0 +1,482 @@
+{
+  "preload-list": [
+    {
+      "preload-id": "preload2",
+      "preload-type": "network",
+      "preload-data": {
+        "preload-network-topology-information": {
+          "host-routes": [
+            {
+              "next-hop": "10.1.12.1",
+              "route-prefix": "12"
+            }
+          ],
+          "is-external-network": true,
+          "is-provider-network": true,
+          "is-shared-network": true,
+          "network-policy": [
+            {
+              "network-policy-fqdn": "policy-sdnc.onap.org",
+              "network-policy-id": "123"
+            }
+          ],
+          "network-topology-identifier-structure": {
+            "eipam-v4-address-plan": "plan9",
+            "eipam-v6-address-plan": "plan9v6",
+            "is-trunked": true,
+            "network-id": "321",
+            "network-instance-group-id": "abc123",
+            "network-name": "syfy",
+            "network-role": "secret",
+            "network-technology": "soupcan",
+            "network-type": "fake",
+            "related-networks": {
+              "related-network": [
+                {
+                  "network-id": "skynet",
+                  "network-role": "master",
+                  "vlan-tags": {
+                    "is-private": true,
+                    "lower-tag-id": 0,
+                    "upper-tag-id": 0,
+                    "vlan-interface": "le1"
+                  }
+                }
+              ]
+            },
+            "segmentation-id": "seg1"
+          },
+          "physical-network-name": "physnet1",
+          "route-table-reference": [
+            {
+              "route-table-reference-fqdn": "sky.net",
+              "route-table-reference-id": "ref1"
+            }
+          ],
+          "subnets": [
+            {
+              "addr-from-start": "Y",
+              "cidr-mask": "255.255.255.0",
+              "dhcp-enabled": "Y",
+              "dhcp-end-address": "10.1.3.250",
+              "dhcp-start-address": "10.1.3.10",
+              "gateway-address": "10.1.3.254",
+              "ip-version": "ipv4",
+              "start-address": "10.1.3.1",
+              "subnet-name": "robot1",
+              "subnet-role": "robot",
+              "subnet-sequence": 0
+            }
+          ],
+          "vpn-bindings": [
+            {
+              "aic-zone": "aic1",
+              "global-route-target": "route66",
+              "route-target-role": "bullseye",
+              "vpn-binding-id": "vpnbind1",
+              "vpn-name": "vpn1"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "preload-id": "preload2",
+      "preload-type": "vf-module",
+      "preload-data": {
+        "preload-vf-module-topology-information": {
+          "vf-module-topology": {
+            "aic-clli": "AICCLLI",
+            "aic-cloud-region": "cloud9",
+            "cloud-owner": "god",
+            "onap-model-information": {
+              "model-customization-uuid": "121212",
+              "model-invariant-uuid": "121212",
+              "model-name": "barbie",
+              "model-uuid": "223344",
+              "model-version": "mattel"
+            },
+            "sdnc-generated-cloud-resources": true,
+            "tenant": "ralph",
+            "vf-module-assignments": {
+              "dhcp-subnet-assignments": {
+                "dhcp-subnet-assignment": [
+                  {
+                    "ip-version": "ipv4",
+                    "network-role": "anchor",
+                    "neutron-subnet-id": "subnet1"
+                  }
+                ]
+              },
+              "vf-module-status": "active",
+              "vlan-vnfc-instance-groups": {
+                "vlan-vnfc-instance-group": [
+                  {
+                    "instance-group-function": "joker",
+                    "instance-group-id": "group1",
+                    "vnf-id": "vnf1",
+                    "vnfcs": {
+                      "vnfc": [
+                        {
+                          "vnfc-name": "vnfc1",
+                          "vnic-groups": {
+                            "vnic-group": [
+                              {
+                                "network-instance-group-function": "leader",
+                                "vlan-assignment-policy-name": "policy1",
+                                "vlan-common-ip-addresses": {
+                                  "ip-addresses": {
+                                    "ipv4-address": "10.1.4.1",
+                                    "ipv6-address": "12:34:ee:ff",
+                                    "vipv4-address": "10.1.4.1",
+                                    "vipv6-address": "12:34:ee:ff"
+                                  }
+                                },
+                                "vlan-tag-index-next": 0,
+                                "vlan-vnics": {
+                                  "vlan-vnic": [
+                                    {
+                                      "vnic-port-id": "vnicport1",
+                                      "vnic-sub-interfaces": {
+                                        "sub-interface-network-data": [
+                                          {
+                                            "floating-ips": {
+                                              "floating-ip-v4": [
+                                                "10.1.5.1"
+                                              ],
+                                              "floating-ip-v6": [
+                                                "12:34:56:ff"
+                                              ]
+                                            },
+                                            "network-id": "skynet2",
+                                            "network-information-items": {
+                                              "network-information-item": [
+                                                {
+                                                  "ip-count": 0,
+                                                  "ip-version": "ipv4",
+                                                  "network-ips": {
+                                                    "network-ip": [
+                                                      "10.1.6.1"
+                                                    ]
+                                                  },
+                                                  "use-dhcp": "Y"
+                                                }
+                                              ]
+                                            },
+                                            "network-name": 0,
+                                            "network-role": "puppet",
+                                            "network-role-tag": "puppet-tag",
+                                            "neutron-network-id": "net1",
+                                            "vlan-tag-id": 0
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                },
+                                "vnic-interface-role": "vnic-role"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              "vms": {
+                "vm": [
+                  {
+                    "nfc-naming-code": "nfs-name",
+                    "onap-model-information": {
+                      "model-customization-uuid": "112233",
+                      "model-invariant-uuid": "112233",
+                      "model-name": "ken",
+                      "model-uuid": "445566",
+                      "model-version": "mattel"
+                    },
+                    "vm-count": 0,
+                    "vm-names": {
+                      "vm-name": [
+                        "vm1"
+                      ],
+                      "vnfc-names": [
+                        {
+                          "vnfc-name": "vnfc1",
+                          "vnfc-networks": {
+                            "vnfc-network-data": [
+                              {
+                                "connection-point": {
+                                  "connection-point-id": "conn1",
+                                  "port-id": "port1",
+                                  "vlan-data": [
+                                    {
+                                      "vlan-role": "hamlet",
+                                      "vlan-tag-description": "dane",
+                                      "vlan-tag-id": "denmark1",
+                                      "vlan-uuid": "998877"
+                                    }
+                                  ]
+                                },
+                                "vnfc-network-role": "prince",
+                                "vnfc-ports": {
+                                  "vnfc-port": [
+                                    {
+                                      "common-sub-interface-role": "slayer",
+                                      "vnfc-port-id": "port2",
+                                      "vnic-sub-interfaces": {
+                                        "sub-interface-network-data": [
+                                          {
+                                            "floating-ips": {
+                                              "floating-ip-v4": [
+                                                "10.1.8.1"
+                                              ],
+                                              "floating-ip-v6": [
+                                                "22:fa:ce:ff"
+                                              ]
+                                            },
+                                            "network-id": "string",
+                                            "network-information-items": {
+                                              "network-information-item": [
+                                                {
+                                                  "ip-count": 0,
+                                                  "ip-version": "ipv4",
+                                                  "network-ips": {
+                                                    "network-ip": [
+                                                      "10.2.4.1"
+                                                    ]
+                                                  },
+                                                  "use-dhcp": "Y"
+                                                }
+                                              ]
+                                            },
+                                            "network-name": 0,
+                                            "network-role": "test",
+                                            "network-role-tag": "test1",
+                                            "neutron-network-id": "net2",
+                                            "vlan-tag-id": 0
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                },
+                                "vnfc-subnet": [
+                                  {
+                                    "vnfc-ip-assignments": [
+                                      {
+                                        "vnfc-address-family": "ipv4",
+                                        "vnfc-subnet-dhcp": "Y",
+                                        "vnfc-subnet-ip": [
+                                          {
+                                            "ip-type": "FIXED",
+                                            "vnfc-client-key": "vnfc-client",
+                                            "vnfc-ip-address": "10.4.1.1"
+                                          }
+                                        ],
+                                        "vnfc-subnet-ip-count": 0
+                                      }
+                                    ],
+                                    "vnfc-subnet-role": "role4"
+                                  }
+                                ],
+                                "vnfc-type": "type9"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    "vm-networks": {
+                      "vm-network": [
+                        {
+                          "floating-ips": {
+                            "floating-ip-v4": [
+                              "10.6.1.1"
+                            ],
+                            "floating-ip-v6": [
+                              "ca:fe:ba:be"
+                            ]
+                          },
+                          "interface-route-prefixes": {
+                            "interface-route-prefix": [
+                              "10."
+                            ]
+                          },
+                          "is-trunked": true,
+                          "mac-addresses": {
+                            "mac-address": [
+                              "EFAF123BBAD"
+                            ]
+                          },
+                          "network-information-items": {
+                            "network-information-item": [
+                              {
+                                "ip-count": 0,
+                                "ip-version": "ipv4",
+                                "network-ips": {
+                                  "network-ip": [
+                                    "10.10.1.1"
+                                  ]
+                                },
+                                "use-dhcp": "Y"
+                              }
+                            ]
+                          },
+                          "network-role": "none",
+                          "network-role-tag": "none",
+                          "related-networks": {
+                            "related-network": [
+                              {
+                                "network-id": "none",
+                                "network-role": "none",
+                                "vlan-tags": {
+                                  "is-private": true,
+                                  "lower-tag-id": 0,
+                                  "upper-tag-id": 0,
+                                  "vlan-interface": "none"
+                                }
+                              }
+                            ]
+                          },
+                          "segmentation-id": "seg4",
+                          "sriov-parameters": {
+                            "application-tags": {
+                              "c-tags": {
+                                "c-tag": [
+                                  "ctag1"
+                                ],
+                                "ctag": [
+                                  "ctag2"
+                                ]
+                              },
+                              "ctags": {
+                                "c-tag": [
+                                  "ctag3"
+                                ],
+                                "ctag": [
+                                  "ctag4"
+                                ]
+                              },
+                              "s-tags": {
+                                "s-tag": [
+                                  "stag1"
+                                ],
+                                "stag": [
+                                  "stag2"
+                                ]
+                              },
+                              "stags": {
+                                "s-tag": [
+                                  "stag3"
+                                ],
+                                "stag": [
+                                  "stag4"
+                                ]
+                              }
+                            },
+                            "heat-vlan-filters": {
+                              "heat-vlan-filter": [
+                                "empty"
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "vm-type": "fake",
+                    "vm-type-tag": "fake1"
+                  }
+                ]
+              }
+            },
+            "vf-module-parameters": {
+              "param": [
+                {
+                  "name": "bogus",
+                  "resource-resolution-data": {
+                    "capability-name": "none",
+                    "payload": "candy",
+                    "resource-key": [
+                      {
+                        "name": "mars",
+                        "value": "1"
+                      }
+                    ],
+                    "status": "disabled"
+                  },
+                  "value": "disabled"
+                }
+              ]
+            },
+            "vf-module-topology-identifier": {
+              "vf-module-id": "vfmodule1",
+              "vf-module-name": "vfmodule1",
+              "vf-module-type": "ms"
+            }
+          },
+          "vnf-resource-assignments": {
+            "availability-zones": {
+              "availability-zone": [
+                "avail-zone-1"
+              ],
+              "max-count": 0
+            },
+            "vnf-networks": {
+              "vnf-network": [
+                {
+                  "contrail-network-fqdn": "sky.net",
+                  "is-trunked": true,
+                  "network-id": "1234",
+                  "network-name": "skynet",
+                  "network-role": "master",
+                  "neutron-id": "physnet1",
+                  "related-networks": {
+                    "related-network": [
+                      {
+                        "network-id": "physnet2",
+                        "network-role": "physical",
+                        "vlan-tags": {
+                          "is-private": true,
+                          "lower-tag-id": 0,
+                          "upper-tag-id": 0,
+                          "vlan-interface": "vlan3"
+                        }
+                      }
+                    ]
+                  },
+                  "segmentation-id": "seg10",
+                  "subnets-data": {
+                    "subnet-data": [
+                      {
+                        "cidr-mask": "255.255.255.0",
+                        "dhcp-enabled": "Y",
+                        "gateway-address": "10.20.1.254",
+                        "ip-version": "ipv4",
+                        "network-start-address": "10.20.1.1",
+                        "sdnc-subnet-id": "123",
+                        "subnet-id": "456",
+                        "subnet-name": "subnet1",
+                        "subnet-role": "workstations"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "vnf-status": "enabled"
+          },
+          "vnf-topology-identifier-structure": {
+            "nf-code": "nfcode1",
+            "nf-function": "nffunction1",
+            "nf-role": "nfrole1",
+            "nf-type": "nftype1",
+            "vnf-id": "999",
+            "vnf-name": "vnf9",
+            "vnf-type": "router"
+          }
+        }
+      }
+    }
+  ]
+}
