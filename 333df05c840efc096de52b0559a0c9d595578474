@@ -16,6 +16,24 @@
       "revId": "333df05c840efc096de52b0559a0c9d595578474",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fed0ef85_70dd95e3",
+        "filename": "sli/common/src/main/java/org/onap/ccsdk/sli/core/sli/MetricLogger.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1219
+      },
+      "writtenOn": "2020-06-17T14:47:08Z",
+      "side": 1,
+      "message": "They need to be unique for each request, so overriding the value is done on purpose.",
+      "parentUuid": "67fa646a_7312c34e",
+      "revId": "333df05c840efc096de52b0559a0c9d595578474",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
