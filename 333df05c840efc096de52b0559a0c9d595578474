@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "67fa646a_7312c34e",
+        "filename": "sli/common/src/main/java/org/onap/ccsdk/sli/core/sli/MetricLogger.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 865
+      },
+      "writtenOn": "2020-06-17T14:42:07Z",
+      "side": 1,
+      "message": "shouldn\u0027t INVOCATION_ID and CLIENT_INVOCATION_ID be checked for existing value.",
+      "revId": "333df05c840efc096de52b0559a0c9d595578474",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
