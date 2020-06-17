@@ -34,6 +34,24 @@
       "revId": "333df05c840efc096de52b0559a0c9d595578474",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3132127d_280c4e68",
+        "filename": "sli/common/src/main/java/org/onap/ccsdk/sli/core/sli/MetricLogger.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 865
+      },
+      "writtenOn": "2020-06-17T16:12:40Z",
+      "side": 1,
+      "message": "if those have allocated a value, it must be uuid too.\nisn\u0027t that so, and not holding unique value from origin ?",
+      "parentUuid": "fed0ef85_70dd95e3",
+      "revId": "333df05c840efc096de52b0559a0c9d595578474",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
