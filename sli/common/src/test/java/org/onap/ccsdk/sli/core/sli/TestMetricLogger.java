@@ -27,8 +27,9 @@ public class TestMetricLogger {
     }
     
     @Test
-    public final void elapsedTime() {
+    public final void elapsedTime() throws InterruptedException {
         logger.logRequest("svcInstance1", "svcName", "svcPartner", "targetEntity", "targetServiceName", "targetVirtualEntity", "hello-world");
+        Thread.sleep(2); // to avoid the testcase from running too quickly in which case elapsed time could be zero
         logger.logResponse("200", "200", "SUCCESS");
         Long elapsedTime = Long.valueOf(MDC.get(ONAPLogConstants.MDCs.ELAPSED_TIME));
         assertNotNull(elapsedTime);
@@ -57,5 +58,38 @@ public class TestMetricLogger {
         assertEquals(" ", output);
         output = logger.formatString("one,two,three,");
         assertEquals("one\\,two\\,three\\,", output);
+    }
+    
+    @Test
+    public void generateInvocationId() {
+        logger.logRequest("svcInstance1", "svcName", "svcPartner", "targetEntity", "targetServiceName", "targetVirtualEntity", "hello-world");
+        assertNotNull(MDC.get(ONAPLogConstants.MDCs.CLIENT_INVOCATION_ID));
+        assertNotNull(MDC.get(ONAPLogConstants.MDCs.INVOCATION_ID));
+    }
+    
+    @Test
+    public void generateRequestId() {
+        logger.logRequest("svcInstance1", "svcName", "svcPartner", "targetEntity", "targetServiceName", "targetVirtualEntity", "hello-world");
+        assertNotNull(MDC.get(ONAPLogConstants.MDCs.REQUEST_ID));
+    }
+    
+    @Test
+    public void overrideInvocationId() {
+        String oldUUID = UUID.randomUUID().toString();
+        MDC.put(ONAPLogConstants.MDCs.CLIENT_INVOCATION_ID, oldUUID);
+        MDC.put(ONAPLogConstants.MDCs.INVOCATION_ID, oldUUID);
+
+        logger.logRequest("svcInstance1", "svcName", "svcPartner", "targetEntity", "targetServiceName", "targetVirtualEntity", "hello-world");
+        String newUUID = MDC.get(ONAPLogConstants.MDCs.CLIENT_INVOCATION_ID);
+        assertFalse(oldUUID.equals(newUUID));
+        newUUID = MDC.get(ONAPLogConstants.MDCs.INVOCATION_ID);
+        assertFalse(oldUUID.equals(newUUID));
+    }
+    
+    @Test
+    public void persistRequestId() {
+        String oldUUID = UUID.randomUUID().toString();
+        MDC.put(ONAPLogConstants.MDCs.REQUEST_ID, oldUUID);
+        assertEquals(oldUUID, MDC.get(ONAPLogConstants.MDCs.REQUEST_ID));
     }
 }
