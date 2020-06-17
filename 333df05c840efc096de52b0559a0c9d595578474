@@ -52,6 +52,24 @@
       "revId": "333df05c840efc096de52b0559a0c9d595578474",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "822c6ad1_7e571abc",
+        "filename": "sli/common/src/main/java/org/onap/ccsdk/sli/core/sli/MetricLogger.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1219
+      },
+      "writtenOn": "2020-06-17T16:15:27Z",
+      "side": 1,
+      "message": "If the same thread uses metric logger and calls log request twice (for two different requests) and InovcationID wasn\u0027t overriden (by metric logger) each request would not have a unique ID. Calling clients currently don\u0027t handle invoctation id at all so it will be handled in the common class metric logger.",
+      "parentUuid": "3132127d_280c4e68",
+      "revId": "333df05c840efc096de52b0559a0c9d595578474",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
