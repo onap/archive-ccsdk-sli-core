@@ -450,6 +450,9 @@ public class SvcLogicParser {
 
 
     public static void load(String xmlfile, SvcLogicStore store) throws SvcLogicException {
+        if (!PathValidator.isValidXmlPath(xmlfile)) {
+            throw new ConfigurationException("Invalid xml file name ("+ xmlfile + ")");
+        }
         File xmlFile = new File(xmlfile);
         if (!xmlFile.canRead()) {
             throw new ConfigurationException("Cannot read xml file (" + xmlfile + ")");
@@ -482,6 +485,9 @@ public class SvcLogicParser {
     }
 
     public static void validate(String xmlfile, SvcLogicStore store) throws SvcLogicException {
+        if (!PathValidator.isValidXmlPath(xmlfile)) {
+            throw new ConfigurationException("Invalid xml file name ("+ xmlfile + ")");
+        }
         File xmlFile = new File(xmlfile);
         if (!xmlFile.canRead()) {
             throw new ConfigurationException("Cannot read xml file (" + xmlfile + ")");
@@ -594,6 +600,9 @@ public class SvcLogicParser {
         }
 
         SAXParserFactory factory = SAXParserFactory.newInstance();
+        // Protect from XXE attacks
+        factory.setFeature("https://xml.org/sax/features/external-general-entities", false);
+        factory.setFeature("https://apache.org/xml/features/disallow-doctype-decl", true);
 
         if (schema != null) {
             factory.setNamespaceAware(true);
@@ -601,6 +610,8 @@ public class SvcLogicParser {
         }
 
         SAXParser saxParser = factory.newSAXParser();
+        // Protect from XXE attacks
+        saxParser.getXMLReader().setFeature("https://xml.org/sax/features/external-general-entities", false);
         if (saxParser.isValidating()) {
             LOGGER.info("Parser configured to validate XML {}", (xsdUrl != null ? xsdUrl.getPath() : null));
         }
