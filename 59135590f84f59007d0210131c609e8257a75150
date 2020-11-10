@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9d0e32c3_82674fe2",
+        "filename": "utils/provider/src/main/java/org/onap/ccsdk/sli/core/utils/JREFileResolver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 865
+      },
+      "writtenOn": "2020-11-10T22:04:13Z",
+      "side": 1,
+      "message": "we can get rid of this catch, but it\u0027s existing so ok to merge :)",
+      "revId": "59135590f84f59007d0210131c609e8257a75150",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
