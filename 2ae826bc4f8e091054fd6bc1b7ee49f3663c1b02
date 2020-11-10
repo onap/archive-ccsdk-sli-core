@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8bac70aa_1f1032cf",
+        "filename": "utils/provider/src/main/java/org/onap/ccsdk/sli/core/utils/JREFileResolver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 865
+      },
+      "writtenOn": "2020-11-10T20:21:36Z",
+      "side": 1,
+      "message": "parent Exception catch block is there, child catch for same is not required, just move log to parent catch",
+      "revId": "2ae826bc4f8e091054fd6bc1b7ee49f3663c1b02",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "715efcf1_405c44c8",
+        "filename": "utils/provider/src/main/java/org/onap/ccsdk/sli/core/utils/common/BundleContextFileResolver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 865
+      },
+      "writtenOn": "2020-11-10T20:21:36Z",
+      "side": 1,
+      "message": "It would be simpler to have:\n\n        try {\n            if (FrameworkUtil.getBundle(clazz) \u003d\u003d null) {\n                return Optional.empty();\n            }\n            final String pathProperty \u003d FrameworkUtil.getBundle(this.clazz).getBundleContext()\n                    .getProperty(SDNC_CONFIG_DIR_PROP_KEY);\n            if (Strings.isNullOrEmpty(pathProperty)) {\n                return Optional.empty();\n            }\n            final Path dblibPath \u003d Paths.get(pathProperty);\n            return Optional.of(dblibPath.resolve(filename).toFile());\n        } catch (Exception|NoClassDefFoundError e) {\n            LoggerFactory.getLogger(this.getClass()).error(\"\", e);\n            return Optional.empty();\n        }",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 9
+      },
+      "revId": "2ae826bc4f8e091054fd6bc1b7ee49f3663c1b02",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
