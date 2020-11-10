@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "cb78f21b_7dfa156c",
+        "filename": "utils/provider/src/main/java/org/onap/ccsdk/sli/core/utils/JREFileResolver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 87
+      },
+      "writtenOn": "2020-11-10T21:38:41Z",
+      "side": 1,
+      "message": "Thanks - I\u0027ll clean up that try/catch to get rid of the inner",
+      "parentUuid": "8bac70aa_1f1032cf",
+      "revId": "2ae826bc4f8e091054fd6bc1b7ee49f3663c1b02",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "715efcf1_405c44c8",
         "filename": "utils/provider/src/main/java/org/onap/ccsdk/sli/core/utils/common/BundleContextFileResolver.java",
         "patchSetId": 1
@@ -39,6 +57,30 @@
       "revId": "2ae826bc4f8e091054fd6bc1b7ee49f3663c1b02",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "644229ac_3564726f",
+        "filename": "utils/provider/src/main/java/org/onap/ccsdk/sli/core/utils/common/BundleContextFileResolver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 87
+      },
+      "writtenOn": "2020-11-10T21:38:41Z",
+      "side": 1,
+      "message": "Good point - I\u0027ll push that change. Thanks!",
+      "parentUuid": "715efcf1_405c44c8",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 9
+      },
+      "revId": "2ae826bc4f8e091054fd6bc1b7ee49f3663c1b02",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
